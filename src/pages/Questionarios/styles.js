@@ -13,16 +13,16 @@ export default StyleSheet.create({
         // justifyContent: 'space-between'
     },
     headerText: {
-        paddingTop: 5,
+        paddingTop: 2,
         fontSize: 12,
         color: '#737380',
         textAlign: 'right'
     },
     title: {
-        fontSize: 25,
-        paddingTop: Constants.statusBarHeight + 5,
-        marginBottom: 10,
-        color: '#ec85ff',
+        fontSize: 40,
+        paddingTop: Constants.statusBarHeight + 10,
+        marginBottom: 5,
+        color: '#00B3A7',
         fontWeight: 'bold',
         textAlign: 'center',
     },
@@ -59,7 +59,7 @@ export default StyleSheet.create({
         position: 'absolute',
         bottom: Constants.statusBarHeight + 20,
         right: 15,
-        backgroundColor: '#ec85ff',
+        backgroundColor: '#00B3A7',
         borderRadius: 50
     }
 

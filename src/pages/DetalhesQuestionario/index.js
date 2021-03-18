@@ -3,7 +3,7 @@ import { Text, FlatList, View } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import styles from './styles';
 // esse detalhe da cliente, fornece um historico de agendamento da cliente e caso necessario é possivel editar as infos de cadastro da cliente.
- const ClientDetail = () => {
+ const DetalhesQuestionario = () => {
     const name ='maria';
     const phone ='5484956252';
     const date = '05/10';
@@ -100,4 +100,4 @@ import styles from './styles';
     );
 }
 
-export default ClientDetail;
+export default DetalhesQuestionario;

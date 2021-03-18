@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import styles from './styles';
   
-const Client = ({name, phone}) => {
+const Questionario = ({name, phone}) => {
     const nav = useNavigation();
     function navigateToDetailsPage() {
         nav.navigate('Informações da Cliente');
@@ -21,22 +21,22 @@ const Client = ({name, phone}) => {
     );
 }
 
-const Clients = () => {
+const Questionarios = () => {
     const nav = useNavigation();
 
     function navigateToAddPage() {
-        nav.navigate('Adicionar Cliente');
+        nav.navigate('Adicionar Questionário');
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Minhas Clientes</Text>
-            <Text style={styles.headerText}>Você tem 0 Clientes cadastradas</Text>
+            <Text style={styles.title}>Questionários</Text>
+            <Text style={styles.headerText}>Atualmente existem 0 questionários cadastradas</Text>
             <FlatList
                 style={styles.clientList}
                 data={ [1,2,3,4,5,6,7,8] }
                 keyExtractor={client => String(client)}
                 showsVerticalScrollIndicator={false}
-                renderItem={() => <Client name='Margarete' phone='54 992394641' /> }
+                renderItem={() => <Questionario name='Margarete' phone='54 992394641' /> }
             />
             <TouchableOpacity
                 style={styles.addButton}
@@ -48,4 +48,4 @@ const Clients = () => {
     );
 }
 
-export default Clients;
+export default Questionarios;
