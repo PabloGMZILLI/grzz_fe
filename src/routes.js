@@ -70,7 +70,7 @@ export default function Routes() {
             }}
             >
               <RootStack.Screen name="Home" component={HomeTabs} />
-              <RootStack.Screen name="Adicionar Questionário" component={AddClient} />
+              <RootStack.Screen name="Como responder" component={AddClient} />
               <RootStack.Screen name="Informações sobre o questionário" component={DetalhesQuestionario} />
           </RootStack.Navigator>
         </NavigationContainer>
