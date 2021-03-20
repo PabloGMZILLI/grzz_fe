@@ -6,61 +6,87 @@ export default StyleSheet.create({
     container : {
         flex: 1,
         paddingHorizontal: 20,
-        paddingTop: Constants.statusBarHeight + 2,
+        backgroundColor: '#b8e0de',
     },
-    header: {
-        // flexDirection: 'row',
-        // justifyContent: 'space-between'
+    title: {
+        fontSize: 45,
+        marginBottom: 5,
+        color: '#000000',
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     headerText: {
         paddingTop: 2,
-        fontSize: 12,
-        color: '#737380',
-        textAlign: 'right'
-    },
-    title: {
-        fontSize: 40,
-        paddingTop: Constants.statusBarHeight + 10,
-        marginBottom: 5,
-        color: '#00B3A7',
-        fontWeight: 'bold',
+        fontSize: 14,
+        color: '#000000',
         textAlign: 'center',
+    },
+    header: {
+        padding: 10,
+        marginHorizontal: -50,
+        marginTop: Constants.statusBarHeight,
+       // backgroundColor: 'white',
+        borderRadius: 15,
     },
     description : {
         fontSize: 12,
         lineHeight: 15,
         color: '#737380'
     },
-    clientList: {
-        marginTop: 10
+    quizContainer: {
+        position: 'relative',
+        marginTop: 10,
+        marginBottom: 80,
+        padding: 10,
+        //backgroundColor: '#cce0df',
+        borderRadius: 15,
     },
-    client: {
+    quiz: {
         padding: 18,
         borderRadius: 8,
         backgroundColor: '#FFF',
-        marginBottom: 10
+        marginBottom: 15,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.12,
+        shadowRadius: 2,
+
+        elevation: 4,
     },
-    clientProp: {
-        fontSize: 14,
-        color: '#41414d',
-        fontWeight: 'bold'
-    },
-    clientValue: {
-        fontSize: 15,
-        marginBottom: 5,
-        color: '#737380'
+    quizProp: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+
     },
     editButton: {
         position: 'absolute',
         top: 20,
         right: 20,
     },
+    buttonText: {
+        color: '#FFF',
+        fontSize: 20,
+        textAlign: 'center',
+    },
     addButton: {
-        position: 'absolute',
-        bottom: Constants.statusBarHeight + 20,
-        right: 15,
-        backgroundColor: '#00B3A7',
-        borderRadius: 50
+        position: 'relative',
+        bottom: 60,
+        width: '100%',
+        backgroundColor: '#EF4358',
+        borderRadius:15,
+        padding: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.21,
+        shadowRadius: 10,
+        elevation: 8,
     }
 
 })
