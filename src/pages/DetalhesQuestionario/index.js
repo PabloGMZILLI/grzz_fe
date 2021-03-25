@@ -26,53 +26,7 @@ const historicInfo = ( el ) => {
 
 const DetalhesQuestionario = () => {
     const nav = useNavigation();
-    const schedules =
-        [
-            {
-                "date": "14/10/2020",
-                "hour": "14:00",
-                "service": "mao",
-                "price": "R$ 20,00"
-            },
-            {
-                "date": "05/10/2020",
-                "hour": "15:00",
-                "service": "pe",
-                "price": "R$ 25,00"
-            },
-            {
-                "date": "24/09/2020",
-                "hour": "10:00",
-                "service": "mao e pe",
-                "price": "R$ 45,00"
-            },
-            {
-                "date": "30/09/2021",
-                "hour": "10:00",
-                "service": "mao e pe",
-                "price": "R$ 45,00"
-            },
-            {
-                "date": "30/10/2021",
-                "hour": "08:00",
-                "service": "mao e pe",
-                "price": "R$ 45,00"
-            },
-            {
-                "date": "30/10/2040",
-                "hour": "08:00",
-                "service": "mao e pe",
-                "price": "R$ 45,00"
-            },
-            {
-                "date": "30/10/3030",
-                "hour": "08:00",
-                "service": "mao e pe",
-                "price": "R$ 45,00"
-            }
-        ];
-              
-    
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Questionario de efetivação</Text>
@@ -81,7 +35,7 @@ const DetalhesQuestionario = () => {
                 <Text style={styles.info}>Destinado para: RH</Text>
             </View>
             <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={styles.button} onPressIn={() => { nav.navigate('Questionário'); } } >
+                <TouchableOpacity style={styles.button} onPressIn={() => { nav.navigate('Answers'); } } >
                     <Text style={styles.buttonText}>Iniciar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPressIn={() => { nav.goBack(); } } >
