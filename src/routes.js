@@ -10,6 +10,7 @@ import preferencias from './pages/Preferencias';
 import painel from './pages/Painel';
 import placar from './pages/Placar';
 import AddClient from './pages/AddClient';
+import Answers from './pages/Answers';
 import DetalhesQuestionario from './pages/DetalhesQuestionario';
 
 const Tab = createBottomTabNavigator();
@@ -71,6 +72,7 @@ export default function Routes() {
             >
               <RootStack.Screen name="Home" component={HomeTabs} />
               <RootStack.Screen name="Como responder" component={AddClient} />
+              <RootStack.Screen name="Answers" component={Answers} />
               <RootStack.Screen name="Informações sobre o questionário" component={DetalhesQuestionario} />
           </RootStack.Navigator>
         </NavigationContainer>
