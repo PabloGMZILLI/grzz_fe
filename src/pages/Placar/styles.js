@@ -13,7 +13,8 @@ export default StyleSheet.create({
         fontSize: 14
     },
     list: {
-        width: "90%",
+        width: "100%",
+        height: "100%"
     },
     panel: {
         flex: 1,

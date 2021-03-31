@@ -5,8 +5,7 @@ export default StyleSheet.create({
     header: {
         alignItems: 'center',
         height: 90,
-        backgroundColor: "green",
-        marginBottom: 20
+        backgroundColor: "green"
     },
     title: {
         color: "white",

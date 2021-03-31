@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, SafeAreaView, FlatList } from 'react-native';
+import { View, SafeAreaView, FlatList, ScrollView } from 'react-native';
 import styles from "./styles";
-import Header from "../../widgets/header/index"
+import Header from "../../widgets/header/index";
+import { ListItem, Avatar, Icon, Badge, Text } from 'react-native-elements'
 
 const topList = [
   {
@@ -33,28 +34,76 @@ const topList = [
     name: "Carlos",
     lastName: "Silva",
     points: 50670
+  },
+  {
+    id: "6",
+    name: "Maria",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "7",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "8",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "9",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "10",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
   }
 ];
 
 export default function placar() {
 
-  const renderItem = ({ index, item }) => (
-    <View style = { styles.listItem }>
-      <Text>{`${index + 1} - ${item.name} ${item.lastName}`}</Text>
-      <Text>{`Pontos: ${item.points}`}</Text>
-    </View>
-  );
-
   return (
     <>
-      <Header title = {'Top 10'} />
-      <View style = { styles.panel }>
-        <SafeAreaView style={ styles.list }>
-          <FlatList
-            data = {topList}
-            renderItem = {renderItem}
-            keyExtractor = { item => item.id }
-          />
+      <Header title={'Top 10'} />
+      <View style={styles.panel}>
+        <SafeAreaView style={styles.list}>
+          <ScrollView>
+            {
+              topList.map((item, i) => (
+                <ListItem key={i} bottomDivider>
+                  <Text h4>{ i + 1 }</Text>
+                  <Icon
+                    name='trophy'
+                    type='font-awesome'
+                    color={i == 0 ? 'yellow' : 'gray'}
+                  />
+                  <Avatar
+                    rounded
+                    title={item.name[0]}
+                    size={26}
+                  />
+                  <ListItem.Content>
+                    <ListItem.Title>
+                    <Text h4>{item.name}</Text>
+                    </ListItem.Title>
+                    <ListItem.Subtitle>Pontos: {item.points}</ListItem.Subtitle>
+                  </ListItem.Content>
+                  <Icon
+                    name='arrow-right'
+                    type='font-awesome'
+                    color='#517fa4'
+                  />
+                </ListItem>
+              ))
+            }
+          </ScrollView>
         </SafeAreaView>
       </View>
     </>
