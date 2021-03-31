@@ -1,10 +1,111 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, SafeAreaView, FlatList, ScrollView } from 'react-native';
+import styles from "./styles";
+import Header from "../../widgets/header/index";
+import { ListItem, Avatar, Icon, Badge, Text } from 'react-native-elements'
 
-export default function Placar() {
-    return(
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Hoje</Text>
-        </View>
-    );
+const topList = [
+  {
+    id: "1",
+    name: "Maria",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "2",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "3",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "4",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "5",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "6",
+    name: "Maria",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "7",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "8",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "9",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  },
+  {
+    id: "10",
+    name: "Carlos",
+    lastName: "Silva",
+    points: 50670
+  }
+];
+
+export default function placar() {
+
+  return (
+    <>
+      <Header title={'Top 10'} />
+      <View style={styles.panel}>
+        <SafeAreaView style={styles.list}>
+          <ScrollView>
+            {
+              topList.map((item, i) => (
+                <ListItem key={i} bottomDivider>
+                  <Text h4>{ i + 1 }</Text>
+                  <Icon
+                    name='trophy'
+                    type='font-awesome'
+                    color={i == 0 ? 'yellow' : 'gray'}
+                  />
+                  <Avatar
+                    rounded
+                    title={item.name[0]}
+                    size={26}
+                  />
+                  <ListItem.Content>
+                    <ListItem.Title>
+                    <Text h4>{item.name}</Text>
+                    </ListItem.Title>
+                    <ListItem.Subtitle>Pontos: {item.points}</ListItem.Subtitle>
+                  </ListItem.Content>
+                  <Icon
+                    name='arrow-right'
+                    type='font-awesome'
+                    color='#517fa4'
+                  />
+                </ListItem>
+              ))
+            }
+          </ScrollView>
+        </SafeAreaView>
+      </View>
+    </>
+  );
 }
