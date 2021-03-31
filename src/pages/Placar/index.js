@@ -19,25 +19,25 @@ const topList = [
   },
   {
     id: "3",
-    name: "Carlos",
+    name: "Julia",
     lastName: "Silva",
     points: 50670
   },
   {
     id: "4",
-    name: "Carlos",
+    name: "Daniel",
     lastName: "Silva",
     points: 50670
   },
   {
     id: "5",
-    name: "Carlos",
+    name: "Irineu",
     lastName: "Silva",
     points: 50670
   },
   {
     id: "6",
-    name: "Maria",
+    name: "Tony",
     lastName: "Silva",
     points: 50670
   },
@@ -82,23 +82,24 @@ export default function placar() {
                   <Icon
                     name='trophy'
                     type='font-awesome'
-                    color={i == 0 ? 'yellow' : 'gray'}
+                    color={i == 0 ? 'orange' : 'gray'}
                   />
                   <Avatar
                     rounded
-                    title={item.name[0]}
-                    size={26}
+                    title={item.name[0] + item.lastName[0]}
+                    containerStyle={{ backgroundColor: "#BDBDBD" }}
                   />
                   <ListItem.Content>
                     <ListItem.Title>
-                    <Text h4>{item.name}</Text>
+                    <Text h4>{item.name} {item.lastName}</Text>
                     </ListItem.Title>
                     <ListItem.Subtitle>Pontos: {item.points}</ListItem.Subtitle>
                   </ListItem.Content>
                   <Icon
-                    name='arrow-right'
-                    type='font-awesome'
+                    name='chevron-right'
+                    type='font-awesome-5'
                     color='#517fa4'
+                    size={14}
                   />
                 </ListItem>
               ))
