@@ -2,29 +2,10 @@ import React from 'react';
 import { Text, FlatList, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
-
-const mock =
-    [
-        {
-            "id": 0,
-            "name": "Questionario de efetivação",
-            "workspace": "TEST",
-        },
-        {
-            "id": 1,
-            "name": "Questionário Introdutório",
-            "workspace": "GERAL",
-        },
-        {
-            "id": 2,
-            "name": "Questionário administrativo",
-            "workspace": "RH",
-        },
-    ];
+import mock from '../../../mocks/quiz.json'
 
 const Questionarios = () => {
     const nav = useNavigation();
-
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -33,7 +14,7 @@ const Questionarios = () => {
             </View>
             <FlatList
                 style={styles.quizContainer}
-                data={ mock }
+                data={ mock.quizzes }
                 keyExtractor={ element => String(element.id)}
                 showsVerticalScrollIndicator={true}
                 renderItem={ element => <Questionario id={element.item.id} workspace={element.item.workspace} name={element.item.name}/> }
@@ -53,7 +34,7 @@ const Questionario = ( element ) => {
     return (
         <TouchableOpacity
             style={styles.quiz}
-            onPressIn={ () => nav.navigate('Informações sobre o questionário', element.id ) }
+            onPressIn={ () => nav.navigate('Informações sobre o questionário', { "quizId": element.id } ) }
             > 
             <Text style={styles.quizProp}>{element.name}</Text>
         </TouchableOpacity>

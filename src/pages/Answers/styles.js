@@ -16,12 +16,11 @@ export default StyleSheet.create({
     },
     header: {
         padding: 10,
-        marginHorizontal: -50,
         paddingTop: Constants.statusBarHeight,
         backgroundColor: '#EF4358',
-        marginBottom: 15,
         flexDirection: "row",
-        alignContent: 'space-between'
+        alignContent: 'space-between',
+        width: '100%'
 
     },
     answersContainer: {
@@ -86,6 +85,7 @@ export default StyleSheet.create({
         marginLeft: 6 // Para que não fique colado ao checkbox
     },
     questionContainer: {
+        marginTop: 10,
         padding:10,
         width: '100%',
         height: '35%',
