@@ -8,10 +8,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import questionarios from './pages/Questionarios';
 import preferencias from './pages/Preferencias';
 import painel from './pages/Painel';
-import placar from './pages/Placar';
+import Billboard from './pages/Billboard';
 import AddClient from './pages/AddClient';
 import Answers from './pages/Answers';
 import DetalhesQuestionario from './pages/DetalhesQuestionario';
+import BillboardDetails from './pages/BillboardDetails';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -29,7 +30,7 @@ function HomeTabs() {
       }}
     >
       <Tab.Screen name="Painel" component={painel} />
-      <Tab.Screen name="Placar" component={placar} />
+      <Tab.Screen name="Placar" component={Billboard} />
       <Tab.Screen name="Questionários" component={questionarios} />
       <Tab.Screen name="Preferências" component={preferencias} />
     </Tab.Navigator>
@@ -74,6 +75,7 @@ export default function Routes() {
               <RootStack.Screen name="Como responder" component={AddClient} />
               <RootStack.Screen name="Answers" component={Answers} />
               <RootStack.Screen name="Informações sobre o questionário" component={DetalhesQuestionario} />
+              <RootStack.Screen name="BillboardDetails" component={BillboardDetails} />
           </RootStack.Navigator>
         </NavigationContainer>
     )
