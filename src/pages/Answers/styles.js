@@ -3,6 +3,18 @@ import Constants from 'expo-constants';
 
 
 export default StyleSheet.create({
+    screenContainer: {
+        height: '100%'
+    },
+        header: {
+        padding: 10,
+        paddingTop: Constants.statusBarHeight,
+        backgroundColor: '#EF4358',
+        flexDirection: "row",
+        alignContent: 'space-between',
+        width: '100%'
+
+    },
     container : {
         flex: 1,
         paddingHorizontal: 20,
@@ -14,29 +26,28 @@ export default StyleSheet.create({
         color: '#000000',
         textAlign: 'center'
     },
-    header: {
-        padding: 10,
-        paddingTop: Constants.statusBarHeight,
-        backgroundColor: '#EF4358',
-        flexDirection: "row",
-        alignContent: 'space-between',
-        width: '100%'
-
-    },
     answersContainer: {
         position: 'relative',
         marginTop: 15,
         padding: 10,
     },
-    time: {
-        marginTop:10,
-        paddingTop: 5,
-        fontSize: 16,
-        color: 'black',
+    timer: {
+        marginTop: 5,
         backgroundColor: 'white',
         padding: 8,
         borderRadius: 10,
-        marginLeft: 50
+        maxWidth: '60%',
+        marginRight: '10%',
+        flex:1,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    timerTxt: {
+        fontSize: 17,
+        color: 'black',
+    },
+    timerNumbers: {
+        color: 'yellow'
     },
     btnTxt: {
         fontSize: 16,
@@ -44,18 +55,13 @@ export default StyleSheet.create({
         color: 'black',
     },
     buttonNext: {
-        marginTop:10,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 5,
+        maxWidth: '30%',
         backgroundColor: 'white',
-        padding: 8,
         borderRadius: 10,
-        marginLeft: 50,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 5,
-        },
-        shadowOpacity: 0.12,
-        shadowRadius: 2,
     },
     question: {
         fontSize: 15,
