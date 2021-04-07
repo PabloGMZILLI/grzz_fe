@@ -4,8 +4,6 @@ import styles from "./styles";
 import { useNavigation } from '@react-navigation/native';
 import { Avatar, Card, Text, Divider, Icon, SocialIcon } from "react-native-elements";
 
-import Header from "../../widgets/header";
-
 export default function BillboardDetails({ route, navigation }) {
 
 	var nav = useNavigation();
@@ -13,7 +11,6 @@ export default function BillboardDetails({ route, navigation }) {
 
 	return (
 		<>
-			<Header title={'Detalhes'} />
 			<View style={{ marginHorizontal: 20, marginTop: 10 }}>
 				<View style={{ flexDirection: 'row' }}>
 					<Avatar
