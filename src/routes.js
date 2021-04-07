@@ -11,7 +11,7 @@ import painel from './pages/Painel';
 import placar from './pages/Placar';
 import AddClient from './pages/AddClient';
 import Answers from './pages/Answers';
-import DetalhesQuestionario from './pages/DetalhesQuestionario';
+import QuizDetails from './pages/QuizDetails';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -73,7 +73,7 @@ export default function Routes() {
               <RootStack.Screen name="Home" component={HomeTabs} />
               <RootStack.Screen name="Como responder" component={AddClient} />
               <RootStack.Screen name="Answers" component={Answers} />
-              <RootStack.Screen name="Informações sobre o questionário" component={DetalhesQuestionario} />
+              <RootStack.Screen name="Informações sobre o questionário" component={QuizDetails} />
           </RootStack.Navigator>
         </NavigationContainer>
     )
