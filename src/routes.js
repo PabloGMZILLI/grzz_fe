@@ -12,6 +12,7 @@ import AddClient from "./pages/AddClient";
 import Answers from "./pages/Answers";
 import QuizDetails from "./pages/QuizDetails";
 import BillboardDetails from "./pages/BillboardDetails";
+import EmployeePerformace from "./pages/EmployeePerformace";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -89,6 +90,13 @@ export default function Routes() {
           component={BillboardDetails}
           options={{
             title: "Detalhes",
+          }}
+        />
+        <RootStack.Screen
+          name="EmployeePerformace"
+          component={EmployeePerformace}
+          options={{
+            title: "Desempenho geral dos colaboradores",
           }}
         />
       </RootStack.Navigator>
