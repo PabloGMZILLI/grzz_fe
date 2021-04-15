@@ -19,7 +19,7 @@ const nextQuestion = (navigation, selectQuizz, position ) => {
     if ((position + 1) < selectQuizz.questions.length) {
         return navigation.navigate('Answers', { quizId: selectQuizz.id, position: position, questionId: selectQuizz.questions[position].id });
     } else {
-        return navigation.navigate('Home');
+        return navigation.navigate('Resultado');
     }
 }
 
@@ -27,7 +27,8 @@ const Answers = ({route, navigation}) => {
     let { quizId, position } = route.params;
     let selectQuizz = selectedQuizz(quizId, mock.quizzes);
     position == undefined ? position = 0 : position += 1;
-    var question = selectQuizz.questions[position];
+    var allQuestions = selectQuizz.questions;
+    var question = allQuestions[position];
     let questionId = question.id;
     return (
         <View style={ styles.screenContainer } >
@@ -57,7 +58,7 @@ const Answers = ({route, navigation}) => {
                     data={ question.answers }
                     keyExtractor={ element => String(element.id)}
                     showsVerticalScrollIndicator={true}
-                    renderItem={ element => <Answer id={ element.item.id } selected={false} answerText={ element.item.answer }/>
+                    renderItem={ element => { console.log();  return <Answer id={ element.item.id } answerText={ element.item.answer }/>}
                     }
                 />
             </View>
@@ -66,12 +67,20 @@ const Answers = ({route, navigation}) => {
  
 }
 
-const Answer = ( element, enableNextButton ) => {
+
+const Answer = ( {id, answerText} ) => {
+    // https://reactnativeelements.com/docs/next/checkbox/ olha ai tio
     const [selected, setSelected] = useState(false);
+
+    const handleChecks = ( id ) => {
+        let ok = allChecks;
+        ok.push(id);
+        setCheck(ok)
+    }
     // https://dev.to/alanrmachado/criando-seu-proprio-componente-checkbox-no-react-native-3np6
     return (
         <TouchableOpacity value={selected} style={styles.answer} onPressIn={ () => { setSelected(!selected); } } > 
-            <Text style={styles.answerLabel}>{element.answerText}</Text>
+            <Text style={styles.answerLabel}>{answerText}</Text>
             { selected ?  <Icon style={styles.CheckBox} name="check" size={15} color='#EF4358' /> : null }
         </TouchableOpacity>
     )

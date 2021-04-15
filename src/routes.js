@@ -11,6 +11,7 @@ import Billboard from "./pages/Billboard";
 import AddClient from "./pages/AddClient";
 import Answers from "./pages/Answers";
 import QuizDetails from "./pages/QuizDetails";
+import QuizResults from "./pages/QuizResults";
 import BillboardDetails from "./pages/BillboardDetails";
 
 const Tab = createBottomTabNavigator();
@@ -78,19 +79,32 @@ export default function Routes() {
           component={HomeTabs}
           options={{ headerShown: false }}
         />
-        <RootStack.Screen name="Como responder" component={AddClient} />
-        <RootStack.Screen name="Answers" component={Answers} />
+        <RootStack.Screen
+          name="Como responder"
+          component={AddClient}
+          />
+        <RootStack.Screen
+          name="Answers"
+          component={Answers}
+          options={{ headerShown: false }}
+          />
         <RootStack.Screen
           name="Informações sobre o questionário"
           component={QuizDetails}
-        />
+          options={{ headerShown: false }}
+          />
+        <RootStack.Screen
+          name="Resultado"
+          component={QuizResults}
+          options={{ headerShown: false }}
+          />
         <RootStack.Screen
           name="BillboardDetails"
           component={BillboardDetails}
           options={{
             title: "Detalhes",
           }}
-        />
+          />
       </RootStack.Navigator>
     </NavigationContainer>
   );
