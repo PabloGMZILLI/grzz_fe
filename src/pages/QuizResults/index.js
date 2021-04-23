@@ -6,6 +6,8 @@ import mock from '../../../mocks/quiz.json'
 import styles from './styles';
 
 const QuizDetails = ({route}) => {
+    let params = route.params;
+    console.log(params);
     var navigation = useNavigation();
 
     return (

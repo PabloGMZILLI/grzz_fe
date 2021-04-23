@@ -14,23 +14,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta errada"
+							"answer": "Resposta errada",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -43,23 +48,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta errada"
+							"answer": "Resposta errada",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -72,23 +82,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta errada"
+							"answer": "Resposta errada",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -101,23 +116,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta errada"
+							"answer": "Resposta errada",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -130,23 +150,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta"
+							"answer": "Resposta",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				}
@@ -166,23 +191,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta"
+							"answer": "Resposta",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -195,23 +225,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Ok"
+							"answer": "Ok",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Acho que sim"
+							"answer": "Acho que sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por também ser humano"
+							"answer": "Por também ser humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Claro que queremos"
+							"answer": "Claro que queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "O que saber"
+							"answer": "O que saber",
+							"checked": false
 						}
 					]
 				},
@@ -224,23 +259,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Interessante"
+							"answer": "Interessante",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Não, sim"
+							"answer": "Não, sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por obsequio"
+							"answer": "Por obsequio",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque oq?"
+							"answer": "Porque oq?",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai la"
+							"answer": "Vai la",
+							"checked": false
 						}
 					]
 				},
@@ -253,23 +293,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Também"
+							"answer": "Também",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porasedasdque sim"
+							"answer": "Porasedasdque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por qu213e sou humano"
+							"answer": "Por qu213e sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porqueasdsad queremos"
+							"answer": "Porqueasdsad queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai sasdsadaber"
+							"answer": "Vai sasdsadaber",
+							"checked": false
 						}
 					]
 				},
@@ -282,23 +327,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Cloroquina"
+							"answer": "Cloroquina",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Vacina"
+							"answer": "Vacina",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Historico de atleta"
+							"answer": "Historico de atleta",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Sim"
+							"answer": "Sim",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Lock down"
+							"answer": "Lock down",
+							"checked": false
 						}
 					]
 				}
@@ -318,23 +368,29 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta"
+							"answer": "Resposta",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
+
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -347,23 +403,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta"
+							"answer": "Resposta",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -376,23 +437,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta"
+							"answer": "Resposta",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -405,23 +471,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta"
+							"answer": "Resposta",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				},
@@ -434,23 +505,28 @@
 					"answers": [
 						{
 							"id": 0,
-							"answer": "Resposta"
+							"answer": "Resposta",
+							"checked": false
 						},
 						{
 							"id": 1,
-							"answer": "Porque sim"
+							"answer": "Porque sim",
+							"checked": false
 						},
 						{
 							"id": 2,
-							"answer": "Por que sou humano"
+							"answer": "Por que sou humano",
+							"checked": false
 						},
 						{
 							"id": 3,
-							"answer": "Porque queremos"
+							"answer": "Porque queremos",
+							"checked": false
 						},
 						{
 							"id": 4,
-							"answer": "Vai saber"
+							"answer": "Vai saber",
+							"checked": false
 						}
 					]
 				}
