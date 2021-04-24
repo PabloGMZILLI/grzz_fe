@@ -18,21 +18,24 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    info: {
-        fontSize: 15,
+    resultsTexts: {
+        fontSize: 20,
         color: '#000000',
         textAlign: 'center',
     },
-    infoResponse: {
-        fontSize: 15,
-        color: '#000000',
-        textAlign: 'center',
-        fontWeight: 'bold'
-    },
-    buttonsContainer: {
-        paddingVertical: 20,
-        position: 'relative',
-        marginVertical: '30%'
+    textContainer: {
+        marginTop: 10,
+        padding:10,
+        height: '35%',
+        backgroundColor: 'rgba(240, 240, 240, 0.5)',
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.12,
+        shadowRadius: 2,
     },
     editButton: {
         position: 'absolute',
@@ -40,6 +43,7 @@ export default StyleSheet.create({
         right: 20,
     },
     button: {
+        marginTop: 30,
         position: 'relative',
         bottom: 0,
         width: '100%',

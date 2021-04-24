@@ -24,11 +24,13 @@ const Answers = ({route}) => {
     const [position, setPosition] = useState(0); // primeiro item do array
     const [currentQuestion, setCurrentQuestion] = useState(questions[position]); // estado inicial
     const [quiz, setQuiz] = useState(selectQuizz);
+    const [disabled, setDisabled] = useState(true);
 
     const nextQuestion = (position) => {
         if ((position + 1) == questions.length) {
-            nav.navigate('Resultado', quiz);
+            nav.navigate('Resultado', {"quiz": quiz });
         } else {
+            setDisabled(true);
             setPosition(position + 1);
         }
     }
@@ -47,7 +49,14 @@ const Answers = ({route}) => {
             setCurrentQuestion( prevState => ({
                 ...prevState,
                 "answers": prevState.answers.map(
-                        el => el.id === currentAnswer.id ? { ...el, checked: !el.checked } : { ...el, checked: false }
+                        el => {
+                            if (el.id === currentAnswer.id) {
+                                setDisabled(!!el.checked);
+                                return { ...el, checked: !el.checked }
+                            } else {
+                                return { ...el, checked: false }
+                            }
+                        }
                     )
                 })
             );
@@ -76,7 +85,9 @@ const Answers = ({route}) => {
                             timeLabels={{m: null, s: null}}
                         />
                     </View>
-                    <TouchableOpacity style={styles.buttonNext} onPressIn={ () => nextQuestion(position) }> 
+                    <TouchableOpacity disabled={disabled}
+                    style={ (disabled) ? styles.buttonDisabled : styles.buttonNext}
+                    onPressIn={ () => nextQuestion(position) }> 
                         <Text style={ styles.btnTxt }>Próxima</Text>
                     </TouchableOpacity>
                 </View>
