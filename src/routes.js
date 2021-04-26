@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import AuthContext from "./contexts/auth";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import questionarios from "./pages/Questionarios";
-import preferencias from "./pages/Preferencias";
+import * as auth from "./services/auth";
+import Quizzes from "./pages/Quizzes";
+import Preferences from "./pages/Preferences";
 import painel from "./pages/Painel";
 import Billboard from "./pages/Billboard";
 import AddClient from "./pages/AddClient";
 import Answers from "./pages/Answers";
 import QuizDetails from "./pages/QuizDetails";
 import QuizResults from "./pages/QuizResults";
+import Login from "./pages/Login";
 import BillboardDetails from "./pages/BillboardDetails";
 
 const Tab = createBottomTabNavigator();
@@ -29,8 +32,8 @@ function HomeTabs() {
     >
       <Tab.Screen name="Painel" component={painel} />
       <Tab.Screen name="Placar" component={Billboard} />
-      <Tab.Screen name="Questionários" component={questionarios} />
-      <Tab.Screen name="Preferências" component={preferencias} />
+      <Tab.Screen name="Questionários" component={Quizzes} />
+      <Tab.Screen name="Preferências" component={Preferences} />
     </Tab.Navigator>
   );
 }
@@ -61,51 +64,85 @@ const icons = ({ route }) => ({
 });
 
 export default function Routes() {
+  const [user, setUser] = useState(null);
+
+  async function signIn() {
+    const response = await auth.signIn();
+    setUser(response.user);
+  }
+
+  function signOut() {
+    setUser(null);
+  }
+  if (!!!user) {
+    return (
+      <NavigationContainer>
+        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>
+          <RootStack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: "#00B3A7",
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
+            }}
+          >
+            <RootStack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+          </RootStack.Navigator>
+        </AuthContext.Provider>
+      </NavigationContainer>
+    );
+  }
   return (
     <NavigationContainer>
-      <RootStack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#00B3A7",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}
-      >
-        <RootStack.Screen
-          name="Home"
-          component={HomeTabs}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen
-          name="Como responder"
-          component={AddClient}
-          />
-        <RootStack.Screen
-          name="Answers"
-          component={Answers}
-          options={{ headerShown: false }}
-          />
-        <RootStack.Screen
-          name="Informações sobre o questionário"
-          component={QuizDetails}
-          options={{ headerShown: false }}
-          />
-        <RootStack.Screen
-          name="Resultado"
-          component={QuizResults}
-          options={{ headerShown: false }}
-          />
-        <RootStack.Screen
-          name="BillboardDetails"
-          component={BillboardDetails}
-          options={{
-            title: "Detalhes",
+      <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>
+        <RootStack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#00B3A7",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
           }}
+        >
+          <RootStack.Screen
+            name="Home"
+            component={HomeTabs}
+            options={{ headerShown: false }}
           />
-      </RootStack.Navigator>
+          <RootStack.Screen name="Como responder" component={AddClient} />
+          <RootStack.Screen
+            name="Answers"
+            component={Answers}
+            options={{ headerShown: false }}
+          />
+          <RootStack.Screen
+            name="Informações sobre o questionário"
+            component={QuizDetails}
+            options={{ headerShown: false }}
+          />
+          <RootStack.Screen
+            name="Resultado"
+            component={QuizResults}
+            options={{ headerShown: false }}
+          />
+          <RootStack.Screen
+            name="BillboardDetails"
+            component={BillboardDetails}
+            options={{
+              title: "Detalhes",
+            }}
+          />
+        </RootStack.Navigator>
+      </AuthContext.Provider>
     </NavigationContainer>
   );
 }
