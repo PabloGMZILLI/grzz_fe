@@ -12,7 +12,7 @@ export default StyleSheet.create({
   image: {
     marginBottom: 70,
     marginHorizontal: 20,
-    width: '100%',
+    width: '85%',
     height: 59,
     resizeMode: 'contain'
   },
@@ -20,7 +20,7 @@ export default StyleSheet.create({
   inputView: {
     backgroundColor: "#b8e0de",
     borderRadius: 30,
-    width: "100%",
+    width: "80%",
     height: 45,
     marginBottom: 20,
     alignItems: "center",
@@ -28,9 +28,8 @@ export default StyleSheet.create({
   },
 
   TextInput: {
-    outlineColor: "#EF4358",
     borderRadius: 30,
-    width: "100%",
+    width: "80%",
     color: '#000000',
     height: 50,
     flex: 1,
@@ -42,7 +41,7 @@ export default StyleSheet.create({
   },
 
   loginBtn: {
-    width: "100%",
+    width: "80%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",

@@ -1,10 +1,13 @@
 interface Response {
     token: string;
     user: {
-      name: string,
-      email: string,
-      workspace: string,
-      account_type: string,
+        id: string,
+        name: string,
+        lastName: string,
+        email: string,
+        workspace: string,
+        account_type: string,
+        points: number,
     };
   }
   
@@ -14,13 +17,16 @@ interface Response {
             resolve({
                 token: 'asdihsaoidh123jhu234uj45huj34h5o34u76456534',
                 user: {
-                    name: 'Admin',
+                    id: "3",
+                    name: 'admin',
+                    lastName: "Silva",
                     email: 'admin@hotmail.com',
                     workspace: 'GERAL',
-                    account_type: 'ADMIN'
+                    account_type: 'ADMIN',
+                    points: 50670,
                 }
             })
-        }, 1000)
+        }, 500)
     }
     )
 }

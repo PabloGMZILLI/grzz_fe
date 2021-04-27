@@ -5,7 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import * as auth from "./services/auth";
+import * as auth_admin from "./services/auth_admin";
+import * as auth_user from "./services/auth_user";
 import Quizzes from "./pages/Quizzes";
 import Preferences from "./pages/Preferences";
 import painel from "./pages/Painel";
@@ -20,24 +21,6 @@ import BillboardDetails from "./pages/BillboardDetails";
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 
-function HomeTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={(routes) => icons(routes)}
-      tabBarOptions={{
-        activeTintColor: "#00B3A7",
-        inactiveTintColor: "gray",
-        keyboardHidesTabBar: false,
-      }}
-    >
-      <Tab.Screen name="Painel" component={painel} />
-      <Tab.Screen name="Placar" component={Billboard} />
-      <Tab.Screen name="Questionários" component={Quizzes} />
-      <Tab.Screen name="Preferências" component={Preferences} />
-    </Tab.Navigator>
-  );
-}
-
 const icons = ({ route }) => ({
   tabBarIcon: ({ focused, color, size }) => {
     let iconName;
@@ -48,6 +31,9 @@ const icons = ({ route }) => ({
 
     if (route.name === "Placar") {
       iconName = focused ? "ios-star" : "ios-star-outline";
+    }
+    if (route.name === "Perfil") {
+      iconName = focused ? "ios-person" : "ios-person";
     }
 
     if (route.name === "Questionários") {
@@ -66,14 +52,59 @@ const icons = ({ route }) => ({
 export default function Routes() {
   const [user, setUser] = useState(null);
 
-  async function signIn() {
-    const response = await auth.signIn();
-    setUser(response.user);
+  async function signIn(user, password) {
+    let response;
+    if (user.toLowerCase() == 'admin' && password.toLowerCase() == 'admin'){
+      response = await auth_admin.signIn();
+      setUser(response.user);
+    }
+    else if(user.toLowerCase() == 'user' && password.toLowerCase() == 'user') {
+      response = await auth_user.signIn();
+      setUser(response.user);
+    }
+  }
+
+  function HomeTabs() {
+    if (user.account_type == 'ADMIN') {
+      return (
+        <Tab.Navigator
+          screenOptions={(routes) => icons(routes)}
+          tabBarOptions={{
+            activeTintColor: "#00B3A7",
+            inactiveTintColor: "gray",
+            keyboardHidesTabBar: false,
+          }}
+        >
+          
+          <Tab.Screen name="Painel" component={painel} />
+          <Tab.Screen name="Placar" component={Billboard} />
+          <Tab.Screen name="Perfil" component={BillboardDetails} />
+          <Tab.Screen name="Questionários" component={Quizzes} />
+          <Tab.Screen name="Preferências" component={Preferences} />
+        </Tab.Navigator>
+      );
+    }
+    return (
+      <Tab.Navigator
+        screenOptions={(routes) => icons(routes)}
+        tabBarOptions={{
+          activeTintColor: "#00B3A7",
+          inactiveTintColor: "gray",
+          keyboardHidesTabBar: false,
+        }}
+      >
+        <Tab.Screen name="Placar" component={Billboard} />
+        <Tab.Screen name="Perfil" component={BillboardDetails} />
+        <Tab.Screen name="Questionários" component={Quizzes} />
+        <Tab.Screen name="Preferências" component={Preferences} />
+      </Tab.Navigator>
+    );
   }
 
   function signOut() {
     setUser(null);
   }
+
   if (!!!user) {
     return (
       <NavigationContainer>
@@ -99,6 +130,7 @@ export default function Routes() {
       </NavigationContainer>
     );
   }
+
   return (
     <NavigationContainer>
       <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>
@@ -145,4 +177,5 @@ export default function Routes() {
       </AuthContext.Provider>
     </NavigationContainer>
   );
+
 }

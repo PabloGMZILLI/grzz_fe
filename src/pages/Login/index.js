@@ -11,15 +11,12 @@ import styles from './styles';
 import AuthContext from '../../contexts/auth';
  
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const { signed, signIn } = useContext(AuthContext);
 
   function handleSign() {
-    console.log(signed);
-    signIn();
-    console.log(signed);
-
+    signIn(user, password);
   }
   return (
     <View style={styles.container}>
@@ -31,7 +28,7 @@ const Login = () => {
           style={styles.TextInput}
           placeholder="Nome"
           placeholderTextColor="#a9a9a9"
-          onChangeText={(email) => setEmail(email)}
+          onChangeText={(user) => setUser(user)}
         />
       </View>
  
