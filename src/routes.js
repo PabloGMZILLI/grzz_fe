@@ -18,88 +18,88 @@ const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 
 function HomeTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={(routes) => icons(routes)}
-      tabBarOptions={{
-        activeTintColor: "#00B3A7",
-        inactiveTintColor: "gray",
-        keyboardHidesTabBar: false,
-      }}
-    >
-      <Tab.Screen name="Painel" component={painel} />
-      <Tab.Screen name="Placar" component={Billboard} />
-      <Tab.Screen name="Questionários" component={questionarios} />
-      <Tab.Screen name="Preferências" component={preferencias} />
-    </Tab.Navigator>
-  );
+    return (
+        <Tab.Navigator
+            screenOptions={(routes) => icons(routes)}
+            tabBarOptions={{
+                activeTintColor: "#00B3A7",
+                inactiveTintColor: "gray",
+                keyboardHidesTabBar: false,
+            }}
+        >
+            <Tab.Screen name="Painel" component={painel} />
+            <Tab.Screen name="Placar" component={Billboard} />
+            <Tab.Screen name="Questionários" component={questionarios} />
+            <Tab.Screen name="Preferências" component={preferencias} />
+        </Tab.Navigator>
+    );
 }
 
 const icons = ({ route }) => ({
-  tabBarIcon: ({ focused, color, size }) => {
-    let iconName;
+    tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
 
-    if (route.name === "Painel") {
-      iconName = "ios-trending-up";
-    }
+        if (route.name === "Painel") {
+            iconName = "ios-trending-up";
+        }
 
-    if (route.name === "Placar") {
-      iconName = focused ? "ios-star" : "ios-star-outline";
-    }
+        if (route.name === "Placar") {
+            iconName = focused ? "ios-star" : "ios-star-outline";
+        }
 
-    if (route.name === "Questionários") {
-      iconName = focused ? "ios-list-box" : "ios-list";
-    }
+        if (route.name === "Questionários") {
+            iconName = focused ? "ios-list-box" : "ios-list";
+        }
 
-    if (route.name === "Preferências") {
-      iconName = "ios-settings";
-    }
+        if (route.name === "Preferências") {
+            iconName = "ios-settings";
+        }
 
-    // You can return any component that you like here!
-    return <Ionicons name={iconName} size={size} color={color} />;
-  },
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={size} color={color} />;
+    },
 });
 
 export default function Routes() {
-  return (
-    <NavigationContainer>
-      <RootStack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#00B3A7",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}
-      >
-        <RootStack.Screen
-          name="Home"
-          component={HomeTabs}
-          options={{ headerShown: false }}
-        />
-        <RootStack.Screen name="Como responder" component={AddClient} />
-        <RootStack.Screen name="Answers" component={Answers} />
-        <RootStack.Screen
-          name="Informações sobre o questionário"
-          component={QuizDetails}
-        />
-        <RootStack.Screen
-          name="BillboardDetails"
-          component={BillboardDetails}
-          options={{
-            title: "Detalhes",
-          }}
-        />
-        <RootStack.Screen
-          name="EmployeePerformace"
-          component={EmployeePerformace}
-          options={{
-            title: "Desempenho geral dos colaboradores",
-          }}
-        />
-      </RootStack.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <RootStack.Navigator
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: "#00B3A7",
+                    },
+                    headerTintColor: "#fff",
+                    headerTitleStyle: {
+                        fontWeight: "bold",
+                    },
+                }}
+            >
+                <RootStack.Screen
+                    name="Home"
+                    component={HomeTabs}
+                    options={{ headerShown: false }}
+                />
+                <RootStack.Screen name="Como responder" component={AddClient} />
+                <RootStack.Screen name="Answers" component={Answers} />
+                <RootStack.Screen
+                    name="Informações sobre o questionário"
+                    component={QuizDetails}
+                />
+                <RootStack.Screen
+                    name="BillboardDetails"
+                    component={BillboardDetails}
+                    options={{
+                        title: "Detalhes",
+                    }}
+                />
+                <RootStack.Screen
+                    name="EmployeePerformace"
+                    component={EmployeePerformace}
+                    options={{
+                        title: "Desempenho geral",
+                    }}
+                />
+            </RootStack.Navigator>
+        </NavigationContainer>
+    );
 }
