@@ -4,8 +4,19 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import mock from '../../../mocks/quiz.json'
 
-const Questionarios = () => {
+const Quizzes = () => {
     const nav = useNavigation();
+    const Quiz = ( element ) => {
+        const nav = useNavigation();
+          return (
+              <TouchableOpacity
+                  style={styles.quiz}
+                  onPressIn={ () => nav.navigate('Informações sobre o questionário', { "quizId": element.id } ) }
+                  > 
+                  <Text style={styles.quizProp}>{element.name}</Text>
+              </TouchableOpacity>
+          );
+      }
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -17,7 +28,7 @@ const Questionarios = () => {
                 data={ mock.quizzes }
                 keyExtractor={ element => String(element.id)}
                 showsVerticalScrollIndicator={true}
-                renderItem={ element => <Questionario id={element.item.id} workspace={element.item.workspace} name={element.item.name}/> }
+                renderItem={ element => <Quiz id={element.item.id} workspace={element.item.workspace} name={element.item.name}/> }
             />
             <TouchableOpacity
                 style={styles.addButton}
@@ -29,16 +40,4 @@ const Questionarios = () => {
     );
 }
 
-const Questionario = ( element ) => {
-  const nav = useNavigation();
-    return (
-        <TouchableOpacity
-            style={styles.quiz}
-            onPressIn={ () => nav.navigate('Informações sobre o questionário', { "quizId": element.id } ) }
-            > 
-            <Text style={styles.quizProp}>{element.name}</Text>
-        </TouchableOpacity>
-    );
-}
-
-export default Questionarios;
+export default Quizzes;

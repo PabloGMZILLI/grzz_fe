@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
-import styles from "./styles";
-import { useNavigation } from '@react-navigation/native';
-import { Avatar, Card, Text, Divider, Icon, SocialIcon } from "react-native-elements";
+import { Avatar, Text, Divider, Icon, SocialIcon } from "react-native-elements";
+import AuthContext from '../../contexts/auth';
+import styles from './styles';
 
 export default function BillboardDetails({ route, navigation }) {
-
-	var nav = useNavigation();
-	const item = route.params;
+	const { user } = useContext(AuthContext);
+	var item = route.params;
+	if (!item) {
+		item = user;
+	}
 
 	return (
 		<>
-			<View style={{ marginHorizontal: 20, marginTop: 10 }}>
-				<View style={{ flexDirection: 'row' }}>
+			<View style={styles.container}>
+				<View style={styles.avatar}>
 					<Avatar
 						rounded
 						title={item.name[0] + item.lastName[0]}
-						containerStyle={{ backgroundColor: "#BDBDBD" }}
-						size={100}
+						containerStyle={{ backgroundColor: "#BDBDBD", marginTop: 10 }}
+						size={70}
 					/>
-					<View style={{ marginLeft: 20 }}>
+					<View style={{ marginLeft: 20, marginTop: 0 }}>
 						<Text h1>{item.name} {item.lastName}</Text>
 						<Text h4>Recursos Humanos</Text>
 					</View>
@@ -49,14 +51,16 @@ export default function BillboardDetails({ route, navigation }) {
 					<Text h4>Funcao: RH</Text>
 				</View>
 				<Divider style={{ marginVertical: 10 }} />
-				<View>
-					<Text h3 style={{ marginBottom: 10 }}>Rede sociais:</Text>
+				<Text h3 style={{ marginBottom: 10 }}>Rede sociais:</Text>
+				<View style={styles.icons} >
 					<SocialIcon
+						style={styles.icon}
 						title='LinkedIn'
 						button
 						type='linkedin'
 					/>
 					<SocialIcon
+						style={styles.icon}
 						title='WhatsApp'
 						button
 						type='whatsapp'
