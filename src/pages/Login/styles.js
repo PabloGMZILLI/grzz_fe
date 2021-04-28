@@ -16,7 +16,10 @@ export default StyleSheet.create({
     height: 59,
     resizeMode: 'contain'
   },
-
+  errorMsg:{
+    color:'red',
+    marginVertical:10
+  },
   inputView: {
     backgroundColor: "#b8e0de",
     borderRadius: 30,

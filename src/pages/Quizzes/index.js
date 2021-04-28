@@ -7,15 +7,14 @@ import mock from '../../../mocks/quiz.json'
 const Quizzes = () => {
     const nav = useNavigation();
     const Quiz = ( element ) => {
-        const nav = useNavigation();
-          return (
-              <TouchableOpacity
-                  style={styles.quiz}
-                  onPressIn={ () => nav.navigate('Informações sobre o questionário', { "quizId": element.id } ) }
-                  > 
-                  <Text style={styles.quizProp}>{element.name}</Text>
-              </TouchableOpacity>
-          );
+        return (
+            <TouchableOpacity
+                style={styles.quiz}
+                onPressIn={ () => nav.navigate('Informações sobre o questionário', { "quizId": element.id } ) }
+                > 
+                <Text style={styles.quizProp}>{element.name}</Text>
+            </TouchableOpacity>
+        );
       }
     return (
         <View style={styles.container}>

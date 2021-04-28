@@ -5,6 +5,7 @@ interface AuthContextData {
   user: object | null;
   signIn(): Promise<void>;
   signOut(): void;
+  error: object;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import {
   Text,
   View,
@@ -9,14 +9,16 @@ import {
 } from "react-native";
 import styles from './styles';
 import AuthContext from '../../contexts/auth';
- 
+import { useNavigation } from '@react-navigation/native';
+
 const Login = () => {
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signed, signIn } = useContext(AuthContext);
+  const { signIn, error } = useContext(AuthContext);
+  const nav = useNavigation();
 
   function handleSign() {
-    signIn(user, password);
+    signIn(email, password);
   }
   return (
     <View style={styles.container}>
@@ -26,9 +28,9 @@ const Login = () => {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Nome"
+          placeholder="Email"
           placeholderTextColor="#a9a9a9"
-          onChangeText={(user) => setUser(user)}
+          onChangeText={(email) => setEmail(email)}
         />
       </View>
  
@@ -41,12 +43,13 @@ const Login = () => {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
+      <Text style={styles.errorMsg}>{error ? error.message : null}</Text>
  
-      <TouchableOpacity>
-        <Text style={styles.forgot_button}>Esqueci minha senha</Text>
+      <TouchableOpacity onPress={ () => nav.navigate('Register') }>
+        <Text style={styles.forgot_button}>Não possuo conta</Text>
       </TouchableOpacity>
  
-      <TouchableOpacity style={styles.loginBtn} onPress={ () => { handleSign() } }>
+      <TouchableOpacity style={styles.loginBtn} onPress={ () => handleSign() }>
         <Text style={styles.loginText}>ENTRAR</Text>
       </TouchableOpacity>
     </View>

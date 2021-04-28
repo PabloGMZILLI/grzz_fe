@@ -16,7 +16,10 @@ import Answers from "./pages/Answers";
 import QuizDetails from "./pages/QuizDetails";
 import QuizResults from "./pages/QuizResults";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import BillboardDetails from "./pages/BillboardDetails";
+
+import firebase from '../src/firebase/config';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -51,17 +54,17 @@ const icons = ({ route }) => ({
 
 export default function Routes() {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
-  async function signIn(user, password) {
-    let response;
-    if (user.toLowerCase() == 'admin' && password.toLowerCase() == 'admin'){
-      response = await auth_admin.signIn();
-      setUser(response.user);
-    }
-    else if(user.toLowerCase() == 'user' && password.toLowerCase() == 'user') {
-      response = await auth_user.signIn();
-      setUser(response.user);
-    }
+  async function signIn(email, password) {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        setError('');
+        setUser(userCredential.user);
+      })
+      .catch((er) => {
+        setError(er);
+      });
   }
 
   function HomeTabs() {
@@ -108,7 +111,7 @@ export default function Routes() {
   if (!!!user) {
     return (
       <NavigationContainer>
-        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>
+        <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, error }}>
           <RootStack.Navigator
             screenOptions={{
               headerStyle: {
@@ -125,6 +128,11 @@ export default function Routes() {
               component={Login}
               options={{ headerShown: false }}
             />
+            <RootStack.Screen
+              name="Register"
+              component={Register}
+              options={{ headerShown: false }}
+            />
           </RootStack.Navigator>
         </AuthContext.Provider>
       </NavigationContainer>
@@ -133,7 +141,7 @@ export default function Routes() {
 
   return (
     <NavigationContainer>
-      <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut }}>
+      <AuthContext.Provider value={{ signed: !!user, user, signIn, signOut, error }}>
         <RootStack.Navigator
           screenOptions={{
             headerStyle: {
