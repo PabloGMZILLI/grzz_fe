@@ -17,36 +17,38 @@ import QuizDetails from "./pages/QuizDetails";
 import QuizResults from "./pages/QuizResults";
 import Login from "./pages/Login";
 import BillboardDetails from "./pages/BillboardDetails";
+import EmployeePerformace from "./pages/EmployeePerformace";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
 
 const icons = ({ route }) => ({
-  tabBarIcon: ({ focused, color, size }) => {
-    let iconName;
+    tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
 
-    if (route.name === "Painel") {
-      iconName = "ios-trending-up";
-    }
+        if (route.name === "Painel") {
+            iconName = "ios-trending-up";
+        }
 
-    if (route.name === "Placar") {
-      iconName = focused ? "ios-star" : "ios-star-outline";
-    }
-    if (route.name === "Perfil") {
-      iconName = focused ? "ios-person" : "ios-person";
-    }
+        if (route.name === "Placar") {
+          iconName = focused ? "ios-star" : "ios-star-outline";
+        }
 
-    if (route.name === "Questionários") {
-      iconName = focused ? "ios-list-box" : "ios-list";
-    }
+        if (route.name === "Perfil") {
+          iconName = focused ? "ios-person" : "ios-person";
+        }
 
-    if (route.name === "Preferências") {
-      iconName = "ios-settings";
-    }
+        if (route.name === "Questionários") {
+            iconName = focused ? "ios-list-box" : "ios-list";
+        }
 
-    // You can return any component that you like here!
-    return <Ionicons name={iconName} size={size} color={color} />;
-  },
+        if (route.name === "Preferências") {
+            iconName = "ios-settings";
+        }
+
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={size} color={color} />;
+    },
 });
 
 export default function Routes() {
@@ -173,9 +175,15 @@ export default function Routes() {
               title: "Detalhes",
             }}
           />
+            <RootStack.Screen
+              name="EmployeePerformace"
+              component={EmployeePerformace}
+              options={{
+              title: "Desempenho geral",
+            }}
+        />
         </RootStack.Navigator>
       </AuthContext.Provider>
     </NavigationContainer>
   );
-
 }
