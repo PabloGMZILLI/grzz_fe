@@ -6,11 +6,11 @@ import { Feather } from '@expo/vector-icons';
 // Tempo para notificar que alguma coisa
 // Notificar aniversario da cliente?
 
- const Preferencias = () => {
+ const Preferences = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         </View>
     );
 }
 
-export default Preferencias;
+export default Preferences;

@@ -63,6 +63,15 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10,
     },
+    buttonDisabled: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 5,
+        maxWidth: '30%',
+        backgroundColor: '#d3d3d3',
+        borderRadius: 10,
+    },
     question: {
         fontSize: 15,
         textAlign: 'justify',
