@@ -8,8 +8,11 @@ import {
     Text,
     Button,
 } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ManagerQuestions() {
+    var nav = useNavigation();
+
     const optionsList = [
         { title: "Questao 1", hitsRate: 80 },
         { title: "Questao 2", hitsRate: 45 },
@@ -39,7 +42,13 @@ export default function ManagerQuestions() {
                     />
                     {optionsList.map((item, i) => {
                         return (
-                            <ListItem key={i} bottomDivider>
+                            <ListItem
+                                key={i}
+                                bottomDivider
+                                onPress={() =>
+                                    nav.navigate("QuestionDetails", item)
+                                }
+                            >
                                 <ListItem.Content>
                                     <ListItem.Title>
                                         <Text>{item.title}</Text>

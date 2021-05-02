@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import BillboardDetails from "./pages/BillboardDetails";
 import EmployeePerformace from "./pages/EmployeePerformace";
 import ManagerQuestions from "./pages/ManagerQuestions";
+import QuestionDetails from "./pages/QuestionDetails";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -202,6 +203,13 @@ export default function Routes() {
                             component={ManagerQuestions}
                             options={{
                                 title: "Questionarios",
+                            }}
+                        />
+                        <RootStack.Screen
+                            name="QuestionDetails"
+                            component={QuestionDetails}
+                            options={{
+                                title: "Detalhes da questao",
                             }}
                         />
                     </RootStack.Navigator>
