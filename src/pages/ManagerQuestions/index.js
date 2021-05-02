@@ -14,11 +14,96 @@ export default function ManagerQuestions() {
     var nav = useNavigation();
 
     const optionsList = [
-        { title: "Questao 1", hitsRate: 80 },
-        { title: "Questao 2", hitsRate: 45 },
-        { title: "Questao 3", hitsRate: 70 },
-        { title: "Questao 4", hitsRate: 50 },
-        { title: "Questao 5", hitsRate: 30 },
+        {
+            title: "Questao 1",
+            hitsRate: 80,
+            answers: [
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: true,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+            ],
+        },
+        {
+            title: "Questao 2",
+            hitsRate: 45,
+            answers: [
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: true,
+                },
+            ],
+        },
+        {
+            title: "Questao 3",
+            hitsRate: 70,
+            answers: [
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: true,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+            ],
+        },
+        {
+            title: "Questao 4",
+            hitsRate: 50,
+            answers: [
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: true,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+            ],
+        },
+        {
+            title: "Questao 5",
+            hitsRate: 30,
+            answers: [
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: true,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+                {
+                    text: "Lorem ipsum dolor aliquam, interdum.",
+                    correct: false,
+                },
+            ],
+        },
     ];
 
     return (

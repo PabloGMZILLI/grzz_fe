@@ -1,24 +1,16 @@
 import React from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
-import { ListItem, Text, Card, Button, Icon } from "react-native-elements";
+import {
+    ListItem,
+    Text,
+    Card,
+    Button,
+    Icon,
+    Avatar,
+} from "react-native-elements";
 
 export default function QuestionDetails({ route, navigation }) {
     const question = route.params;
-
-    const answers = [
-        {
-            text: "Lorem ipsum dolor aliquam, interdum.",
-            correct: false,
-        },
-        {
-            text: "Lorem ipsum dolor aliquam, interdum.",
-            correct: true,
-        },
-        {
-            text: "Lorem ipsum dolor aliquam, interdum.",
-            correct: false,
-        },
-    ];
 
     return (
         <View
@@ -65,10 +57,21 @@ export default function QuestionDetails({ route, navigation }) {
                     <Card>
                         <Card.Title>Respostas</Card.Title>
                         <Card.Divider />
-                        {answers.map((item, i) => {
-                            <ListItem key={i} bottomDivider>
-                                <Text>{item.text}</Text>
-                            </ListItem>;
+                        {question.answers.map((item, i) => {
+                            return (
+                                <ListItem key={i} bottomDivider>
+                                    <Avatar
+                                        rounded
+                                        title={i + 1}
+                                        containerStyle={{
+                                            backgroundColor: item.correct
+                                                ? "green"
+                                                : "red",
+                                        }}
+                                    />
+                                    <Text>{item.text}</Text>
+                                </ListItem>
+                            );
                         })}
                     </Card>
                     <Button
