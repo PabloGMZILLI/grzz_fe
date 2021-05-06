@@ -21,6 +21,7 @@ import BillboardDetails from "./pages/BillboardDetails";
 import EmployeePerformace from "./pages/EmployeePerformace";
 import ManagerQuestions from "./pages/ManagerQuestions";
 import QuestionDetails from "./pages/QuestionDetails";
+import axios from './instances/axios';
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -42,7 +43,7 @@ const icons = ({ route }) => ({
         }
 
         if (route.name === "Questionários") {
-            iconName = focused ? "ios-list-box" : "ios-list";
+            iconName = "ios-list";
         }
 
         if (route.name === "Preferências") {
@@ -57,21 +58,15 @@ const icons = ({ route }) => ({
 export default function Routes() {
     const [user, setUser] = useState(null);
 
-    async function signIn(user, password) {
-        let response;
-        if (
-            user.toLowerCase() == "admin" &&
-            password.toLowerCase() == "admin"
-        ) {
-            response = await auth_admin.signIn();
-            setUser(response.user);
-        } else if (
-            user.toLowerCase() == "user" &&
-            password.toLowerCase() == "user"
-        ) {
-            response = await auth_user.signIn();
-            setUser(response.user);
-        }
+    async function signIn(name, password) {
+        await axios.post(`/login`, { name, password })
+        .then(res => {
+            if (res.data){
+              setUser(res.data);
+            }
+          }).catch ( err => {
+            console.log('Erro: ', err);
+          });
     }
 
     function HomeTabs() {
@@ -109,6 +104,7 @@ export default function Routes() {
             </Tab.Navigator>
         );
     }
+
 
     function signOut() {
         setUser(null);

@@ -1,77 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, SafeAreaView, FlatList, ScrollView } from "react-native";
 import styles from "./styles";
 import { ListItem, Avatar, Icon, Badge, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
-const topList = [
-  {
-    id: "1",
-    name: "Maria",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "2",
-    name: "Carlos",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "3",
-    name: "Julia",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "4",
-    name: "Daniel",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "5",
-    name: "Irineu",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "6",
-    name: "Tony",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "7",
-    name: "Carlos",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "8",
-    name: "Carlos",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "9",
-    name: "Carlos",
-    lastName: "Silva",
-    points: 50670,
-  },
-  {
-    id: "10",
-    name: "Carlos",
-    lastName: "Silva",
-    points: 50670,
-  },
-];
+import axios from '../../instances/axios';
 
 export default function Billboard() {
+  const [ranking, setRanking] = useState(false);
   var nav = useNavigation();
+  async function getRanking() {
+    await axios.get(`/ranking`)
+      .then(res => {
+        if (res.data) {
+          setRanking(res.data);
+        }
+      })
+  }
+  if (typeof ranking == 'boolean') {
+    getRanking();
+  }
 
-  return (
-    <>
+  if (ranking) {
+    return (
       <View style={styles.panel}>
         <SafeAreaView style={styles.list}>
           <ScrollView>
@@ -86,7 +37,7 @@ export default function Billboard() {
             >
               Classificacao
             </Text>
-            {topList.map((item, i) => (
+            {ranking.map((item, i) => (
               <ListItem
                 key={i}
                 bottomDivider
@@ -100,13 +51,13 @@ export default function Billboard() {
                 />
                 <Avatar
                   rounded
-                  title={item.name[0] + item.lastName[0]}
+                  title={item.name[0].toUpperCase() + item.lastname[0].toUpperCase()}
                   containerStyle={{ backgroundColor: "#BDBDBD" }}
                 />
                 <ListItem.Content>
                   <ListItem.Title>
                     <Text h4>
-                      {item.name} {item.lastName}
+                      {item.name[0].toUpperCase() + item.name.substr(1)} {item.lastname[0].toUpperCase() + item.lastname.substr(1)}
                     </Text>
                   </ListItem.Title>
                   <ListItem.Subtitle>Pontos: {item.points}</ListItem.Subtitle>
@@ -122,6 +73,11 @@ export default function Billboard() {
           </ScrollView>
         </SafeAreaView>
       </View>
-    </>
-  );
+    );
+  } else {
+    return (
+      <View style={styles.loader}>
+      </View>
+    )
+  }
 }

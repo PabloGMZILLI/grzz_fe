@@ -19,5 +19,14 @@ export default StyleSheet.create({
     panel: {
         flex: 1,
         alignItems: 'center'
+    },
+    lottie: {
+        width: 100,
+        height: 100
+    },
+    loader: {
+        flex: 1,
+        alignItems: 'center', 
+        justifyContent: 'center'
     }
 });
