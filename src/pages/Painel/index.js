@@ -17,6 +17,10 @@ const adminOptions = [
         title: "Colaboradores",
         path: "EmployeePerformace",
     },
+    {
+        title: "Baixar dados dos colaboradores",
+        path: "EmployeePerformace",
+    },
 ];
 
 export default function Painel() {
