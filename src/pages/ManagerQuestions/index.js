@@ -124,6 +124,7 @@ export default function ManagerQuestions() {
                         title="Adicionar nova questao"
                         style={{ padding: 20 }}
                         buttonStyle={{ backgroundColor: "green" }}
+                        onPress={() => nav.navigate("NewQuestion")}
                     />
                     {optionsList.map((item, i) => {
                         return (

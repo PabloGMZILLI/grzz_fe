@@ -21,7 +21,8 @@ import BillboardDetails from "./pages/BillboardDetails";
 import EmployeePerformace from "./pages/EmployeePerformace";
 import ManagerQuestions from "./pages/ManagerQuestions";
 import QuestionDetails from "./pages/QuestionDetails";
-import axios from './instances/axios';
+import axios from "./instances/axios";
+import NewQuestion from "./pages/NewQuestion";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -59,18 +60,21 @@ export default function Routes() {
     const [user, setUser] = useState(null);
 
     async function signIn(name, password) {
-        await axios.post(`/login`, { name, password })
-        .then(res => {
-            if (res.data){
-              setUser(res.data);
-            }
-          }).catch ( err => {
-            console.log('Erro: ', err);
-          });
+        await axios
+            .post(`/login`, { name, password })
+            .then((res) => {
+                if (res.data) {
+                    setUser(res.data);
+                    console.log(res);
+                }
+            })
+            .catch((err) => {
+                console.log("Erro: ", err);
+            });
     }
 
     function HomeTabs() {
-        if (user.account_type == "ADMIN") {
+        if (user.account_type == "admin") {
             return (
                 <Tab.Navigator
                     screenOptions={(routes) => icons(routes)}
@@ -104,7 +108,6 @@ export default function Routes() {
             </Tab.Navigator>
         );
     }
-
 
     function signOut() {
         setUser(null);
@@ -206,6 +209,13 @@ export default function Routes() {
                             component={QuestionDetails}
                             options={{
                                 title: "Detalhes da questao",
+                            }}
+                        />
+                        <RootStack.Screen
+                            name="NewQuestion"
+                            component={NewQuestion}
+                            options={{
+                                title: "Novo questionario",
                             }}
                         />
                     </RootStack.Navigator>
