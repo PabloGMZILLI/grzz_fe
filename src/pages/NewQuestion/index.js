@@ -9,11 +9,14 @@ import {
     Switch,
 } from "react-native-elements";
 
-export default function NewQuestion() {
-    const [answers, setAnswers] = useState([]);
+export default function NewQuestion({ route, navigation }) {
+    const question = route.params;
+    const [answers, setAnswers] = useState(question ? question.answers : []);
     const [tempAnswer, setTempAnswer] = useState("");
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState(question ? question.title : "");
+    const [description, setDescription] = useState(
+        question ? question.description : ""
+    );
 
     function setCorrectAnswer(index) {
         let tempList = [];
@@ -125,7 +128,9 @@ export default function NewQuestion() {
                         </View>
                     </View>
                     <Button
-                        title="Adicionar questao"
+                        title={
+                            question ? "Editar questao" : "Adicionar questao"
+                        }
                         disabled={
                             answers.length > 0 &&
                             title.length > 0 &&
