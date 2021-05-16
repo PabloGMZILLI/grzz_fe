@@ -23,6 +23,7 @@ import ManagerQuestions from "./pages/ManagerQuestions";
 import QuestionDetails from "./pages/QuestionDetails";
 import axios from "./instances/axios";
 import NewQuestion from "./pages/NewQuestion";
+import UserPanel from "./pages/UserPanel";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -216,6 +217,13 @@ export default function Routes() {
                             component={NewQuestion}
                             options={{
                                 title: "Novo questionario",
+                            }}
+                        />
+                        <RootStack.Screen
+                            name="UserPanel"
+                            component={UserPanel}
+                            options={{
+                                title: "Lista de usuarios",
                             }}
                         />
                     </RootStack.Navigator>

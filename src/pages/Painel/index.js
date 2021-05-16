@@ -15,7 +15,7 @@ const adminOptions = [
     },
     {
         title: "Colaboradores",
-        path: "EmployeePerformace",
+        path: "UserPanel",
     },
     {
         title: "Baixar dados dos colaboradores",
