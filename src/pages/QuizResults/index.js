@@ -1,12 +1,23 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import { Text, View, TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
-
+import AuthContext from '../../contexts/auth';
 import styles from './styles';
+import axios from '../../instances/axios';
 
 const QuizDetails = ({route}) => {
     var {quiz} = route.params;
+    const { user } = useContext(AuthContext);
     var navigation = useNavigation();
+    async function saveAnswer(quizId, questionId, answerId, timespent = 50) {
+        await axios.post(`/answer/save`, {
+            "user_id": user.id,
+            "quiz_id": quizId,
+            "question_id": questionId,
+            "answer_checked_id" : answerId,
+            "timespent": timespent
+        });
+    }
     //Pontuação do user
     var points = 0;
     //Id das questões que o user acertou
@@ -16,6 +27,7 @@ const QuizDetails = ({route}) => {
         question => question.answers.map(
             answer => {
                 if (answer.checked){
+                    saveAnswer(quiz.id, question.id, answer.id);
                     if (answer.id == question.correct_answer_id) {
                         points = points + question.points
                         correctQuestions.push(question.id)

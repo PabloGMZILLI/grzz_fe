@@ -20,14 +20,14 @@ const Quizzes = () => {
         getQuizzes();
     }, []);
 
-    const Quiz = (element) => {
+    const Quiz = ({currentQuiz}) => {
         const nav = useNavigation();
         return (
             <TouchableOpacity
                 style={styles.quiz}
-                onPressIn={() => nav.navigate('Informações sobre o questionário', { "quizId": element.id })}
+                onPressIn={() => nav.navigate('Informações sobre o questionário', { "currentQuiz": currentQuiz })}
             >
-                <Text style={styles.quizProp}>{element.name}</Text>
+                <Text style={styles.quizProp}>{currentQuiz.name}</Text>
             </TouchableOpacity>
         );
     }
@@ -43,7 +43,7 @@ const Quizzes = () => {
                     data={quizzes}
                     keyExtractor={element => String(element.id)}
                     showsVerticalScrollIndicator={true}
-                    renderItem={element => <Quiz id={element.item.id} workspace={element.item.workspace} name={element.item.name} />}
+                    renderItem={element => <Quiz currentQuiz={element.item} />}
                 /> :
                 <Text style={styles.emptyMessage} >Não tem nenhum quiz disponivel pra você responder neste momento =/</Text>
             }
