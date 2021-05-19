@@ -37,21 +37,7 @@ export default function QuestionDetails({ route, navigation }) {
                         <Card.Title>Descricao</Card.Title>
                         <Card.Divider />
                         <Text style={{ marginBottom: 10 }}>
-                            Lorem ipsum condimentum justo eleifend dapibus
-                            aliquam gravida aenean pharetra ipsum, placerat quis
-                            nisl ultrices lacinia mauris malesuada condimentum
-                            ac varius, ultricies libero porttitor tempor
-                            torquent nisl porta lacinia justo. malesuada auctor
-                            eros morbi posuere a taciti rutrum, justo accumsan
-                            vestibulum torquent mollis at dolor, libero tellus
-                            libero eget nisi duis. lectus neque habitasse mollis
-                            conubia quis facilisis, porttitor varius curae
-                            interdum augue quam vestibulum, aenean aliquet velit
-                            mauris morbi. nisl ornare enim scelerisque hendrerit
-                            per vulputate accumsan lobortis nulla, ante dictum
-                            erat lobortis morbi faucibus molestie pretium
-                            habitant, molestie commodo curabitur et ante ut
-                            nullam donec.
+                            {question.description}
                         </Text>
                     </Card>
                     <Card>
@@ -78,6 +64,9 @@ export default function QuestionDetails({ route, navigation }) {
                         title="Editar questao"
                         style={{ padding: 20, paddingBottom: 0 }}
                         buttonStyle={{ backgroundColor: "orange", padding: 15 }}
+                        onPress={() =>
+                            navigation.navigate("NewQuestion", question)
+                        }
                         icon={
                             <Icon
                                 name="trash"
