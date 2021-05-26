@@ -7,8 +7,8 @@ import axios from "../../instances/axios";
 
 export default function UserPanel({ route, navigation }) {
     const [userList, setUserList] = useState([
-        { name: "Carlos", lastname: "Silva", type: "Admin" },
-        { name: "Maria", lastname: "Silva", type: "Usuario" },
+        { name: "Carlos", lastname: "Silva", account_type: "Admin" },
+        { name: "Maria", lastname: "Silva", account_type: "Usuario" },
     ]);
 
     if (userList) {
@@ -17,7 +17,16 @@ export default function UserPanel({ route, navigation }) {
                 <SafeAreaView style={styles.list}>
                     <ScrollView>
                         {userList.map((item, i) => (
-                            <ListItem key={i} bottomDivider>
+                            <ListItem
+                                key={i}
+                                bottomDivider
+                                onPress={() => {
+                                    navigation.navigate(
+                                        "BillboardDetails",
+                                        item
+                                    );
+                                }}
+                            >
                                 <Text h4>{i + 1}</Text>
                                 <Avatar
                                     rounded
@@ -39,7 +48,7 @@ export default function UserPanel({ route, navigation }) {
                                         </Text>
                                     </ListItem.Title>
                                     <ListItem.Subtitle>
-                                        Tipo: {item.type}
+                                        Tipo: {item.account_type}
                                     </ListItem.Subtitle>
                                 </ListItem.Content>
                                 <Icon
