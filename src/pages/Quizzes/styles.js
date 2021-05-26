@@ -80,7 +80,7 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
     howAnswer: {
-        position: 'relatiave',
+        position: 'relative',
         bottom: 60,
         width: '100%',
         backgroundColor: '#EF4358',
