@@ -75,7 +75,7 @@ export default function NewQuestion({ route, navigation }) {
                         onChangeText={(text) => setDescription(text)}
                     />
                     <Card>
-                        <Card.Title>Questoes</Card.Title>
+                        <Card.Title>Respostas</Card.Title>
                         <Card.Divider />
                         {answers.length > 0 ? (
                             answers.map((item, i) => {
@@ -109,7 +109,7 @@ export default function NewQuestion({ route, navigation }) {
                             </View>
                         )}
                     </Card>
-                    <Text style={{ marginTop: 10 }}>questao:</Text>
+                    <Text style={{ marginTop: 10 }}>Nova resposta:</Text>
                     <View style={{ flexDirection: "row", flex: 1 }}>
                         <View style={{ width: "70%" }}>
                             <Input
