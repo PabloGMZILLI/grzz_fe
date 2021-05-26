@@ -41,6 +41,13 @@ export default StyleSheet.create({
         //backgroundColor: '#cce0df',
         borderRadius: 15,
     },
+    emptyMessage: {
+        position: 'relative',
+        marginTop: 10,
+        marginBottom: 80,
+        padding: 10,
+        textAlign: 'center'
+    },
     quiz: {
         padding: 18,
         borderRadius: 8,
@@ -72,8 +79,8 @@ export default StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
     },
-    addButton: {
-        position: 'relative',
+    howAnswer: {
+        position: 'relatiave',
         bottom: 60,
         width: '100%',
         backgroundColor: '#EF4358',

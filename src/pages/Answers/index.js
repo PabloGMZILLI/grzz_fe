@@ -4,26 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CountDown from 'react-native-countdown-component';
 import styles from './styles';
-import mock from '../../../mocks/quiz.json'
-
-const selectedQuizz = (quizId, quizzes) => {
-    var quiz;
-    quizzes.map(element => {
-        if (element.id == quizId) {
-            quiz = element;
-        }
-    });
-    return quiz;
-}
 
 const Answers = ({route}) => {
-    let { quizId } = route.params;
+    let { currentQuiz } = route.params;
     const nav = useNavigation();
-    var selectQuizz = selectedQuizz(quizId, mock.quizzes);
-    var questions = selectQuizz.questions;
+    var questions = currentQuiz.questions;
     const [position, setPosition] = useState(0); // primeiro item do array
     const [currentQuestion, setCurrentQuestion] = useState(questions[position]); // estado inicial
-    const [quiz, setQuiz] = useState(selectQuizz);
+    const [quiz, setQuiz] = useState(currentQuiz);
     const [disabled, setDisabled] = useState(true);
 
     const nextQuestion = (position) => {
