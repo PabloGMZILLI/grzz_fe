@@ -26,6 +26,7 @@ import NewQuestion from "./pages/NewQuestion";
 import UserPanel from "./pages/UserPanel";
 import ManagerEachQuestions from "./pages/ManagerEachQuestions";
 import NewQuestionnaire from "./pages/NewQuestionnaire";
+import * as UserService from "./services/UserService";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -63,17 +64,11 @@ export default function Routes() {
     const [user, setUser] = useState(null);
 
     async function signIn(name, password) {
-        await axios
-            .post(`/login`, { name, password })
-            .then((res) => {
-                if (res.data) {
-                    setUser(res.data);
-                    console.log(res);
-                }
-            })
-            .catch((err) => {
-                console.log("Erro: ", err);
-            });
+        UserService.loginUser(name, password).then((res) => {
+            if (res) {
+                setUser(res);
+            }
+        });
     }
 
     function HomeTabs() {

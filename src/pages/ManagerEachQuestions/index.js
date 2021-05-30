@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function ManagerEachQuestions({ route, navigation }) {
     var nav = useNavigation();
 
-    const questions = route.params;
+    const { questions, id } = route.params;
 
     return (
         <View
@@ -33,7 +33,12 @@ export default function ManagerEachQuestions({ route, navigation }) {
                         title="Adicionar novo questao"
                         style={{ padding: 20 }}
                         buttonStyle={{ backgroundColor: "green" }}
-                        onPress={() => nav.navigate("NewQuestion")}
+                        onPress={() =>
+                            nav.navigate("NewQuestion", {
+                                questions: null,
+                                id: id,
+                            })
+                        }
                     />
                     {questions.map((item, i) => {
                         return (
@@ -46,7 +51,7 @@ export default function ManagerEachQuestions({ route, navigation }) {
                             >
                                 <ListItem.Content>
                                     <ListItem.Title>
-                                        <Text>{item.title}</Text>
+                                        <Text>{item.question}</Text>
                                     </ListItem.Title>
                                     <ListItem.Subtitle>
                                         Taxa de acertos: {item.hitsRate}%
