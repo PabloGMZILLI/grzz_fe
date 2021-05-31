@@ -35,7 +35,7 @@ export default function Billboard() {
                                 key={i}
                                 bottomDivider
                                 onPress={() =>
-                                    nav.navigate("BillboardDetails", item)
+                                    nav.navigate("BillboardDetails", { item, administrative: false} )
                                 }
                             >
                                 <Text h4>{i + 1}</Text>

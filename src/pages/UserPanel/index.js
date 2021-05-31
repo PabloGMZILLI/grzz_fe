@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect, useContext } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import styles from "./styles";
 import { ListItem, Avatar, Icon, Text } from "react-native-elements";
-
-import axios from "../../instances/axios";
+import AuthContext from '../../contexts/auth';
+import * as UserService from "../../services/UserService";
 
 export default function UserPanel({ route, navigation }) {
-    const [userList, setUserList] = useState([
-        { name: "Carlos", lastname: "Silva", account_type: "Admin" },
-        { name: "Maria", lastname: "Silva", account_type: "Usuario" },
-    ]);
+    const [userList, setUserList] = useState([]);
+    const { user } = useContext(AuthContext);
+
+    useLayoutEffect(() => {
+        UserService.getAllUser(user.id).then((res) => setUserList(res));
+    }, []);
 
     if (userList) {
         return (
@@ -23,7 +25,7 @@ export default function UserPanel({ route, navigation }) {
                                 onPress={() => {
                                     navigation.navigate(
                                         "BillboardDetails",
-                                        item
+                                        { item, administrative: true }
                                     );
                                 }}
                             >

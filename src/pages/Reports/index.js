@@ -6,20 +6,28 @@ import { useNavigation } from "@react-navigation/native";
 
 const adminOptions = [
     {
-        title: "Relatórios",
-        path: "Reports",
+        title: "Questionarios",
+        path: "",
     },
     {
-        title: "Configurações dos Questionarios",
-        path: "ManageQuestions",
+        title: "Por Colaborador",
+        path: "UserPanel",
     },
     {
-        title: "Configurações dos Colaboradores",
+        title: "Por Cidades",
+        path: "EmployeePerformace",
+    },
+    {
+        title: "Exportar Relatórios",
         path: "",
     },
 ];
 
-export default function Painel() {
+// Pagina de preferencias da usuaria, aqui pode configurar algumas coisas:
+// Tempo para notificar que alguma coisa
+// Notificar aniversario da cliente?
+
+export default function Reports() {
     var nav = useNavigation();
 
     return (
@@ -35,7 +43,6 @@ export default function Painel() {
                             fontWeight: "bold",
                         }}
                     >
-                        Painel Admin
                     </Text>
                     {adminOptions.map((item, i) => {
                         return (

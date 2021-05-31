@@ -49,3 +49,17 @@ export function setUserWorkspace(userId, newWorkspace, adminId) {
             .catch((error) => reject(error));
     });
 }
+
+export function getUserQuestions(userDisplayedId, userId) {
+    return new Promise((resolve, reject) => {
+        axios.get(`/answers/` + userDisplayedId, {
+            headers: {
+                'user_id': userId
+            }
+        })
+            .then(res => {
+                resolve(res.data)
+            })
+            .catch((error) => reject(error));
+    });
+}

@@ -19,6 +19,7 @@ import QuizResults from "./pages/QuizResults";
 import Login from "./pages/Login";
 import BillboardDetails from "./pages/BillboardDetails";
 import EmployeePerformace from "./pages/EmployeePerformace";
+import Reports from "./pages/Reports";
 import ManagerQuestions from "./pages/ManagerQuestions";
 import QuestionDetails from "./pages/QuestionDetails";
 import axios from "./instances/axios";
@@ -196,6 +197,13 @@ export default function Routes() {
                             }}
                         />
                         <RootStack.Screen
+                            name="Reports"
+                            component={Reports}
+                            options={{
+                                title: "Relatórios Gerais",
+                            }}
+                        />
+                        <RootStack.Screen
                             name="ManageQuestions"
                             component={ManagerQuestions}
                             options={{
@@ -220,7 +228,7 @@ export default function Routes() {
                             name="UserPanel"
                             component={UserPanel}
                             options={{
-                                title: "Lista de usuarios",
+                                title: "Relatório por colaboradores",
                             }}
                         />
                         <RootStack.Screen
