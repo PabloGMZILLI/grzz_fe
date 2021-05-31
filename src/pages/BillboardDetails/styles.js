@@ -39,7 +39,6 @@ export default StyleSheet.create({
     question: {
         flex: 1,
         flexDirection: "column",
-        alignItems: "left",
         padding: 18,
         borderRadius: 8,
         backgroundColor: '#FFF',
