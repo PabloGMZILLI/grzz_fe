@@ -16,16 +16,12 @@ export default function BillboardDetails({ route, navigation }) {
 
     if (!userDisplayed && user) userDisplayed = user;
 
-    console.log(showQuestions);
-
     if (administrative) useLayoutEffect(() => {
         UserService.getUserQuestions(userDisplayed.id, user.id).then((res) => setUserQuestions(res));
     }, []);
 
 
     const Question = ({ el }) => {
-        console.log('aleluia: ');
-        console.log(el);
         let elements = el.item;
         return (
             <View style={styles.question}>
@@ -76,12 +72,12 @@ export default function BillboardDetails({ route, navigation }) {
                                         size={80}
                                     />
                                     <View style={{ marginLeft: 20 }}>
-                                        <Text h4><strong>Platina</strong></Text>
+                                        <Text h4><Text style={{fontWeight: 'bold'}}>Platina</Text></Text>
                                         <Text h7>
-                                        <strong>Melhor pontuação:</strong> {(userDisplayed.points).toFixed(2)}
+                                        <Text style={{fontWeight: 'bold'}}>Melhor pontuação:</Text> {(userDisplayed.points).toFixed(2)}
                                         </Text>
                                         <Text h7>
-                                        <strong>Tipo de avaliação:</strong> {userDisplayed.workspace}
+                                        <Text style={{fontWeight: 'bold'}}>Tipo de avaliação:</Text> {userDisplayed.workspace}
                                         </Text>
                                     </View>
                                 </View>
@@ -93,14 +89,14 @@ export default function BillboardDetails({ route, navigation }) {
 
                     <View style={mainStyle.container} >
                         <Text h3 style={{ marginBottom: 10 }}>Dados</Text>
-                        <Text h7><strong>Cidade sede:</strong> {userDisplayed.city}</Text>
-                        <Text h7><strong>Função:</strong> {userDisplayed.workspace}</Text>
+                        <Text h7><Text style={{fontWeight: 'bold'}}>Cidade sede:</Text> {userDisplayed.city}</Text>
+                        <Text h7><Text style={{fontWeight: 'bold'}}>Função:</Text> {userDisplayed.workspace}</Text>
                     </View>
                     {
                         administrative ?
                             <View style={mainStyle.container}>
                                 <Text h3 style={{ marginBottom: 10 }}> Perguntas respondidas </Text>
-                                <Text h7> Total de <strong>{userQuestions.length}</strong> peguntas respondidas </Text>
+                                <Text h7> Total de <Text style={{fontWeight: 'bold'}}>{userQuestions.length}</Text> peguntas respondidas </Text>
                                 <TouchableOpacity style={mainStyle.redButton} onPress={() => toggleQuestions(!showQuestions)}>
                                     <Text style={mainStyle.buttonText}>Exibir as questões</Text>
                                 </TouchableOpacity>
