@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import {
     ListItem,
@@ -10,18 +10,10 @@ import {
 } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
-import * as QuizService from "../../services/QuizService";
-
-export default function ManagerQuestions({ route, navigation }) {
+export default function ManagerEachQuestions({ route, navigation }) {
     var nav = useNavigation();
-    const [optionsList, setOptionsList] = useState([]);
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener("focus", () => {
-            QuizService.getQuizzes().then((data) => setOptionsList(data));
-        });
-        return unsubscribe;
-    }, [navigation]);
+    const { questions, id } = route.params;
 
     return (
         <View
@@ -38,29 +30,31 @@ export default function ManagerQuestions({ route, navigation }) {
             >
                 <ScrollView>
                     <Button
-                        title="Adicionar nova questionario"
+                        title="Adicionar novo questao"
                         style={{ padding: 20 }}
                         buttonStyle={{ backgroundColor: "green" }}
-                        onPress={() => nav.navigate("NewQuestionnaire")}
+                        onPress={() =>
+                            nav.navigate("NewQuestion", {
+                                questions: null,
+                                id: id,
+                            })
+                        }
                     />
-                    {optionsList.map((item, i) => {
+                    {questions.map((item, i) => {
                         return (
                             <ListItem
                                 key={i}
                                 bottomDivider
                                 onPress={() =>
-                                    nav.navigate("ManagerEachQuestions", {
-                                        questions: item.questions,
-                                        id: item.id,
-                                    })
+                                    nav.navigate("QuestionDetails", item)
                                 }
                             >
                                 <ListItem.Content>
                                     <ListItem.Title>
-                                        <Text>{item.name}</Text>
+                                        <Text>{item.question}</Text>
                                     </ListItem.Title>
                                     <ListItem.Subtitle>
-                                        <Text>Area: {item.to_workspace}</Text>
+                                        Taxa de acertos: {item.hitsRate}%
                                     </ListItem.Subtitle>
                                 </ListItem.Content>
                                 <Icon

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import {
     ListItem,
@@ -9,8 +9,19 @@ import {
     Avatar,
 } from "react-native-elements";
 
+import * as QuizService from "../../services/QuizService";
+import AuthContext from "../../contexts/auth";
+
 export default function QuestionDetails({ route, navigation }) {
     const question = route.params;
+    const { user } = useContext(AuthContext);
+    const [deleteLoading, setDeleteLoading] = useState(false);
+
+    async function deleteQuestion(questionId, userId) {
+        setDeleteLoading(true);
+        await QuizService.deleteQuestion(questionId, userId);
+        navigation.navigate("ManageQuestions");
+    }
 
     return (
         <View
@@ -50,12 +61,14 @@ export default function QuestionDetails({ route, navigation }) {
                                         rounded
                                         title={i + 1}
                                         containerStyle={{
-                                            backgroundColor: item.correct
-                                                ? "green"
-                                                : "red",
+                                            backgroundColor:
+                                                question.correct_answer_id ==
+                                                item.id
+                                                    ? "green"
+                                                    : "red",
                                         }}
                                     />
-                                    <Text>{item.text}</Text>
+                                    <Text>{item.answer}</Text>
                                 </ListItem>
                             );
                         })}
@@ -78,7 +91,7 @@ export default function QuestionDetails({ route, navigation }) {
                         }
                     />
                     <Button
-                        title="Apagar questao"
+                        title={deleteLoading ? "Apagando..." : "Apagar questao"}
                         style={{ padding: 20, paddingBottom: 0 }}
                         buttonStyle={{ backgroundColor: "red", padding: 15 }}
                         icon={
@@ -90,6 +103,7 @@ export default function QuestionDetails({ route, navigation }) {
                                 iconStyle={{ marginRight: 10 }}
                             />
                         }
+                        onPress={() => deleteQuestion(question.id, user.id)}
                     />
                 </ScrollView>
             </SafeAreaView>

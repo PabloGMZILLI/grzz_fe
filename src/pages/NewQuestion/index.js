@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, SafeAreaView, ScrollView } from "react-native";
 import {
     Input,
@@ -9,21 +9,28 @@ import {
     Switch,
 } from "react-native-elements";
 
+import * as QuizService from "../../services/QuizService";
+import AuthContext from "../../contexts/auth";
+
 export default function NewQuestion({ route, navigation }) {
-    const question = route.params;
+    const { question, id } = route.params;
     const [answers, setAnswers] = useState(question ? question.answers : []);
     const [tempAnswer, setTempAnswer] = useState("");
     const [title, setTitle] = useState(question ? question.title : "");
     const [description, setDescription] = useState(
         question ? question.description : ""
     );
+    const [points, setPoints] = useState(question ? question.points : "");
+    const [maxTimer, setMaxTimer] = useState(question ? question.points : "");
+    const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
 
     function setCorrectAnswer(index) {
         let tempList = [];
 
         answers.forEach((item, i) => {
             tempList.push({
-                text: item.text,
+                answer: item.answer,
                 correct: i == index ? true : false,
             });
         });
@@ -34,7 +41,7 @@ export default function NewQuestion({ route, navigation }) {
         if (text.length > 0) {
             setAnswers(
                 answers.concat({
-                    text,
+                    answer: text,
                     correct: answers.length == 0 ? true : false,
                 })
             );
@@ -47,12 +54,39 @@ export default function NewQuestion({ route, navigation }) {
         answers.forEach((item, i) => {
             if (index !== i) {
                 tempList.push({
-                    text: item.text,
+                    answer: item.answer,
                     correct: item.correct,
                 });
             }
         });
         setAnswers(tempList);
+    }
+
+    function saveQuestion() {
+        setLoading(true);
+        let tempSentAnswers = answers;
+
+        tempSentAnswers.forEach((item) => {
+            if (item.correct == false) {
+                delete item.correct;
+            }
+            console.log(item);
+        });
+
+        QuizService.addQuestion(
+            id,
+            {
+                question: title,
+                points: points,
+                max_time: maxTimer,
+                answers: tempSentAnswers,
+            },
+            user.id
+        )
+            .then(() => navigation.navigate("ManageQuestions"))
+            .catch((error) => {
+                setLoading(false), console.log(error);
+            });
     }
 
     return (
@@ -74,8 +108,20 @@ export default function NewQuestion({ route, navigation }) {
                         value={description}
                         onChangeText={(text) => setDescription(text)}
                     />
+                    <Text>Tempo maximo para responder:</Text>
+                    <Input
+                        value={maxTimer}
+                        onChangeText={(number) => setMaxTimer(number)}
+                        keyboardType="numeric"
+                    />
+                    <Text>Pontos:</Text>
+                    <Input
+                        value={points}
+                        onChangeText={(number) => setPoints(number)}
+                        keyboardType="numeric"
+                    />
                     <Card>
-                        <Card.Title>Questoes</Card.Title>
+                        <Card.Title>Respostas</Card.Title>
                         <Card.Divider />
                         {answers.length > 0 ? (
                             answers.map((item, i) => {
@@ -92,7 +138,7 @@ export default function NewQuestion({ route, navigation }) {
                                             onPress={() => setCorrectAnswer(i)}
                                         />
                                         <ListItem.Content>
-                                            <Text>{item.text}</Text>
+                                            <Text>{item.answer}</Text>
                                         </ListItem.Content>
                                         <Button
                                             title="Apagar"
@@ -109,7 +155,7 @@ export default function NewQuestion({ route, navigation }) {
                             </View>
                         )}
                     </Card>
-                    <Text style={{ marginTop: 10 }}>questao:</Text>
+                    <Text style={{ marginTop: 10 }}>Nova resposta:</Text>
                     <View style={{ flexDirection: "row", flex: 1 }}>
                         <View style={{ width: "70%" }}>
                             <Input
@@ -129,7 +175,11 @@ export default function NewQuestion({ route, navigation }) {
                     </View>
                     <Button
                         title={
-                            question ? "Editar questao" : "Adicionar questao"
+                            loading
+                                ? "Salvando..."
+                                : question
+                                ? "Editar questao"
+                                : "Adicionar questao"
                         }
                         disabled={
                             answers.length > 0 &&
@@ -138,6 +188,7 @@ export default function NewQuestion({ route, navigation }) {
                                 ? false
                                 : true
                         }
+                        onPress={() => saveQuestion()}
                     />
                 </ScrollView>
             </SafeAreaView>
