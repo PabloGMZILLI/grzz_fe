@@ -3,7 +3,7 @@ import axios from "../instances/axios";
 export function getRanking() {
     return new Promise((resolve, reject) => {
         axios
-            .get("/ranking?limit=20&offset=0&filter=sananduva&filterName=city")
+            .get("/ranking?filter=all")
             .then((response) => resolve(response.data))
             .catch((error) => reject(error));
     });
