@@ -2,6 +2,11 @@ import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
 
 export default StyleSheet.create({
+  headertitle: {
+    marginBottom: 10,
+    fontWeight: "bold",
+    textAlign: "center"
+  },
   listItem: {
     backgroundColor: "white",
     padding: 10,
@@ -15,6 +20,9 @@ export default StyleSheet.create({
   list: {
     width: "100%",
     height: "100%",
+  },
+  listContainer: {
+    margin: 15
   },
   panel: {
     flex: 1,

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useLayoutEffect, useEffect } from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import { Avatar, Text, Icon, SocialIcon } from "react-native-elements";
 import AuthContext from "../../contexts/auth";
 import * as UserService from "../../services/UserService";
@@ -12,31 +12,32 @@ export default function BillboardDetails({ route, navigation }) {
     const [userQuestions, setUserQuestions] = useState([]);
     const [showQuestions, toggleQuestions] = useState(false);
     const params = route.params;
-    if (params) var { userDisplayed, administrative } = params;
+    if (params) var { item, administrative } = params;
 
+    var userDisplayed = item;
     if (!userDisplayed && user) userDisplayed = user;
 
     if (administrative) useLayoutEffect(() => {
         UserService.getUserQuestions(userDisplayed.id, user.id).then((res) => setUserQuestions(res));
     }, []);
 
-
-    const Question = ({ el }) => {
-        let elements = el.item;
-        return (
-            <View style={styles.question}>
-                <Text style={{ fontSize: 15 }}>Quiz: {elements.quiz_id}</Text>
-                <Text style={{ fontSize: 15 }}>Question: {elements.question_id}</Text>
-                <Text style={{ fontSize: 15 }}>Resposta selecionada: {elements.answer_checked_id}</Text>
-                <Text style={{ fontSize: 15 }}>Resposta correta :</Text>
-                <Text style={{ fontSize: 15 }}>Pontos ganhos: {elements.points}</Text>
-            </View>
-        )
+    const Question = ({ element, index }) => {
+        if (element){
+            return (
+                <View key={index} style={styles.question}>
+                    <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Quiz: </Text> {element.quiz_label}</Text>
+                    <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Questão: </Text> {element.question_label}</Text>
+                    <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Resposta selecionada: </Text> {element.answer_checked_label}</Text>
+                    <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Resposta correta: </Text>{element.correct_answer_label}</Text>
+                    <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Pontos ganhos: </Text> {element.points}</Text>
+                </View>
+            )
+        }
     }
     if (userDisplayed) {
         return (
-            <>
-                <View style={styles.container}>
+            <View style={styles.container}>
+                <ScrollView>
                     <View style={styles.avatar}>
                         <Avatar
                             rounded
@@ -72,12 +73,12 @@ export default function BillboardDetails({ route, navigation }) {
                                         size={80}
                                     />
                                     <View style={{ marginLeft: 20 }}>
-                                        <Text h4><Text style={{fontWeight: 'bold'}}>Platina</Text></Text>
+                                        <Text h4><Text style={{ fontWeight: 'bold' }}>Platina</Text></Text>
                                         <Text h7>
-                                        <Text style={{fontWeight: 'bold'}}>Melhor pontuação:</Text> {(userDisplayed.points).toFixed(2)}
+                                            <Text style={{ fontWeight: 'bold' }}>Melhor pontuação:</Text> {userDisplayed ? (userDisplayed.points).toFixed(2) : null }
                                         </Text>
                                         <Text h7>
-                                        <Text style={{fontWeight: 'bold'}}>Tipo de avaliação:</Text> {userDisplayed.workspace}
+                                            <Text style={{ fontWeight: 'bold' }}>Tipo de avaliação:</Text> {userDisplayed.workspace}
                                         </Text>
                                     </View>
                                 </View>
@@ -89,30 +90,22 @@ export default function BillboardDetails({ route, navigation }) {
 
                     <View style={mainStyle.container} >
                         <Text h3 style={{ marginBottom: 10 }}>Dados</Text>
-                        <Text h7><Text style={{fontWeight: 'bold'}}>Cidade sede:</Text> {userDisplayed.city}</Text>
-                        <Text h7><Text style={{fontWeight: 'bold'}}>Função:</Text> {userDisplayed.workspace}</Text>
+                        <Text h7><Text style={{ fontWeight: 'bold' }}>Cidade sede:</Text> {userDisplayed.city}</Text>
+                        <Text h7><Text style={{ fontWeight: 'bold' }}>Função:</Text> {userDisplayed.workspace}</Text>
                     </View>
                     {
                         administrative ?
                             <View style={mainStyle.container}>
                                 <Text h3 style={{ marginBottom: 10 }}> Perguntas respondidas </Text>
-                                <Text h7> Total de <Text style={{fontWeight: 'bold'}}>{userQuestions.length}</Text> peguntas respondidas </Text>
+                                <Text h7> Total de <Text style={{ fontWeight: 'bold' }}>{userQuestions.length}</Text> peguntas respondidas </Text>
                                 <TouchableOpacity style={mainStyle.redButton} onPress={() => toggleQuestions(!showQuestions)}>
-                                    <Text style={mainStyle.buttonText}>Exibir as questões</Text>
+                                    <Text style={mainStyle.buttonText}>Exibir as respostas</Text>
                                 </TouchableOpacity>
                                 {
                                     showQuestions ?
-                                        <FlatList
-                                            style={styles.questionsContainer}
-                                            data={userQuestions}
-                                            keyExtractor={(item, index) => 'key' + index}
-                                            showsVerticalScrollIndicator={true}
-                                            renderItem={
-                                                element => {
-                                                    return <Question el={element} />
-                                                }
-                                            }
-                                        />
+                                        userQuestions.map((question, i) => (
+                                            <Question key={i} element={question} />
+                                        ))
                                         : null
                                 }
                             </View>
@@ -135,8 +128,8 @@ export default function BillboardDetails({ route, navigation }) {
                             />
                         </View>
                     </View>
-                </View>
-            </>
+                </ScrollView>
+            </View>
         );
     }
 }

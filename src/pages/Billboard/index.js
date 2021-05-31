@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from "react";
-import { View, SafeAreaView, FlatList, ScrollView } from "react-native";
+import { View, SafeAreaView, ScrollView } from "react-native";
 import styles from "./styles";
-import { ListItem, Avatar, Icon, Badge, Text } from "react-native-elements";
+import { ListItem, Avatar, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 import * as RankingService from "../../services/RankingService";
@@ -33,7 +33,7 @@ export default function Billboard() {
                         {ranking.map((item, i) => (
                             <ListItem
                                 key={i}
-                                bottomDivider
+                                bottomDivider={(i === ranking.length - 1) ? null : true}
                                 onPress={() =>
                                     nav.navigate("BillboardDetails", { item, administrative: false} )
                                 }

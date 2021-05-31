@@ -1,9 +1,11 @@
 import React, { useState, useLayoutEffect, useContext } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
-import styles from "./styles";
 import { ListItem, Avatar, Icon, Text } from "react-native-elements";
 import AuthContext from '../../contexts/auth';
 import * as UserService from "../../services/UserService";
+
+import mainStyle from "../../Styles/main";
+import styles from "./styles";
 
 export default function UserPanel({ route, navigation }) {
     const [userList, setUserList] = useState([]);
@@ -17,11 +19,12 @@ export default function UserPanel({ route, navigation }) {
         return (
             <View style={styles.panel}>
                 <SafeAreaView style={styles.list}>
+                    <View style={[mainStyle.container, styles.listContainer]}>
                     <ScrollView>
                         {userList.map((item, i) => (
                             <ListItem
                                 key={i}
-                                bottomDivider
+                                bottomDivider={(i === userList.length - 1) ? null : true}
                                 onPress={() => {
                                     navigation.navigate(
                                         "BillboardDetails",
@@ -62,6 +65,7 @@ export default function UserPanel({ route, navigation }) {
                             </ListItem>
                         ))}
                     </ScrollView>
+                    </View>
                 </SafeAreaView>
             </View>
         );
