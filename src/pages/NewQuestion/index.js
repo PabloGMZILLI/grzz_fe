@@ -179,7 +179,7 @@ export default function NewQuestion({ route, navigation }) {
                                 ? "Salvando..."
                                 : question
                                 ? "Editar questao"
-                                : "Adicionar questao"
+                                : "Salvar questao"
                         }
                         disabled={
                             answers.length > 0 &&

@@ -1,14 +1,14 @@
 import React from "react";
-import { View, SafeAreaView, ScrollView } from "react-native";
+import { View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
 import {
     ListItem,
-    Avatar,
     Icon,
-    Badge,
     Text,
     Button,
 } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+
+import mainStyle from "../../Styles/main";
 
 export default function ManagerEachQuestions({ route, navigation }) {
     var nav = useNavigation();
@@ -29,43 +29,47 @@ export default function ManagerEachQuestions({ route, navigation }) {
                 }}
             >
                 <ScrollView>
-                    <Button
-                        title="Adicionar novo questao"
-                        style={{ padding: 20 }}
-                        buttonStyle={{ backgroundColor: "green" }}
-                        onPress={() =>
-                            nav.navigate("NewQuestion", {
-                                questions: null,
-                                id: id,
-                            })
-                        }
-                    />
-                    {questions.map((item, i) => {
-                        return (
-                            <ListItem
-                                key={i}
-                                bottomDivider
-                                onPress={() =>
-                                    nav.navigate("QuestionDetails", item)
-                                }
-                            >
-                                <ListItem.Content>
-                                    <ListItem.Title>
-                                        <Text>{item.question}</Text>
-                                    </ListItem.Title>
-                                    <ListItem.Subtitle>
-                                        Taxa de acertos: {item.hitsRate}%
+                    <View style={{ flex: 1, width: '100%', alignItems: 'center' }} >
+                        <TouchableOpacity
+                            style={[mainStyle.redButton, { width: '80%' }]}
+                            onPress={() =>
+                                nav.navigate("NewQuestion", {
+                                    questions: null,
+                                    id: id,
+                                })
+                            }
+                        >
+                            <Text style={mainStyle.buttonText}>Adicionar questão</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={[mainStyle.container, { margin: 10 }]}>
+                        {questions.map((item, i) => {
+                            return (
+                                <ListItem
+                                    key={i}
+                                    bottomDivider={(i === questions.length - 1) ? null : true}
+                                    onPress={() =>
+                                        nav.navigate("QuestionDetails", item)
+                                    }
+                                >
+                                    <ListItem.Content>
+                                        <ListItem.Title>
+                                            <Text>{item.question}</Text>
+                                        </ListItem.Title>
+                                        <ListItem.Subtitle>
+                                            Taxa de acertos: {item.hitsRate}%
                                     </ListItem.Subtitle>
-                                </ListItem.Content>
-                                <Icon
-                                    name="chevron-right"
-                                    type="font-awesome-5"
-                                    color="#517fa4"
-                                    size={14}
-                                />
-                            </ListItem>
-                        );
-                    })}
+                                    </ListItem.Content>
+                                    <Icon
+                                        name="chevron-right"
+                                        type="font-awesome-5"
+                                        color="#517fa4"
+                                        size={14}
+                                    />
+                                </ListItem>
+                            );
+                        })}
+                    </View>
                 </ScrollView>
             </SafeAreaView>
         </View>

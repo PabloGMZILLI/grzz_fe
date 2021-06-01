@@ -3,6 +3,9 @@ import Constants from 'expo-constants';
 
 
 export default StyleSheet.create({
+    header: {
+        paddingTop: Constants.statusBarHeight + 10,
+    },
     container: {
         padding: 10,
         borderRadius: 8,

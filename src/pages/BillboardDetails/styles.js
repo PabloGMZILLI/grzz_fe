@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import Constants from 'expo-constants';
+import { block } from "react-native-reanimated";
 
 export default StyleSheet.create({
     container : {
@@ -19,17 +20,18 @@ export default StyleSheet.create({
         marginBottom:20
     },
     icon: {
-        height: 30,
-        padding: 10,
+        flex: 1,
+        height: 45,
+        justifyContent: 'center',
         width: '50%'
     },
     icons: {
-        flex: 1,
+        height: 100,
         width: '100%',
         justifyContent: 'center',
         flexDirection:'row',
         alignItems: 'center',
-        padding: 10
+        padding: 10,
     },
     questionsContainer: {
         position: 'relative',

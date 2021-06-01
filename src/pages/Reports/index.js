@@ -1,8 +1,9 @@
 import React from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
-import { ListItem, Avatar, Icon, Badge, Text } from "react-native-elements";
-import styles from "./styles";
+import { ListItem, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import styles from "./styles";
+import mainStyle from "../../Styles/main";
 
 const adminOptions = [
     {
@@ -23,49 +24,37 @@ const adminOptions = [
     },
 ];
 
-// Pagina de preferencias da usuaria, aqui pode configurar algumas coisas:
-// Tempo para notificar que alguma coisa
-// Notificar aniversario da cliente?
-
 export default function Reports() {
     var nav = useNavigation();
 
     return (
         <View style={styles.panel}>
             <SafeAreaView style={styles.list}>
-                <ScrollView>
-                    <Text
-                        h2
-                        style={{
-                            marginTop: 40,
-                            marginLeft: 20,
-                            marginBottom: 10,
-                            fontWeight: "bold",
-                        }}
-                    >
-                    </Text>
-                    {adminOptions.map((item, i) => {
-                        return (
-                            <ListItem
-                                key={i}
-                                bottomDivider
-                                onPress={() => nav.navigate(item.path)}
-                            >
-                                <ListItem.Content>
-                                    <ListItem.Title>
-                                        <Text>{item.title}</Text>
-                                    </ListItem.Title>
-                                </ListItem.Content>
-                                <Icon
-                                    name="chevron-right"
-                                    type="font-awesome-5"
-                                    color="#517fa4"
-                                    size={14}
-                                />
-                            </ListItem>
-                        );
-                    })}
-                </ScrollView>
+                <View style={[mainStyle.container, styles.listContainer]}>
+                    <ScrollView>
+                        {adminOptions.map((item, i) => {
+                            return (
+                                <ListItem
+                                    key={i}
+                                    bottomDivider={(i === adminOptions.length - 1) ? null : true}
+                                    onPress={() => nav.navigate(item.path)}
+                                >
+                                    <ListItem.Content>
+                                        <ListItem.Title>
+                                            <Text>{item.title}</Text>
+                                        </ListItem.Title>
+                                    </ListItem.Content>
+                                    <Icon
+                                        name="chevron-right"
+                                        type="font-awesome-5"
+                                        color="#517fa4"
+                                        size={14}
+                                    />
+                                </ListItem>
+                            );
+                        })}
+                    </ScrollView>
+                </View>
             </SafeAreaView>
         </View>
     );

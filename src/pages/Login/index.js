@@ -10,7 +10,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const { signed, signIn } = useContext(AuthContext);
 
-    function handleSign() {
+    function handleSignIn() {
         signIn(user, password);
     }
     return (
@@ -48,7 +48,7 @@ const Login = () => {
                 style={styles.loginBtn}
                 onPress={() => {
                     setLoading(true);
-                    handleSign();
+                    handleSignIn();
                 }}
             >
                 <Text style={styles.loginText}>

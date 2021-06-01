@@ -22,7 +22,6 @@ import EmployeePerformace from "./pages/EmployeePerformace";
 import Reports from "./pages/Reports";
 import ManagerQuestions from "./pages/ManagerQuestions";
 import QuestionDetails from "./pages/QuestionDetails";
-import axios from "./instances/axios";
 import NewQuestion from "./pages/NewQuestion";
 import UserPanel from "./pages/UserPanel";
 import ManagerEachQuestions from "./pages/ManagerEachQuestions";
@@ -62,7 +61,7 @@ const icons = ({ route }) => ({
 });
 
 export default function Routes() {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);    
 
     async function signIn(name, password) {
         UserService.loginUser(name, password).then((res) => {
@@ -235,7 +234,7 @@ export default function Routes() {
                             name="ManagerEachQuestions"
                             component={ManagerEachQuestions}
                             options={{
-                                title: "Lista de questoes",
+                                title: "Lista de questões",
                             }}
                         />
                         <RootStack.Screen
