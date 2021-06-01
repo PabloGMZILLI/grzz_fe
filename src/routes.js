@@ -70,7 +70,6 @@ export default function Routes() {
             }
         });
     }
-    !user ? signIn('admin', '12345'): null;
 
     function HomeTabs() {
         if (user.account_type == "admin") {
@@ -235,7 +234,7 @@ export default function Routes() {
                             name="ManagerEachQuestions"
                             component={ManagerEachQuestions}
                             options={{
-                                title: "Lista de questoes",
+                                title: "Lista de questões",
                             }}
                         />
                         <RootStack.Screen

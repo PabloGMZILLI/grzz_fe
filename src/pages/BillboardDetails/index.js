@@ -30,6 +30,7 @@ export default function BillboardDetails({ route, navigation }) {
                     <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Resposta selecionada: </Text> {element.answer_checked_label}</Text>
                     <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Resposta correta: </Text>{element.correct_answer_label}</Text>
                     <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Pontos ganhos: </Text> {element.points}</Text>
+                    <Text style={{ fontSize: 15 }}><Text style={{ fontWeight: 'bold' }}>Tempo gasto: </Text> { (element.timespent > 60) ? (element.timespent / 60)+ ' min/s' : element.timespent + ' segundos' } </Text>
                 </View>
             )
         }
@@ -75,7 +76,7 @@ export default function BillboardDetails({ route, navigation }) {
                                     <View style={{ marginLeft: 20 }}>
                                         <Text h4><Text style={{ fontWeight: 'bold' }}>Platina</Text></Text>
                                         <Text h7>
-                                            <Text style={{ fontWeight: 'bold' }}>Melhor pontuação:</Text> {userDisplayed ? (userDisplayed.points).toFixed(2) : null }
+                                            <Text style={{ fontWeight: 'bold' }}>Melhor pontuação:</Text> {userDisplayed.points ? (userDisplayed).toFixed(2) : null }
                                         </Text>
                                         <Text h7>
                                             <Text style={{ fontWeight: 'bold' }}>Tipo de avaliação:</Text> {userDisplayed.workspace}
