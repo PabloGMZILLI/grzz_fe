@@ -1,16 +1,10 @@
 import React, { useState, useContext } from "react";
-import { Text, View, SafeAreaView, ScrollView } from "react-native";
-import {
-    Input,
-    Card,
-    ListItem,
-    Avatar,
-    Button,
-    Switch,
-} from "react-native-elements";
+import { Text, View, SafeAreaView, ScrollView, TextInput } from "react-native";
+import { Button } from "react-native-elements";
 
 import * as QuizService from "../../services/QuizService";
 import AuthContext from "../../contexts/auth";
+import mainStyle from "../../Styles/main";
 
 export default function NewQuestionnaire({ route, navigation }) {
     const question = route.params;
@@ -18,9 +12,11 @@ export default function NewQuestionnaire({ route, navigation }) {
     const [workspace, setWorkspace] = useState(
         question ? question.workspace : ""
     );
+    const [loading, setLoading] = useState(false);
     const { user } = useContext(AuthContext);
 
     function saveQuestionnaire() {
+        setLoading(true);
         QuizService.createFullQuiz(
             {
                 name: title,
@@ -28,9 +24,13 @@ export default function NewQuestionnaire({ route, navigation }) {
                 questions: [],
             },
             user.id
-        ).then((res) => {
-            navigation.navigate("ManageQuestions");
-        });
+        )
+            .then((res) => {
+                navigation.navigate("ManageQuestions");
+            })
+            .catch((error) => {
+                setLoading(false);
+            });
     }
 
     return (
@@ -43,22 +43,36 @@ export default function NewQuestionnaire({ route, navigation }) {
             >
                 <ScrollView>
                     <Text>Nome do novo questionario:</Text>
-                    <Input
-                        value={title}
-                        onChangeText={(text) => setTitle(text)}
-                    />
+                    <View style={mainStyle.inputView}>
+                        <TextInput
+                            value={title}
+                            placeholder="Nome do novo questionario"
+                            placeholderTextColor="#a9a9a9"
+                            style={mainStyle.TextInput}
+                            onChangeText={(text) => setTitle(text)}
+                        />
+                    </View>
                     <Text>Area de trabalho:</Text>
-                    <Input
-                        value={workspace}
-                        onChangeText={(text) => setWorkspace(text)}
-                    />
+                    <View style={mainStyle.inputView}>
+                        <TextInput
+                            value={workspace}
+                            placeholder="Area de trabalho"
+                            placeholderTextColor="#a9a9a9"
+                            style={mainStyle.TextInput}
+                            onChangeText={(text) => setWorkspace(text)}
+                        />
+                    </View>
                     <Button
                         title={
                             question ? "Editar questao" : "Adicionar questao"
                         }
+                        buttonStyle={mainStyle.redButtonElements}
                         onPress={() => saveQuestionnaire()}
+                        loading={loading}
                         disabled={
-                            title.length > 0 && workspace.length > 0
+                            loading
+                                ? false
+                                : title.length > 0 && workspace.length > 0
                                 ? false
                                 : true
                         }

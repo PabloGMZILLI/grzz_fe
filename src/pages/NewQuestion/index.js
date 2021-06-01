@@ -1,19 +1,13 @@
 import React, { useState, useContext } from "react";
-import { Text, View, SafeAreaView, ScrollView } from "react-native";
-import {
-    Input,
-    Card,
-    ListItem,
-    Avatar,
-    Button,
-    Switch,
-} from "react-native-elements";
+import { Text, View, SafeAreaView, ScrollView, TextInput } from "react-native";
+import { Card, ListItem, Avatar, Button } from "react-native-elements";
 
 import * as QuizService from "../../services/QuizService";
 import AuthContext from "../../contexts/auth";
+import mainStyle from "../../Styles/main";
 
 export default function NewQuestion({ route, navigation }) {
-    const { question, id } = route.params;
+    const question = route.params;
     const [answers, setAnswers] = useState(question ? question.answers : []);
     const [tempAnswer, setTempAnswer] = useState("");
     const [title, setTitle] = useState(question ? question.title : "");
@@ -99,27 +93,51 @@ export default function NewQuestion({ route, navigation }) {
             >
                 <ScrollView>
                     <Text>Titulo da questao:</Text>
-                    <Input
-                        value={title}
-                        onChangeText={(text) => setTitle(text)}
-                    />
+                    <View style={mainStyle.inputView}>
+                        <TextInput
+                            style={mainStyle.TextInput}
+                            placeholder="Titulo da questao"
+                            placeholderTextColor="#a9a9a9"
+                            value={title}
+                            onChangeText={(text) => setTitle(text)}
+                        />
+                    </View>
+
                     <Text>Descricao da questao:</Text>
-                    <Input
-                        value={description}
-                        onChangeText={(text) => setDescription(text)}
-                    />
+                    <View style={mainStyle.inputView}>
+                        <TextInput
+                            style={mainStyle.TextInput}
+                            placeholder="Descricao da questao"
+                            placeholderTextColor="#a9a9a9"
+                            value={description}
+                            onChangeText={(text) => setDescription(text)}
+                        />
+                    </View>
+
                     <Text>Tempo maximo para responder:</Text>
-                    <Input
-                        value={maxTimer}
-                        onChangeText={(number) => setMaxTimer(number)}
-                        keyboardType="numeric"
-                    />
+                    <View style={mainStyle.inputView}>
+                        <TextInput
+                            style={mainStyle.TextInput}
+                            placeholder="Tempo maximo para responder"
+                            placeholderTextColor="#a9a9a9"
+                            value={maxTimer}
+                            onChangeText={(number) => setMaxTimer(number)}
+                            keyboardType="numeric"
+                        />
+                    </View>
+
                     <Text>Pontos:</Text>
-                    <Input
-                        value={points}
-                        onChangeText={(number) => setPoints(number)}
-                        keyboardType="numeric"
-                    />
+                    <View style={mainStyle.inputView}>
+                        <TextInput
+                            style={mainStyle.TextInput}
+                            placeholder="Pontos"
+                            placeholderTextColor="#a9a9a9"
+                            value={points}
+                            onChangeText={(number) => setPoints(number)}
+                            keyboardType="numeric"
+                        />
+                    </View>
+
                     <Card>
                         <Card.Title>Respostas</Card.Title>
                         <Card.Divider />
@@ -141,6 +159,9 @@ export default function NewQuestion({ route, navigation }) {
                                             <Text>{item.answer}</Text>
                                         </ListItem.Content>
                                         <Button
+                                            buttonStyle={
+                                                mainStyle.redButtonElements
+                                            }
                                             title="Apagar"
                                             onPress={() => removeAnswer(i)}
                                         />
@@ -158,13 +179,22 @@ export default function NewQuestion({ route, navigation }) {
                     <Text style={{ marginTop: 10 }}>Nova resposta:</Text>
                     <View style={{ flexDirection: "row", flex: 1 }}>
                         <View style={{ width: "70%" }}>
-                            <Input
-                                value={tempAnswer}
-                                onChangeText={(text) => setTempAnswer(text)}
-                            />
+                            <View style={mainStyle.inputView}>
+                                <TextInput
+                                    style={mainStyle.TextInput}
+                                    placeholder="Nova Resposta"
+                                    placeholderTextColor="#a9a9a9"
+                                    value={tempAnswer}
+                                    onChangeText={(text) => setTempAnswer(text)}
+                                />
+                            </View>
                         </View>
                         <View style={{ width: "30%" }}>
                             <Button
+                                buttonStyle={[
+                                    mainStyle.redButtonElements,
+                                    { marginLeft: 5 },
+                                ]}
                                 title="Adicionar"
                                 onPress={() => {
                                     addAnswer(tempAnswer);
@@ -174,6 +204,7 @@ export default function NewQuestion({ route, navigation }) {
                         </View>
                     </View>
                     <Button
+                        buttonStyle={mainStyle.redButtonElements}
                         title={
                             loading
                                 ? "Salvando..."
