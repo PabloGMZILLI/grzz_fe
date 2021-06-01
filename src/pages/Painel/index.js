@@ -11,7 +11,7 @@ const adminOptions = [
         path: "Reports",
     },
     {
-        title: "Configurações dos Questionarios",
+        title: "Configurações dos Questionários",
         path: "ManageQuestions",
     },
     {

@@ -6,7 +6,9 @@ export default StyleSheet.create({
         paddingTop: Constants.statusBarHeight + 10,
     },
     container: {
+        width: "96%",
         padding: 10,
+        marginHorizontal: "2%",
         borderRadius: 8,
         backgroundColor: "#FFF",
         shadowColor: "#000",
@@ -32,7 +34,23 @@ export default StyleSheet.create({
         },
         shadowOpacity: 0.21,
         shadowRadius: 10,
-        elevation: 8,
+        elevation: 4,
+    },
+    disabledButton: {
+        position: 'relative',
+        width: '100%',
+        backgroundColor: '#d3d3d3',
+        borderRadius:15,
+        padding: 10,
+        shadowColor: "#000",
+        marginVertical: 10,
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.21,
+        shadowRadius: 10,
+        elevation: 4,
     },
     redButton: {
         position: "relative",
@@ -48,7 +66,7 @@ export default StyleSheet.create({
         },
         shadowOpacity: 0.21,
         shadowRadius: 10,
-        elevation: 8,
+        elevation: 4,
     },
     buttonText: {
         color: "#FFF",
@@ -77,4 +95,19 @@ export default StyleSheet.create({
         padding: 10,
         marginVertical: 10,
     },
-});
+    input: {
+        position: 'relative',
+        width: '100%',
+        backgroundColor: '#FFF',
+        borderRadius:15,
+        padding: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.20,
+        shadowRadius: 15,
+        elevation: 4,
+    },
+})

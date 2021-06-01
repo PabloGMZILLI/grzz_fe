@@ -7,7 +7,7 @@ import mainStyle from "../../Styles/main";
 
 const adminOptions = [
     {
-        title: "Questionarios",
+        title: "Questionários",
         path: "",
     },
     {
