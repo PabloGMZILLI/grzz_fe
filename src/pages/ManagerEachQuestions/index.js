@@ -14,7 +14,7 @@ export default function ManagerEachQuestions({ route, navigation }) {
     var nav = useNavigation();
 
     const { questions, id } = route.params;
-
+    console.log('id: ', id);
     return (
         <View
             style={{
@@ -34,8 +34,7 @@ export default function ManagerEachQuestions({ route, navigation }) {
                             style={[mainStyle.redButton, { width: '80%' }]}
                             onPress={() =>
                                 nav.navigate("NewQuestion", {
-                                    questions: null,
-                                    id: id,
+                                    quizId: id,
                                 })
                             }
                         >
@@ -48,17 +47,18 @@ export default function ManagerEachQuestions({ route, navigation }) {
                                 <ListItem
                                     key={i}
                                     bottomDivider={(i === questions.length - 1) ? null : true}
-                                    onPress={() =>
-                                        nav.navigate("QuestionDetails", item)
+                                    onPress={() => {
+                                        nav.navigate("QuestionDetails", {
+                                            quizId: id,
+                                            question: item
+                                        })
+                                    }
                                     }
                                 >
                                     <ListItem.Content>
                                         <ListItem.Title>
                                             <Text>{item.question}</Text>
                                         </ListItem.Title>
-                                        <ListItem.Subtitle>
-                                            Taxa de acertos: {item.hitsRate}%
-                                    </ListItem.Subtitle>
                                     </ListItem.Content>
                                     <Icon
                                         name="chevron-right"

@@ -75,7 +75,7 @@ export default StyleSheet.create({
     },
     TextInput: {
         borderRadius: 30,
-        color: "#000000",
+        //color: "#000000",
         width: "90%",
         height: 50,
         flex: 1,

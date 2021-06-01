@@ -1,29 +1,19 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Text, View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
-import {
-    Input,
-    Card,
-    ListItem,
-    Avatar,
-    Button,
-} from "react-native-elements";
+import { Text, View, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from "react-native";
+import { Card, ListItem, Avatar, Button } from "react-native-elements";
 
 import * as QuizService from "../../services/QuizService";
 import AuthContext from "../../contexts/auth";
 import mainStyle from "../../Styles/main";
 
-import mainStyle from "../../Styles/main";
-
 export default function NewQuestion({ route, navigation }) {
-    const question = route.params;
-    const [answers, setAnswers] = useState(question ? question.answers : []);
+    const { quizId, question } = route.params;
+    const [answers, setAnswers] = useState(question && question.answers ? question.answers : [] );
     const [tempAnswer, setTempAnswer] = useState("");
-    const [title, setTitle] = useState(question ? question.title : "");
-    const [description, setDescription] = useState(
-        question ? question.description : ""
-    );
-    const [points, setPoints] = useState(question ? question.points : "");
-    const [maxTimer, setMaxTimer] = useState(question ? question.points : "");
+    const [title, setTitle] = useState(question && question.title ? question.title : "");
+    const [description, setDescription] = useState(question && question.description ? question.description : "");
+    const [points, setPoints] = useState(question && question.points ? question.points : "");
+    const [maxTimer, setMaxTimer] = useState(question && question.maxTimer ? question.maxTimer : "");
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [disabledButton, setDisabledButton] = useState(false);
@@ -65,14 +55,6 @@ export default function NewQuestion({ route, navigation }) {
         setAnswers(tempList);
     }
 
-    useEffect(() => {
-        answers.length > 0 &&
-        title.length > 0 &&
-        description.length > 0
-            ? setDisabledButton(false)
-            : setDisabledButton(true)
-      }, [answers, title, description]);
-
     function saveQuestion() {
         setLoading(true);
         let tempSentAnswers = answers;
@@ -85,7 +67,7 @@ export default function NewQuestion({ route, navigation }) {
         });
 
         QuizService.addQuestion(
-            id,
+            quizId,
             {
                 question: title,
                 points: points,
@@ -100,6 +82,15 @@ export default function NewQuestion({ route, navigation }) {
             });
     }
 
+    useEffect(() => {
+        answers.length > 0 &&
+            title.length > 0 &&
+            description.length > 0
+            ? setDisabledButton(false)
+            : setDisabledButton(true)
+    }, [answers, title, description]);
+
+
     return (
         <View style={{ padding: 10 }}>
             <SafeAreaView
@@ -110,38 +101,48 @@ export default function NewQuestion({ route, navigation }) {
             >
                 <ScrollView>
                     <View style={mainStyle.container}>
-                        <Text>Titulo da questao:</Text>
-                        <Input
-                            value={title}
-                            onChangeText={(text) => setTitle(text)}
-                        />
-                        <Text>Descricao da questao:</Text>
-                        <Input
-                            value={description}
-                            onChangeText={(text) => setDescription(text)}
-                        />
-                        <Text>Tempo maximo para responder:</Text>
-                        <Input
-                            value={maxTimer}
-                            onChangeText={(number) => setMaxTimer(number)}
-                            keyboardType="numeric"
-                        />
-                    </View>
-
-                    <Text>Pontos:</Text>
-                    <View style={mainStyle.inputView}>
-                        <TextInput
-                            style={mainStyle.TextInput}
-                            placeholder="Pontos"
-                            placeholderTextColor="#a9a9a9"
-                            value={points}
-                            onChangeText={(number) => setPoints(number)}
-                            keyboardType="numeric"
-                        />
+                        <View style={mainStyle.inputView}>
+                            <TextInput
+                                style={mainStyle.TextInput}
+                                placeholder="Titulo da questao"
+                                placeholderTextColor="#a9a9a9"
+                                value={title}
+                                onChangeText={(text) => setTitle(text)}
+                            />
+                        </View>
+                        <View style={mainStyle.inputView}>
+                            <TextInput
+                                style={mainStyle.TextInput}
+                                placeholder="Descricao da questao"
+                                placeholderTextColor="#a9a9a9"
+                                value={description}
+                                onChangeText={(text) => setDescription(text)}
+                            />
+                        </View>
+                        <View style={mainStyle.inputView}>
+                            <TextInput
+                                style={mainStyle.TextInput}
+                                placeholder="Tempo maximo para responder"
+                                placeholderTextColor="#a9a9a9"
+                                value={maxTimer}
+                                onChangeText={(number) => setMaxTimer(number)}
+                                keyboardType="numeric"
+                            />
+                        </View>
+                        <View style={mainStyle.inputView}>
+                            <TextInput
+                                style={mainStyle.TextInput}
+                                placeholder="Pontos"
+                                placeholderTextColor="#a9a9a9"
+                                value={points}
+                                onChangeText={(number) => setPoints(number)}
+                                keyboardType="numeric"
+                            />
+                        </View>
                         <Card borderRadius={10}>
                             <Card.Title>Respostas</Card.Title>
                             <Card.Divider />
-                            {answers.length > 0 ? (
+                            { answers.length > 0 ? (
                                 answers.map((item, i) => {
                                     return (
                                         <ListItem key={i} bottomDivider>
@@ -167,7 +168,7 @@ export default function NewQuestion({ route, navigation }) {
                                                     height: 28,
                                                     borderColor: "black",
                                                     borderWidth: 1,
-                                                 }}
+                                                }}
                                                 onPress={() => removeAnswer(i)}
                                             />
                                         </ListItem>
@@ -181,38 +182,42 @@ export default function NewQuestion({ route, navigation }) {
                                 </View>
                             )}
                         </Card>
-                        <Text style={{ marginTop: 10 }}>Nova resposta:</Text>
                         <View style={{ flexDirection: "row", flex: 1 }}>
                             <View style={{ width: "70%" }}>
-                                <Input
+                            <View style={mainStyle.inputView}>
+                                <TextInput
+                                    style={mainStyle.TextInput}
+                                    placeholder="Nova Resposta"
+                                    placeholderTextColor="#a9a9a9"
                                     value={tempAnswer}
                                     onChangeText={(text) => setTempAnswer(text)}
                                 />
                             </View>
+                            </View>
                             <View style={{ width: "30%" }}>
                                 <TouchableOpacity
-                                    style={ mainStyle.redButton }
+                                    style={mainStyle.redButton}
                                     onPress={() => {
                                         addAnswer(tempAnswer);
                                         setTempAnswer("");
                                     }}
                                 >
-                                    <Text style={ [mainStyle.buttonText, {fontSize: 15}]}>Adicionar</Text>
+                                    <Text style={[mainStyle.buttonText, { fontSize: 15 }]}>Adicionar</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
-                     <View style={{ flex: 1, width: '100%', marginTop: 10, alignItems: 'center' }} >
+                    <View style={{ flex: 1, width: '100%', marginTop: 10, alignItems: 'center' }} >
                         <TouchableOpacity
-                            style={[ disabledButton ? mainStyle.disabledButton : mainStyle.redButton, { width: '96%'} ]}
-                            onPress={() => saveQuiz()}
-                            disabled={ disabledButton }
+                            style={[disabledButton ? mainStyle.disabledButton : mainStyle.redButton, { width: '96%' }]}
+                            onPress={() => saveQuestion()}
+                            disabled={disabledButton}
                         >
-                            <Text style={mainStyle.buttonText}>{ loading
+                            <Text style={mainStyle.buttonText}>{loading
                                 ? "Salvando..."
                                 : question
-                                ? "Editar questão"
-                                : "Salvar questão" }</Text>
+                                    ? "Atualizar questão"
+                                    : "Salvar questão"}</Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
