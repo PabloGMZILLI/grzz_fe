@@ -1,6 +1,5 @@
-import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
-
+import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 export default StyleSheet.create({
     header: {
@@ -9,7 +8,7 @@ export default StyleSheet.create({
     container: {
         padding: 10,
         borderRadius: 8,
-        backgroundColor: '#FFF',
+        backgroundColor: "#FFF",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -18,13 +17,13 @@ export default StyleSheet.create({
         shadowOpacity: 0.12,
         shadowRadius: 2,
         elevation: 4,
-        marginBottom: 10
+        marginBottom: 10,
     },
     whiteButton: {
-        position: 'relative',
-        width: '100%',
-        backgroundColor: '#FFF',
-        borderRadius:15,
+        position: "relative",
+        width: "100%",
+        backgroundColor: "#FFF",
+        borderRadius: 15,
         padding: 10,
         shadowColor: "#000",
         shadowOffset: {
@@ -36,10 +35,10 @@ export default StyleSheet.create({
         elevation: 8,
     },
     redButton: {
-        position: 'relative',
-        width: '100%',
-        backgroundColor: '#EF4358',
-        borderRadius:15,
+        position: "relative",
+        width: "100%",
+        backgroundColor: "#EF4358",
+        borderRadius: 15,
         padding: 10,
         shadowColor: "#000",
         marginVertical: 10,
@@ -52,8 +51,30 @@ export default StyleSheet.create({
         elevation: 8,
     },
     buttonText: {
-        color: '#FFF',
+        color: "#FFF",
         fontSize: 20,
-        textAlign: 'center',
+        textAlign: "center",
     },
-})
+    TextInput: {
+        borderRadius: 30,
+        color: "#000000",
+        width: "90%",
+        height: 50,
+        flex: 1,
+    },
+    inputView: {
+        backgroundColor: "#b8e0de",
+        borderRadius: 30,
+        height: 45,
+        marginTop: 10,
+        marginBottom: 20,
+        alignItems: "center",
+        paddingHorizontal: 10,
+    },
+    redButtonElements: {
+        backgroundColor: "#EF4358",
+        borderRadius: 15,
+        padding: 10,
+        marginVertical: 10,
+    },
+});
