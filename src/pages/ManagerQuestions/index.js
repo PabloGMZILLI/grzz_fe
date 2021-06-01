@@ -38,9 +38,9 @@ export default function ManagerQuestions({ route, navigation }) {
                     <View style={{ flex: 1, width: '100%', marginTop: 10, alignItems: 'center' }} >
                     <TouchableOpacity
                         style={[mainStyle.redButton, { width: '80%'}]}
-                        onPress={() => nav.navigate("NewQuestionnaire")}
+                        onPress={() => nav.navigate("NewQuiz")}
                     >
-                        <Text style={mainStyle.buttonText}>Adicionar nova questionario</Text>
+                        <Text style={mainStyle.buttonText}>Adicionar novo questionário</Text>
                     </TouchableOpacity>
                     </View>
                     <View style={[mainStyle.container, {margin: 10}]}>

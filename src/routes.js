@@ -25,7 +25,7 @@ import QuestionDetails from "./pages/QuestionDetails";
 import NewQuestion from "./pages/NewQuestion";
 import UserPanel from "./pages/UserPanel";
 import ManagerEachQuestions from "./pages/ManagerEachQuestions";
-import NewQuestionnaire from "./pages/NewQuestionnaire";
+import NewQuiz from "./pages/NewQuiz";
 import * as UserService from "./services/UserService";
 
 const Tab = createBottomTabNavigator();
@@ -206,21 +206,21 @@ export default function Routes() {
                             name="ManageQuestions"
                             component={ManagerQuestions}
                             options={{
-                                title: "Questionarios",
+                                title: "Questionários",
                             }}
                         />
                         <RootStack.Screen
                             name="QuestionDetails"
                             component={QuestionDetails}
                             options={{
-                                title: "Detalhes da questao",
+                                title: "Detalhes da questão",
                             }}
                         />
                         <RootStack.Screen
                             name="NewQuestion"
                             component={NewQuestion}
                             options={{
-                                title: "Novo questionario",
+                                title: "Novo questionário",
                             }}
                         />
                         <RootStack.Screen
@@ -238,10 +238,10 @@ export default function Routes() {
                             }}
                         />
                         <RootStack.Screen
-                            name="NewQuestionnaire"
-                            component={NewQuestionnaire}
+                            name="NewQuiz"
+                            component={NewQuiz}
                             options={{
-                                title: "Novo questionario",
+                                title: "Novo questionário",
                             }}
                         />
                     </RootStack.Navigator>
