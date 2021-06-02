@@ -74,12 +74,12 @@ export default function QuestionDetails({ route, navigation }) {
                                             <Avatar
                                                 rounded
                                                 title={i + 1}
-                                                containerStyle={{
+                                                containerStyle={[mainStyle.shadow, {
                                                     backgroundColor:
                                                         question.correct_answer_id == item.id
                                                             ? "green"
                                                             : "red",
-                                                }}
+                                                }]}
                                             />
                                             <Text>{item.answer}</Text>
                                         </ListItem>

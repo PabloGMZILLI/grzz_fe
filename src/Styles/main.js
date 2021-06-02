@@ -121,4 +121,14 @@ export default StyleSheet.create({
         shadowRadius: 15,
         elevation: 4,
     },
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.21,
+        shadowRadius: 10,
+        elevation: 4,
+    },
 })

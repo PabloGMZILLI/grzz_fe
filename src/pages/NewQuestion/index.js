@@ -160,11 +160,11 @@ export default function NewQuestion({ route, navigation }) {
                                             <Avatar
                                                 rounded
                                                 title={i + 1}
-                                                containerStyle={{
+                                                containerStyle={[mainStyle.shadow, {
                                                     backgroundColor: item.correct || question && question.correct_answer_id == item.id
                                                         ? "green"
                                                         : "red",
-                                                }}
+                                                }]}
                                                 onPress={() => setCorrectAnswer(i)}
                                             />
                                             <ListItem.Content>
@@ -172,12 +172,12 @@ export default function NewQuestion({ route, navigation }) {
                                             </ListItem.Content>
                                             <Button
                                                 title="X"
-                                                buttonStyle={{
-                                                    backgroundColor: "red",
+                                                buttonStyle={[mainStyle.redButton, {
                                                     borderRadius: 50,
+                                                    backgroundColor: "red",
                                                     width: 28,
                                                     height: 28,
-                                                }}
+                                                }]}
                                                 onPress={() => removeAnswer(i)}
                                             />
                                         </ListItem>
