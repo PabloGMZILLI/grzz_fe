@@ -1,5 +1,5 @@
 import React, { useContext, useState, useLayoutEffect, useEffect } from "react";
-import { View, TouchableOpacity, ScrollView } from "react-native";
+import { View, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
 import { Avatar, Text, Icon, SocialIcon } from "react-native-elements";
 import AuthContext from "../../contexts/auth";
 import * as UserService from "../../services/UserService";
@@ -132,5 +132,7 @@ export default function BillboardDetails({ route, navigation }) {
                 </ScrollView>
             </View>
         );
+    } else {
+        <View style={{flex: 1, alignContent: "center", justifyContent: "center"}}><ActivityIndicator size="large" color="#EF4358" /></View>
     }
 }

@@ -9,6 +9,8 @@ import styles from "./styles";
 
 export default function Billboard() {
     const [ranking, setRanking] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     var nav = useNavigation();
 
     useLayoutEffect(() => {
@@ -17,7 +19,7 @@ export default function Billboard() {
     function nameNormalized(name, lastname) {
         let fullname = "";
         let firstname = name[0].toUpperCase() + name.substr(1);
-        if ( (name.length + lastname.length) >= 10) {
+        if ((name.length + lastname.length) >= 10) {
             fullname = firstname + " " + lastname[0].toUpperCase() + lastname.substr(1, 3) + "...";
         } else {
             fullname = firstname + " " + lastname[0].toUpperCase() + lastname.substr(1);
@@ -38,58 +40,68 @@ export default function Billboard() {
                             </Text>
                         </View>
                         <View style={[mainStyle.container, { marginHorizontal: 10 }]}>
-                            {ranking.map((item, i) => (
-                                <ListItem
-                                    key={i}
-                                    bottomDivider={(i === ranking.length - 1) ? null : true}
-                                    onPress={() =>
-                                        nav.navigate("BillboardDetails", { item, administrative: false })
-                                    }
-                                >
-                                    <Text style={{width:18}} h5>{i + 1}</Text>
-                                    <Avatar
-                                        rounded
-                                        size="small"
-                                        title={
-                                            item.name[0].toUpperCase() +
-                                            item.lastname[0].toUpperCase()
-                                        }
-                                        containerStyle={{
-                                            backgroundColor: "#EF4358",
-                                        }}
-                                    />
-                                    <ListItem.Content>
-                                        <ListItem.Title>
-                                            <Text  style={{ width: 50}} h5>
-                                                {nameNormalized(item.name, item.lastname)}
-                                            </Text>
-                                        </ListItem.Title>
-                                        <ListItem.Subtitle>
-                                            {item.workspace}
-                                        </ListItem.Subtitle>
-                                    </ListItem.Content>
-                                    <View style={{flex: 1, flexDirection: "row", alignContent: "center", marginRight: 0}}>
-                                        <Icon
-                                            name="trophy"
-                                            type="font-awesome"
-                                            color={i == 0 ? "orange" : "gray"}
-                                        />
-                                        <Text style={{marginLeft: 5}}>{item.points}</Text>
+                            {
+                                loading ?
+                                    <View style={{ flex: 1, alignContent: "center", justifyContent: "center" }}>
+                                        <ActivityIndicator size="large" color="#EF4358" />
                                     </View>
-                                    <Icon
-                                        name="chevron-right"
-                                        type="font-awesome-5"
-                                        color="#517fa4"
-                                        size={14}
-                                    />
-                                </ListItem>
-                            ))}
+                                    : null
+                            }
+                            {ranking.map((item, i) => {
+                                if (loading) setLoading(false);
+                                return (
+                                    <ListItem
+                                        key={i}
+                                        bottomDivider={(i === ranking.length - 1) ? null : true}
+                                        onPress={() =>
+                                            nav.navigate("BillboardDetails", { item, administrative: false })
+                                        }
+                                    >
+                                        <Text style={{ width: 18 }} h5>{i + 1}</Text>
+                                        <Avatar
+                                            rounded
+                                            size="small"
+                                            title={
+                                                item.name[0].toUpperCase() +
+                                                item.lastname[0].toUpperCase()
+                                            }
+                                            containerStyle={{
+                                                backgroundColor: "#EF4358",
+                                            }}
+                                        />
+                                        <ListItem.Content>
+                                            <ListItem.Title>
+                                                <Text style={{ width: 50 }} h5>
+                                                    {nameNormalized(item.name, item.lastname)}
+                                                </Text>
+                                            </ListItem.Title>
+                                            <ListItem.Subtitle>
+                                                {item.workspace}
+                                            </ListItem.Subtitle>
+                                        </ListItem.Content>
+                                        <View style={{ flex: 1, flexDirection: "row", alignContent: "center", marginRight: 0 }}>
+                                            <Icon
+                                                name="trophy"
+                                                type="font-awesome"
+                                                color={i == 0 ? "orange" : "gray"}
+                                            />
+                                            <Text style={{ marginLeft: 5 }}>{item.points}</Text>
+                                        </View>
+                                        <Icon
+                                            name="chevron-right"
+                                            type="font-awesome-5"
+                                            color="#517fa4"
+                                            size={14}
+                                        />
+                                    </ListItem>
+                                )
+                            })}
                         </View>
                     </ScrollView>
                 </SafeAreaView>
             </View>
         );
     } else {
-        return <View style={{flex: 1, alignContent: "center", justifyContent: "center"}}><ActivityIndicator size="large" color="#EF4358" /></View>
+        return <View style={{ flex: 1, alignContent: "center", justifyContent: "center" }}><ActivityIndicator size="large" color="#EF4358" /></View>
     }
 }
