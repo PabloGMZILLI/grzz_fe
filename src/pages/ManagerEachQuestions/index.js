@@ -41,7 +41,7 @@ export default function ManagerEachQuestions({ route, navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style={[mainStyle.container, { margin: 10 }]}>
-                        {questions.map((item, i) => {
+                        { questions && questions.length > 0 ? questions.map((item, i) => {
                             return (
                                 <ListItem
                                     key={i}
@@ -55,9 +55,10 @@ export default function ManagerEachQuestions({ route, navigation }) {
                                     }
                                 >
                                     <ListItem.Content>
-                                        <ListItem.Title>
-                                            <Text>{item.question}</Text>
-                                        </ListItem.Title>
+                                    <View style={{flexDirection: "row"}}>
+                                        <Text style={{flex: 1, color: "#d3d3d3"}}>{item.id}</Text>
+                                        <Text style={{flex: 5}}>{item.question}</Text>
+                                    </View>
                                     </ListItem.Content>
                                     <Icon
                                         name="chevron-right"
@@ -67,7 +68,10 @@ export default function ManagerEachQuestions({ route, navigation }) {
                                     />
                                 </ListItem>
                             );
-                        })}
+                        })
+                    :
+                    <Text style={{alignSelf:"center"}}>Nenhuma questão cadastrada</Text>
+                    }
                     </View>
                 </ScrollView>
             </SafeAreaView>

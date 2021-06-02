@@ -3,18 +3,6 @@ import Constants from 'expo-constants';
 import { block } from "react-native-reanimated";
 
 export default StyleSheet.create({
-    container : {
-        flex: 1,
-        backgroundColor: '#b8e0de',
-        paddingHorizontal: 20,
-        paddingTop: Constants.statusBarHeight + 20,
-        height: '100%'
-    },
-    avatarContainer: {
-        flexDirection: 'row',
-        backgroundColor: 'white',
-        marginBottom:20
-    },
     icon: {
         flex: 1,
         height: 45,
