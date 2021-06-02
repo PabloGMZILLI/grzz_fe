@@ -1,19 +1,14 @@
 import React from "react";
 import { View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
-import {
-    ListItem,
-    Icon,
-    Text,
-    Button,
-} from "react-native-elements";
+import { ListItem, Icon, Text, Button } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 import mainStyle from "../../Styles/main";
 
 export default function ManagerEachQuestions({ route, navigation }) {
-    var nav = useNavigation();
-
     const { questions, id } = route.params;
+
+    console.log(questions);
 
     return (
         <View
@@ -29,9 +24,11 @@ export default function ManagerEachQuestions({ route, navigation }) {
                 }}
             >
                 <ScrollView>
-                    <View style={{ flex: 1, width: '100%', alignItems: 'center' }} >
+                    <View
+                        style={{ flex: 1, width: "100%", alignItems: "center" }}
+                    >
                         <TouchableOpacity
-                            style={[mainStyle.redButton, { width: '80%' }]}
+                            style={[mainStyle.redButton, { width: "80%" }]}
                             onPress={() =>
                                 nav.navigate("NewQuestion", {
                                     questions: null,
@@ -39,7 +36,9 @@ export default function ManagerEachQuestions({ route, navigation }) {
                                 })
                             }
                         >
-                            <Text style={mainStyle.buttonText}>Adicionar questão</Text>
+                            <Text style={mainStyle.buttonText}>
+                                Adicionar questão
+                            </Text>
                         </TouchableOpacity>
                     </View>
                     <View style={[mainStyle.container, { margin: 10 }]}>
@@ -47,10 +46,16 @@ export default function ManagerEachQuestions({ route, navigation }) {
                             return (
                                 <ListItem
                                     key={i}
-                                    bottomDivider={(i === questions.length - 1) ? null : true}
-                                    onPress={() =>
-                                        nav.navigate("QuestionDetails", item)
+                                    bottomDivider={
+                                        i === questions.length - 1 ? null : true
                                     }
+                                    onPress={() => {
+                                        navigation.navigate("QuestionDetails", {
+                                            question: item,
+                                            id: id,
+                                        });
+                                        console.log(i);
+                                    }}
                                 >
                                     <ListItem.Content>
                                         <ListItem.Title>
@@ -58,7 +63,7 @@ export default function ManagerEachQuestions({ route, navigation }) {
                                         </ListItem.Title>
                                         <ListItem.Subtitle>
                                             Taxa de acertos: {item.hitsRate}%
-                                    </ListItem.Subtitle>
+                                        </ListItem.Subtitle>
                                     </ListItem.Content>
                                     <Icon
                                         name="chevron-right"

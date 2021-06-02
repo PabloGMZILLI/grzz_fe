@@ -7,15 +7,18 @@ import AuthContext from "../../contexts/auth";
 import mainStyle from "../../Styles/main";
 
 export default function NewQuestion({ route, navigation }) {
-    const question = route.params;
+    const { question, id } = route.params;
+
     const [answers, setAnswers] = useState(question ? question.answers : []);
     const [tempAnswer, setTempAnswer] = useState("");
-    const [title, setTitle] = useState(question ? question.title : "");
-    const [description, setDescription] = useState(
-        question ? question.description : ""
+    const [title, setTitle] = useState(question ? question.question : "");
+    const [description, setDescription] = useState("");
+    const [points, setPoints] = useState(
+        question ? question.points.toString() : ""
     );
-    const [points, setPoints] = useState(question ? question.points : "");
-    const [maxTimer, setMaxTimer] = useState(question ? question.points : "");
+    const [maxTimer, setMaxTimer] = useState(
+        question ? question.max_time.toString() : ""
+    );
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
 
@@ -59,6 +62,10 @@ export default function NewQuestion({ route, navigation }) {
     function saveQuestion() {
         setLoading(true);
         let tempSentAnswers = answers;
+
+        if (question) {
+            QuizService.deleteQuestion(question.id, user.id);
+        }
 
         tempSentAnswers.forEach((item) => {
             if (item.correct == false) {

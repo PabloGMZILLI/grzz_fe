@@ -13,7 +13,7 @@ import * as QuizService from "../../services/QuizService";
 import AuthContext from "../../contexts/auth";
 
 export default function QuestionDetails({ route, navigation }) {
-    const question = route.params;
+    const { question, id } = route.params;
     const { user } = useContext(AuthContext);
     const [deleteLoading, setDeleteLoading] = useState(false);
 
@@ -78,7 +78,7 @@ export default function QuestionDetails({ route, navigation }) {
                         style={{ padding: 20, paddingBottom: 0 }}
                         buttonStyle={{ backgroundColor: "orange", padding: 15 }}
                         onPress={() =>
-                            navigation.navigate("NewQuestion", question)
+                            navigation.navigate("NewQuestion", { question, id })
                         }
                         icon={
                             <Icon
