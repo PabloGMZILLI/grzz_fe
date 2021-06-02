@@ -45,7 +45,7 @@ const Quizzes = () => {
                     showsVerticalScrollIndicator={true}
                     renderItem={element => <Quiz currentQuiz={element.item} />}
                 /> :
-                <Text style={styles.emptyMessage} >Não tem nenhum quiz disponivel pra você responder neste momento =/</Text>
+                <Text style={styles.emptyMessage}> Não tem nenhum quiz disponivel pra você responder neste momento =/</Text>
             }
 
             <TouchableOpacity

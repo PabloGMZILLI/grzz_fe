@@ -28,6 +28,9 @@ export default StyleSheet.create({
         borderRadius: 15,
         padding: 10,
         shadowColor: "#000",
+        alignItems: "center",
+        justifyContent: "center",
+
         shadowOffset: {
             width: 0,
             height: 10,
@@ -44,6 +47,8 @@ export default StyleSheet.create({
         padding: 10,
         shadowColor: "#000",
         marginVertical: 10,
+        alignItems: "center",
+        justifyContent: "center",
         shadowOffset: {
             width: 0,
             height: 10,
@@ -60,6 +65,8 @@ export default StyleSheet.create({
         padding: 10,
         shadowColor: "#000",
         marginVertical: 10,
+        alignItems: "center",
+        justifyContent: "center",
         shadowOffset: {
             width: 0,
             height: 10,
@@ -75,19 +82,23 @@ export default StyleSheet.create({
     },
     TextInput: {
         borderRadius: 30,
-        //color: "#000000",
+        color: "#000000",
         width: "90%",
         height: 50,
         flex: 1,
     },
     inputView: {
-        backgroundColor: "#b8e0de",
+        backgroundColor: "#EFFAFA",
         borderRadius: 30,
         height: 45,
         marginTop: 10,
         marginBottom: 20,
         alignItems: "center",
         paddingHorizontal: 10,
+        shadowColor: '#470000',
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity: 0.1,
+        elevation: 2,
     },
     redButtonElements: {
         backgroundColor: "#EF4358",

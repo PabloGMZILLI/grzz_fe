@@ -71,6 +71,7 @@ export default function Routes() {
         });
     }
 
+    // !user ? signIn('admin', '12345'): null;
     function HomeTabs() {
         if (user.account_type == "admin") {
             return (
@@ -220,7 +221,7 @@ export default function Routes() {
                             name="NewQuestion"
                             component={NewQuestion}
                             options={{
-                                title: "Novo questionário",
+                                title: "Adicionar/Editar questão",
                             }}
                         />
                         <RootStack.Screen

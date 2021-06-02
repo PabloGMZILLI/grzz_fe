@@ -39,23 +39,9 @@ export default StyleSheet.create({
     height: 30,
     marginBottom: 30,
   },
-
   loginBtn: {
     width: "80%",
     height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 30,
-    backgroundColor: "#EF4358",
-    borderRadius: 15,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.21,
-    shadowRadius: 10,
-    elevation: 8,
   },
   loginText: {
     fontSize: 15,
