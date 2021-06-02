@@ -8,7 +8,6 @@ export default StyleSheet.create({
     },
         header: {
         padding: 10,
-        paddingTop: Constants.statusBarHeight,
         backgroundColor: '#EF4358',
         flexDirection: "row",
         alignContent: 'space-between',

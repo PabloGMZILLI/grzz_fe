@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Text, FlatList, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import * as QuizService from "../../services/QuizService";
+
 import styles from './styles';
-import axios from '../../instances/axios';
 
 const Quizzes = () => {
     const [quizzes, setQuizzes] = useState([]);
-
     const nav = useNavigation();
-    async function getQuizzes() {
-        await axios.get(`/quiz`)
-            .then(res => {
-                if (res.data) {
-                    setQuizzes(res.data);
-                }
-            })
-    }
-    useEffect(() => {
-        getQuizzes();
+
+    useLayoutEffect(() => {
+        QuizService.getQuizzes().then((res) => setQuizzes(res));
     }, []);
 
     const Quiz = ({currentQuiz}) => {

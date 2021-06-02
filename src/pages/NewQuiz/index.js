@@ -1,8 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Text, View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
-import {
-    Input,
-} from "react-native-elements";
+import { Text, View, SafeAreaView, ScrollView, TouchableOpacity, TextInput } from "react-native";
 
 import * as QuizService from "../../services/QuizService";
 import AuthContext from "../../contexts/auth";
@@ -45,16 +42,25 @@ export default function NewQuiz({ route, navigation }) {
             >
                 <ScrollView>
                     <View style={mainStyle.container}>
-                    <Text>Nome do novo questionário:</Text>
-                    <Input
-                        value={title}
-                        onChangeText={(text) => setTitle(text)}
-                    />
-                    <Text>Area de trabalho:</Text>
-                    <Input
-                        value={workspace}
-                        onChangeText={(text) => setWorkspace(text)}
-                    />
+                    <View style={mainStyle.inputView}>
+                        <TextInput
+                            style={mainStyle.TextInput}
+                            placeholder="Nome do questionário"
+                            placeholderTextColor="#a9a9a9"
+                            value={title}
+                            onChangeText={(text) => setTitle(text)}
+                            autoFocus={true}
+                        />
+                    </View>
+                    <View style={mainStyle.inputView}>
+                            <TextInput
+                                style={mainStyle.TextInput}
+                                placeholder="Área destinada o questionário"
+                                placeholderTextColor="#a9a9a9"
+                                value={workspace}
+                                onChangeText={(text) => setWorkspace(text)}
+                            />
+                        </View>
                     </View>
                     <View style={{ flex: 1, width: '100%', marginTop: 10, alignItems: 'center' }} >
                     <TouchableOpacity
