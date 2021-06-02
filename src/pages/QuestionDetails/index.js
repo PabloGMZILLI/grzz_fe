@@ -100,11 +100,14 @@ export default function QuestionDetails({ route, navigation }) {
                                     style={[mainStyle.redButton, { width: '96%', backgroundColor: "red", flexDirection: 'row', alignItems: 'center' }]}
                                     onPress={() => deleteQuestion(question.id, user.id)}
                                 >
-                                    <Icon name="trash" type="font-awesome-5" color="white" size={20} iconStyle={{ marginRight: 10 }} />
+                                    
                                     {deleteLoading ?
                                         <ActivityIndicator size="large" color="white" />
                                         :
-                                        <Text style={mainStyle.buttonText}>Apagar questão</Text>
+                                        <View style={{flexDirection: "row", alignItems: "center"}}>
+                                            <Icon name="trash" type="font-awesome-5" color="white" size={20} iconStyle={{ marginRight: 10 }} />
+                                            <Text style={mainStyle.buttonText}>Apagar questão</Text>
+                                        </View>
                                     }
                                 </TouchableOpacity>
                             </View>

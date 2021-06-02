@@ -3,6 +3,7 @@ import { View, TouchableOpacity, ScrollView, ActivityIndicator } from "react-nat
 import { Avatar, Text, Icon, SocialIcon } from "react-native-elements";
 import AuthContext from "../../contexts/auth";
 import * as UserService from "../../services/UserService";
+import Constants from "expo-constants";
 
 import styles from "./styles";
 import mainStyle from "../../Styles/main";
@@ -12,6 +13,7 @@ export default function BillboardDetails({ route, navigation }) {
     const [userQuestions, setUserQuestions] = useState([]);
     const [showQuestions, toggleQuestions] = useState(false);
     const params = route.params;
+
     if (params) var { item, administrative } = params;
 
     var userDisplayed = item;
@@ -46,7 +48,8 @@ export default function BillboardDetails({ route, navigation }) {
         return (
             <View style={styles.container}>
                 <ScrollView>
-                    <View style={[mainStyle.container, styles.avatarContainer]}>
+                    <View style={[mainStyle.container,  { marginTop: Constants.statusBarHeight + 20,  flexDirection: "row"}]}>
+                        <View style={{flex:1}}>
                         <Avatar
                             rounded
                             title={
@@ -56,10 +59,12 @@ export default function BillboardDetails({ route, navigation }) {
                             containerStyle={{
                                 backgroundColor: "#EF4358",
                                 marginTop: 10,
+                                
                             }}
                             size={70}
                         />
-                        <View style={{ marginLeft: 20, marginTop: 0 }}>
+                        </View>
+                        <View style={{ marginLeft: 20, marginTop: 0, flex: 4 }}>
                             <Text style={{ fontSize: 30 }}>
                                 {nameNormalized(userDisplayed.name, userDisplayed.lastname)}
                             </Text>

@@ -74,7 +74,7 @@ const Answers = ({ route }) => {
             <View style={[styles.screenContainer, {backgroundColor: "#EF4358"}]} >
                 <View style={[mainStyle.header, { width: "50%", alignSelf: "center"}]}>
                     <View style={{marginVertical: 5, alignItems: "center", width: "100%", }}>
-                        <Progress.Bar progress={progressValue(position, questions.length)} unfilledColor="#dcdcdc" width={windowWidth - 5} color="#48d241" height={10} borderWidth={2} borderColor="white" />
+                        <Progress.Bar progress={progressValue(position, questions.length)} unfilledColor="#c2f9cb" width={windowWidth - 10} color="#48d241" height={10} borderWidth={2} borderColor="white" />
                     </View>
                 </View>
                 <View style={styles.header}>
