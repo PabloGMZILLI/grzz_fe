@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { View, SafeAreaView, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
 import {
     ListItem,
     Icon,
@@ -13,6 +13,7 @@ import * as QuizService from "../../services/QuizService";
 export default function ManagerQuestions({ route, navigation }) {
     var nav = useNavigation();
     const [optionsList, setOptionsList] = useState([]);
+    const [loading, setLoading] = useState(  true );
 
     useEffect(() => {
         const unsubscribe = navigation.addListener("focus", () => {
@@ -44,7 +45,15 @@ export default function ManagerQuestions({ route, navigation }) {
                     </TouchableOpacity>
                     </View>
                     <View style={[mainStyle.container, {margin: 10}]}>
+                    {
+                        loading ?
+                        <View style={{flex: 1, alignContent: "center", justifyContent: "center"}}>
+                            <ActivityIndicator size="large" color="#EF4358" />
+                        </View>
+                        : null
+                    }
                     {optionsList.map((item, i) => {
+                        if (loading) setLoading(false);
                         return (
                                 <ListItem
                                     key={i}

@@ -10,13 +10,9 @@ export default StyleSheet.create({
         paddingTop: Constants.statusBarHeight + 20,
         height: '100%'
     },
-    avatar: {
+    avatarContainer: {
         flexDirection: 'row',
         backgroundColor: 'white',
-        width: '100%',
-        height: 110,
-        padding: 10,
-        borderRadius: 15,
         marginBottom:20
     },
     icon: {

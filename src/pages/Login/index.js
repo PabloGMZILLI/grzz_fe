@@ -1,18 +1,24 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useContext, useCallback } from "react";
-import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
-import styles from "./styles";
+import React, { useState, useContext, useEffect } from "react";
+import { Text, View, ActivityIndicator, Image, TextInput, TouchableOpacity } from "react-native";
 import AuthContext from "../../contexts/auth";
+import styles from "./styles";
+import mainStyle from "../../Styles/main";
 
 const Login = () => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const { signed, signIn } = useContext(AuthContext);
+    const [disabledButton, setDisabledButton] = useState(false);
 
     function handleSignIn() {
         signIn(user, password);
     }
+
+    useEffect(() => {
+        (user.length > 0 && password.length > 0) ? setDisabledButton(false) : setDisabledButton(true)
+      }, [user, password]);
     return (
         <View style={styles.container}>
             <Image
@@ -27,6 +33,7 @@ const Login = () => {
                     placeholder="Nome"
                     placeholderTextColor="#a9a9a9"
                     onChangeText={(user) => setUser(user)}
+                    autoFocus={true}
                 />
             </View>
 
@@ -45,14 +52,15 @@ const Login = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={styles.loginBtn}
+                style={[ disabledButton ? mainStyle.disabledButton : mainStyle.redButton, styles.loginBtn ]}
+                disabled={disabledButton}
                 onPress={() => {
                     setLoading(true);
                     handleSignIn();
                 }}
             >
                 <Text style={styles.loginText}>
-                    {loading ? "Carregando..." : "ENTRAR"}
+                    {loading ? <ActivityIndicator size="large" color="white" /> : "Entrar"}
                 </Text>
             </TouchableOpacity>
         </View>

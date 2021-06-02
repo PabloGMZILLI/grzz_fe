@@ -29,6 +29,17 @@ export function addQuestion(quizId, question, adminId) {
     });
 }
 
+export function updateQuestion(questionId, question, adminId) {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`/question/update/${questionId}`, question,  {
+                headers: { user_id: adminId },
+            })
+            .then((response) => resolve(response.data))
+            .catch((error) => reject(error));
+    });
+}
+
 export function setCorrectAnswer(questionId, answerId, adminId) {
     return new Promise((resolve, reject) => {
         axios

@@ -14,7 +14,6 @@ export default function ManagerEachQuestions({ route, navigation }) {
     var nav = useNavigation();
 
     const { questions, id } = route.params;
-    console.log('id: ', id);
     return (
         <View
             style={{

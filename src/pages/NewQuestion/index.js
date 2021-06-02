@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Text, View, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, ActivityIndicator, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from "react-native";
 import { Card, ListItem, Avatar, Button } from "react-native-elements";
 
 import * as QuizService from "../../services/QuizService";
@@ -8,15 +8,15 @@ import mainStyle from "../../Styles/main";
 
 export default function NewQuestion({ route, navigation }) {
     const { quizId, question } = route.params;
-    const [answers, setAnswers] = useState(question && question.answers ? question.answers : [] );
+    const [answers, setAnswers] = useState(question && question.answers ? question.answers : []);
     const [tempAnswer, setTempAnswer] = useState("");
-    const [title, setTitle] = useState(question && question.title ? question.title : "");
-    const [description, setDescription] = useState(question && question.description ? question.description : "");
-    const [points, setPoints] = useState(question && question.points ? question.points : "");
-    const [maxTimer, setMaxTimer] = useState(question && question.maxTimer ? question.maxTimer : "");
+    const [title, setTitle] = useState(question && question.question ? question.question : "");
+    const [points, setPoints] = useState(question && question.points ? (question.points).toString() : "");
+    const [maxTimer, setMaxTimer] = useState(question && question.max_time ? (question.max_time).toString() : "");
     const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [disabledButton, setDisabledButton] = useState(false);
+    const questionId = question && question.id ? question.id : null;
 
     function setCorrectAnswer(index) {
         let tempList = [];
@@ -63,33 +63,46 @@ export default function NewQuestion({ route, navigation }) {
             if (item.correct == false) {
                 delete item.correct;
             }
-            console.log(item);
         });
-
-        QuizService.addQuestion(
-            quizId,
-            {
-                question: title,
-                points: points,
-                max_time: maxTimer,
-                answers: tempSentAnswers,
-            },
-            user.id
-        )
-            .then(() => navigation.navigate("ManageQuestions"))
-            .catch((error) => {
-                setLoading(false), console.log(error);
-            });
+        if (questionId) {
+            QuizService.updateQuestion(
+                questionId,
+                {
+                    question: title,
+                    points: points,
+                    max_time: maxTimer,
+                    answers: tempSentAnswers,
+                },
+                user.id
+            )
+                .then(() => navigation.navigate("ManageQuestions"))
+                .catch((error) => {
+                    setLoading(false), console.log(error);
+                });
+        } else {
+            QuizService.addQuestion(
+                quizId,
+                {
+                    question: title,
+                    points: points,
+                    max_time: maxTimer,
+                    answers: tempSentAnswers,
+                },
+                user.id
+            )
+                .then(() => navigation.navigate("ManageQuestions"))
+                .catch((error) => {
+                    setLoading(false), console.log(error);
+                });
+        }
     }
 
     useEffect(() => {
         answers.length > 0 &&
-            title.length > 0 &&
-            description.length > 0
+            title.length > 0
             ? setDisabledButton(false)
             : setDisabledButton(true)
-    }, [answers, title, description]);
-
+    }, [answers, title]);
 
     return (
         <View style={{ padding: 10 }}>
@@ -101,6 +114,11 @@ export default function NewQuestion({ route, navigation }) {
             >
                 <ScrollView>
                     <View style={mainStyle.container}>
+                        {questionId ?
+                            <View style={{ alignItems: "center", backgroundColor: '#d3d3d3', borderRadius: 20, padding: 10, marginBottom: 10 }}>
+                                <Text style={{ fontSize: 20 }}>Questão id: <Text>{question.id}</Text></Text>
+                            </View>
+                            : null}
                         <View style={mainStyle.inputView}>
                             <TextInput
                                 style={mainStyle.TextInput}
@@ -108,15 +126,7 @@ export default function NewQuestion({ route, navigation }) {
                                 placeholderTextColor="#a9a9a9"
                                 value={title}
                                 onChangeText={(text) => setTitle(text)}
-                            />
-                        </View>
-                        <View style={mainStyle.inputView}>
-                            <TextInput
-                                style={mainStyle.TextInput}
-                                placeholder="Descricao da questao"
-                                placeholderTextColor="#a9a9a9"
-                                value={description}
-                                onChangeText={(text) => setDescription(text)}
+                                autoFocus={true}
                             />
                         </View>
                         <View style={mainStyle.inputView}>
@@ -142,15 +152,16 @@ export default function NewQuestion({ route, navigation }) {
                         <Card borderRadius={10}>
                             <Card.Title>Respostas</Card.Title>
                             <Card.Divider />
-                            { answers.length > 0 ? (
+                            {answers.length > 0 ? (
                                 answers.map((item, i) => {
+                                    question && question.correct_answer_id == item.id ? setCorrectAnswer(i) : null;
                                     return (
                                         <ListItem key={i} bottomDivider>
                                             <Avatar
                                                 rounded
                                                 title={i + 1}
                                                 containerStyle={{
-                                                    backgroundColor: item.correct
+                                                    backgroundColor: item.correct || question && question.correct_answer_id == item.id
                                                         ? "green"
                                                         : "red",
                                                 }}
@@ -166,8 +177,6 @@ export default function NewQuestion({ route, navigation }) {
                                                     borderRadius: 50,
                                                     width: 28,
                                                     height: 28,
-                                                    borderColor: "black",
-                                                    borderWidth: 1,
                                                 }}
                                                 onPress={() => removeAnswer(i)}
                                             />
@@ -183,18 +192,18 @@ export default function NewQuestion({ route, navigation }) {
                             )}
                         </Card>
                         <View style={{ flexDirection: "row", flex: 1 }}>
-                            <View style={{ width: "70%" }}>
-                            <View style={mainStyle.inputView}>
-                                <TextInput
-                                    style={mainStyle.TextInput}
-                                    placeholder="Nova Resposta"
-                                    placeholderTextColor="#a9a9a9"
-                                    value={tempAnswer}
-                                    onChangeText={(text) => setTempAnswer(text)}
-                                />
+                            <View style={{ width: "80%" }}>
+                                <View style={mainStyle.inputView}>
+                                    <TextInput
+                                        style={mainStyle.TextInput}
+                                        placeholder="Adicionar nova resposta"
+                                        placeholderTextColor="#a9a9a9"
+                                        value={tempAnswer}
+                                        onChangeText={(text) => setTempAnswer(text)}
+                                    />
+                                </View>
                             </View>
-                            </View>
-                            <View style={{ width: "30%" }}>
+                            <View style={{ width: "17%", marginLeft: "3%" }}>
                                 <TouchableOpacity
                                     style={mainStyle.redButton}
                                     onPress={() => {
@@ -202,7 +211,7 @@ export default function NewQuestion({ route, navigation }) {
                                         setTempAnswer("");
                                     }}
                                 >
-                                    <Text style={[mainStyle.buttonText, { fontSize: 15 }]}>Adicionar</Text>
+                                    <Text style={[mainStyle.buttonText, { fontSize: 15 }]}>Add</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -213,11 +222,11 @@ export default function NewQuestion({ route, navigation }) {
                             onPress={() => saveQuestion()}
                             disabled={disabledButton}
                         >
-                            <Text style={mainStyle.buttonText}>{loading
-                                ? "Salvando..."
-                                : question
-                                    ? "Atualizar questão"
-                                    : "Salvar questão"}</Text>
+                            {loading ?
+                                <ActivityIndicator size="large" color="white" />
+                                :
+                                <Text style={mainStyle.buttonText}>{question ? "Atualizar questão" : "Salvar questão"}</Text>
+                            }
                         </TouchableOpacity>
                     </View>
                 </ScrollView>
