@@ -1,17 +1,17 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, FlatList, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as QuizService from "../../services/QuizService";
+import { useIsFocused } from '@react-navigation/native';
 
 import styles from './styles';
 
 const Quizzes = () => {
     const [quizzes, setQuizzes] = useState([]);
     const nav = useNavigation();
+    const isFocused = useIsFocused();
 
-    useLayoutEffect(() => {
-        QuizService.getQuizzes().then((res) => setQuizzes(res));
-    }, []);
+    if (isFocused) QuizService.getQuizzes().then((res) => setQuizzes(res));
 
     const Quiz = ({currentQuiz}) => {
         const nav = useNavigation();
