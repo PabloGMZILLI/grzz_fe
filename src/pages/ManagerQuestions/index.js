@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
-import {
-    ListItem,
-    Icon,
-    Text,
-} from "react-native-elements";
+import { ListItem, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import mainStyle from "../../Styles/main";
 
@@ -35,24 +31,38 @@ export default function ManagerQuestions({ route, navigation }) {
                 }}
             >
                 <ScrollView>
-                    <View style={{ flex: 1, width: '100%', marginTop: 10, alignItems: 'center' }} >
-                    <TouchableOpacity
-                        style={[mainStyle.redButton, { width: '80%'}]}
-                        onPress={() => nav.navigate("NewQuestionnaire")}
+                    <View
+                        style={{
+                            flex: 1,
+                            width: "100%",
+                            marginTop: 10,
+                            alignItems: "center",
+                        }}
                     >
-                        <Text style={mainStyle.buttonText}>Adicionar nova questionario</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[mainStyle.redButton, { width: "80%" }]}
+                            onPress={() => nav.navigate("NewQuestionnaire")}
+                        >
+                            <Text style={mainStyle.buttonText}>
+                                Adicionar nova questionario
+                            </Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={[mainStyle.container, {margin: 10}]}>
-                    {optionsList.map((item, i) => {
-                        return (
+                    <View style={[mainStyle.container, { margin: 10 }]}>
+                        {optionsList.map((item, i) => {
+                            return (
                                 <ListItem
                                     key={i}
-                                    bottomDivider={(i === optionsList.length - 1) ? null : true}
+                                    bottomDivider={
+                                        i === optionsList.length - 1
+                                            ? null
+                                            : true
+                                    }
                                     onPress={() =>
                                         nav.navigate("ManagerEachQuestions", {
                                             questions: item.questions,
                                             id: item.id,
+                                            questionnaire: item,
                                         })
                                     }
                                 >
@@ -61,7 +71,9 @@ export default function ManagerQuestions({ route, navigation }) {
                                             <Text>{item.name}</Text>
                                         </ListItem.Title>
                                         <ListItem.Subtitle>
-                                            <Text>Area: {item.to_workspace}</Text>
+                                            <Text>
+                                                Area: {item.to_workspace}
+                                            </Text>
                                         </ListItem.Subtitle>
                                     </ListItem.Content>
                                     <Icon
@@ -71,8 +83,8 @@ export default function ManagerQuestions({ route, navigation }) {
                                         size={14}
                                     />
                                 </ListItem>
-                        );
-                    })}
+                            );
+                        })}
                     </View>
                 </ScrollView>
             </SafeAreaView>

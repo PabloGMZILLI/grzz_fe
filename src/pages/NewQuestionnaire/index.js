@@ -7,24 +7,30 @@ import AuthContext from "../../contexts/auth";
 import mainStyle from "../../Styles/main";
 
 export default function NewQuestionnaire({ route, navigation }) {
-    const question = route.params;
-    const [title, setTitle] = useState(question ? question.title : "");
+    const { questionnaire } = route.params;
+
+    const [title, setTitle] = useState(questionnaire ? questionnaire.name : "");
     const [workspace, setWorkspace] = useState(
-        question ? question.workspace : ""
+        questionnaire ? questionnaire.to_workspace : ""
     );
     const [loading, setLoading] = useState(false);
     const { user } = useContext(AuthContext);
 
     function saveQuestionnaire() {
         setLoading(true);
-        QuizService.createFullQuiz(
-            {
-                name: title,
-                to_workspace: workspace,
-                questions: [],
-            },
-            user.id
-        )
+
+        let newQuestionnaire = {
+            name: title,
+            to_workspace: workspace,
+            questions: [],
+        };
+
+        if (questionnaire) {
+            QuizService.deleteQuiz(questionnaire.id, user.id);
+            newQuestionnaire.questions = questionnaire.questions;
+        }
+
+        QuizService.createFullQuiz(newQuestionnaire, user.id)
             .then((res) => {
                 navigation.navigate("ManageQuestions");
             })
@@ -64,7 +70,9 @@ export default function NewQuestionnaire({ route, navigation }) {
                     </View>
                     <Button
                         title={
-                            question ? "Editar questao" : "Adicionar questao"
+                            questionnaire
+                                ? "Editar questao"
+                                : "Adicionar questao"
                         }
                         buttonStyle={mainStyle.redButtonElements}
                         onPress={() => saveQuestionnaire()}

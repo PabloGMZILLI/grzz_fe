@@ -6,9 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import mainStyle from "../../Styles/main";
 
 export default function ManagerEachQuestions({ route, navigation }) {
-    const { questions, id } = route.params;
-
-    console.log(questions);
+    const { questions, id, questionnaire } = route.params;
 
     return (
         <View
@@ -30,7 +28,7 @@ export default function ManagerEachQuestions({ route, navigation }) {
                         <TouchableOpacity
                             style={[mainStyle.redButton, { width: "80%" }]}
                             onPress={() =>
-                                nav.navigate("NewQuestion", {
+                                navigation.navigate("NewQuestion", {
                                     questions: null,
                                     id: id,
                                 })
@@ -38,6 +36,23 @@ export default function ManagerEachQuestions({ route, navigation }) {
                         >
                             <Text style={mainStyle.buttonText}>
                                 Adicionar questão
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[
+                                mainStyle.redButton,
+                                { width: "80%", backgroundColor: "orange" },
+                            ]}
+                            onPress={() => {
+                                console.log(questionnaire);
+                                navigation.navigate("NewQuestionnaire", {
+                                    questionnaire: questionnaire,
+                                    id: id,
+                                });
+                            }}
+                        >
+                            <Text style={mainStyle.buttonText}>
+                                Editar essa questionario
                             </Text>
                         </TouchableOpacity>
                     </View>
