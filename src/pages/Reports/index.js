@@ -15,7 +15,7 @@ const adminOptions = [
         path: "UserPanel",
     },
     {
-        title: "Por Cidades",
+        title: "Por Sede",
         path: "EmployeePerformace",
     },
     {

@@ -234,16 +234,16 @@ export default function Routes() {
                         <RootStack.Screen
                             name="ManagerEachQuestions"
                             component={ManagerEachQuestions}
-                            options={{
-                                title: "Lista de questões",
-                            }}
+                            options={({route}) => ({
+                                title: route && route.params && route.params.pageTitle ? route.params.pageTitle : "",
+                            })}
                         />
                         <RootStack.Screen
                             name="NewQuiz"
                             component={NewQuiz}
-                            options={{
-                                title: "Novo questionário",
-                            }}
+                            options={({route}) => ({
+                                title: route && route.params && route.params.pageTitle ? route.params.pageTitle : "Adicionar novo questionário",
+                            })}
                         />
                     </RootStack.Navigator>
                 </AuthContext.Provider>
