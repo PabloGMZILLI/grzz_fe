@@ -18,6 +18,17 @@ export function createFullQuiz(quiz, adminId) {
     });
 }
 
+export function updateQuiz(quizId, updates, adminId) {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`/quiz/update/${quizId}`, updates,  {
+                headers: { user_id: adminId },
+            })
+            .then((response) => resolve(response.data))
+            .catch((error) => reject(error));
+    });
+}
+
 export function addQuestion(quizId, question, adminId) {
     return new Promise((resolve, reject) => {
         axios
