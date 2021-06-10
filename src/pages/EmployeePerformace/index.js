@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import { ListItem, Avatar, Icon, Badge, Text } from "react-native-elements";
 import { AreaChart, Grid, XAxis, YAxis } from "react-native-svg-charts";
 import * as shape from "d3-shape";
 import * as scale from "d3-scale";
 import * as dateFns from "date-fns";
+import * as RankingService from "../../services/RankingService";
 
 export default function EmployeePerformace() {
+    const [ranking, setRanking] = useState([]);
+    const [cityList, setCityList] = useState([]);
+
     const data = [
         {
             points: 700,
@@ -36,14 +40,50 @@ export default function EmployeePerformace() {
 
     const yLabel = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
 
-    const list = [
-        { sede: "Passo Fundo", points: 900 },
-        { sede: "Passo Fundo", points: 900 },
-        { sede: "Passo Fundo", points: 900 },
-        { sede: "Passo Fundo", points: 900 },
-        { sede: "Passo Fundo", points: 900 },
-        { sede: "Passo Fundo", points: 900 },
-    ];
+    useLayoutEffect(() => {
+        RankingService.getRanking().then((data) => {
+            setRanking(data);
+            CreateCitiesList();
+        });
+    }, []);
+
+    function CreateCitiesList() {
+        let tempCities = [];
+        let duplicates = [...tempCities];
+        let citiesWithPoints = [];
+
+        ranking.forEach((item) => {
+            tempCities.push(item.city.toLowerCase());
+        });
+
+        const cities = [...new Set(tempCities)];
+
+        cities.forEach((item) => {
+            const i = duplicates.indexOf(item);
+            duplicates = duplicates
+                .slice(0, i)
+                .concat(duplicates.slice(i + 1, duplicates.length));
+        });
+
+        cities.forEach((city) => {
+            citiesWithPoints.push({
+                city: city,
+                users: 0,
+                points: 0,
+            });
+        });
+
+        ranking.forEach((user) => {
+            citiesWithPoints.forEach((city) => {
+                if (user.city.toLowerCase() == city.city) {
+                    city.points = city.points + user.points;
+                    city.users = city.users + 1;
+                }
+            });
+        });
+
+        setCityList(citiesWithPoints);
+    }
 
     return (
         <View>
@@ -93,14 +133,18 @@ export default function EmployeePerformace() {
             <View style={{ marginBottom: 100 }}>
                 <SafeAreaView>
                     <ScrollView>
-                        {list.map((item, i) => (
+                        {cityList.map((item, i) => (
                             <ListItem key={i} bottomDivider>
                                 <ListItem.Content>
                                     <ListItem.Title>
-                                        <Text h4>Sede: {item.sede}</Text>
+                                        <Text h4>Sede: {item.city}</Text>
                                     </ListItem.Title>
                                     <ListItem.Subtitle>
-                                        Pontos gerais: {item.points} pontos
+                                        Pontos gerais:{" "}
+                                        {item.points == 0
+                                            ? 0
+                                            : item.points / item.users}{" "}
+                                        pontos
                                     </ListItem.Subtitle>
                                 </ListItem.Content>
                                 <Icon
