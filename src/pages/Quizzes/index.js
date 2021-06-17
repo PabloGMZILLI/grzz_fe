@@ -18,7 +18,7 @@ const Quizzes = () => {
         return (
             <TouchableOpacity
                 style={styles.quiz}
-                onPressIn={() => nav.navigate('Informações sobre o questionário', { "currentQuiz": currentQuiz })}
+                onPressIn={() => nav.navigate('QuizDetails', { "currentQuiz": currentQuiz })}
             >
                 <Text style={styles.quizProp}>{currentQuiz.name}</Text>
             </TouchableOpacity>
