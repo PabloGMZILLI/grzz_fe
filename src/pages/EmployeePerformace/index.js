@@ -75,23 +75,22 @@ export default function EmployeePerformace() {
     }
 
     return (
-        <View>
-            <Text
-                h2
-                style={{
-                    marginTop: 40,
-                    marginLeft: 20,
-                    marginBottom: 10,
-                    fontWeight: "bold",
-                }}
-            >
-                Performace geral dos colaboradores
-            </Text>
+        <View style={{ backgroundColor: "#b8e0de", height: "100%" }}>
+            <View style={{ alignItems: "center", marginVertical: 30 }}>
+                <Text
+                    h4
+                    style={{
+                        fontWeight: "bold",
+                    }}
+                >
+                    Performace geral dos colaboradores
+                </Text>
+            </View>
             <View style={{ marginBottom: 100 }}>
                 <SafeAreaView>
                     <View style={[mainStyle.container]}>
                         <ScrollView>
-                            {cityList.length == 0 ? (
+                            {cityList ? (
                                 <View
                                     style={{
                                         alignItems: "center",
@@ -109,11 +108,7 @@ export default function EmployeePerformace() {
                                     }}
                                 >
                                     <YAxis
-                                        data={
-                                            cityList.length == 0
-                                                ? handleError
-                                                : cityList
-                                        }
+                                        data={cityList}
                                         style={{ width: "21%" }}
                                         yAccessor={({ index }) => index}
                                         scale={scale.scaleBand}
@@ -151,7 +146,7 @@ export default function EmployeePerformace() {
                     </View>
                     <View style={[mainStyle.container]}>
                         <ScrollView>
-                            {cityList.length == 0 ? (
+                            {cityList ? (
                                 <View
                                     style={{
                                         alignItems: "center",
