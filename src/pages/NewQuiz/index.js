@@ -5,7 +5,7 @@ import { Icon } from "react-native-elements";
 import * as QuizService from "../../services/QuizService";
 import AuthContext from "../../contexts/auth";
 
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 
 export default function NewQuiz({ route, navigation }) {
     const params = route.params;
@@ -67,7 +67,7 @@ export default function NewQuiz({ route, navigation }) {
     }, [title, workspace]);
 
     return (
-        <View style={{ padding: 10 }}>
+        <View style={[{ padding: 10 }, mainStyle.background]}>
             <SafeAreaView
                 style={{ width: "100%", height: "100%" }} >
                 <ScrollView>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
 
 import styles from './styles';
+import mainStyle from "../../styles/main";
 
 
 
@@ -10,7 +11,7 @@ const QuizDetails = ({ route, navigation }) => {
 
     if (currentQuiz) {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, mainStyle.background]}>
                 <Text style={styles.title}>{currentQuiz.name}</Text>
                 <View style={styles.infoContainer}>
                     <Text style={styles.info}>Total de perguntas do questionário: {currentQuiz.questions.length}</Text>

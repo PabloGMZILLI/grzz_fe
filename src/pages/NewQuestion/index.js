@@ -4,7 +4,7 @@ import { Card, ListItem, Avatar, Button } from "react-native-elements";
 
 import * as QuizService from "../../services/QuizService";
 import AuthContext from "../../contexts/auth";
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 
 export default function NewQuestion({ route, navigation }) {
     const { quizId, question } = route.params;
@@ -105,7 +105,7 @@ export default function NewQuestion({ route, navigation }) {
     }, [answers, title]);
 
     return (
-        <View style={{ padding: 10 }}>
+        <View style={[{ padding: 10 }, mainStyle.background]}>
             <SafeAreaView
                 style={{
                     width: "100%",

@@ -1,6 +1,4 @@
 import { StyleSheet } from "react-native";
-import Constants from 'expo-constants';
-import { block } from "react-native-reanimated";
 
 export default StyleSheet.create({
     icon: {

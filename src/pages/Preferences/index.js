@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import { Text, ActivityIndicator, View } from 'react-native'
 import { Feather } from '@expo/vector-icons';
+import mainStyle from "../../styles/main";
 
 import AuthContext from '../../contexts/auth';
 // Pagina de preferencias da usuaria, aqui pode configurar algumas coisas:
@@ -11,7 +12,7 @@ import AuthContext from '../../contexts/auth';
     const { user } = useContext(AuthContext);
      console.log(user);
     return (
-        <View style={{flex: 1, alignContent: "center", justifyContent: "center"}}><ActivityIndicator size="large" color="#EF4358" /></View>
+        <View style={[{flex: 1, alignContent: "center", justifyContent: "center"}, mainStyle.background]}><ActivityIndicator size="large" color="#EF4358" /></View>
     );
 }
 

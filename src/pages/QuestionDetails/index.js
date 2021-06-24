@@ -11,7 +11,7 @@ import {
 import * as QuizService from "../../services/QuizService";
 import AuthContext from "../../contexts/auth";
 
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 
 export default function QuestionDetails({ route, navigation }) {
     const { quizId, question } = route.params;

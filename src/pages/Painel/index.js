@@ -2,7 +2,7 @@ import React from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import { ListItem, Icon, Badge, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 import styles from "./styles";
 
 const adminOptions = [
@@ -24,7 +24,7 @@ export default function Painel() {
     var nav = useNavigation();
 
     return (
-        <View style={styles.panel}>
+        <View style={[styles.panel, mainStyle.background]}>
             <SafeAreaView style={styles.list}>
                 <ScrollView>
                     <Text

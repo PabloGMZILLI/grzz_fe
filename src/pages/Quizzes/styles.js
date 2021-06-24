@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
+import { COLORS } from '../../styles/constants';
 
 
 export default StyleSheet.create({
     container : {
         flex: 1,
         paddingHorizontal: 20,
-        backgroundColor: '#b8e0de',
+        backgroundColor: COLORS.blue,
     },
     title: {
         fontSize: 45,

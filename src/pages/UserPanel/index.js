@@ -4,7 +4,7 @@ import { ListItem, Avatar, Icon, Text } from "react-native-elements";
 import AuthContext from '../../contexts/auth';
 import * as UserService from "../../services/UserService";
 
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 import styles from "./styles";
 
 export default function UserPanel({ route, navigation }) {
@@ -29,7 +29,7 @@ export default function UserPanel({ route, navigation }) {
 
     if (userList) {
         return (
-            <View style={styles.panel}>
+            <View style={[styles.panel, mainStyle.background]}>
                 <SafeAreaView style={styles.list}>
                     <View style={[mainStyle.container, {marginTop: 10 }]}>
                         <ScrollView>

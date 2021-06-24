@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import { ListItem, Avatar, Icon, Badge, Text } from "react-native-elements";
 import * as RankingService from "../../services/RankingService";
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 import { BarChart, Grid, YAxis, XAxis } from "react-native-svg-charts";
 import * as scale from "d3-scale";
 
