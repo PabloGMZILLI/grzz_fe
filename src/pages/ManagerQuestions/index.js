@@ -6,7 +6,7 @@ import {
     Text,
 } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 
 import * as QuizService from "../../services/QuizService";
 
@@ -31,7 +31,7 @@ export default function ManagerQuestions({ route, navigation }) {
 
 
     return (
-        <View style={{ flex: 1, alignItems: "center", backgroundColor: '#b8e0de' }}>
+        <View style={[{ flex: 1, alignItems: "center" }, mainStyle.background]}>
             <SafeAreaView style={{ width: "100%", height: "100%" }}>
                 <ScrollView>
                     <View style={{ flex: 1, width: '100%', marginTop: 10, alignItems: 'center' }} >

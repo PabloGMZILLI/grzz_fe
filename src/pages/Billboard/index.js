@@ -4,7 +4,7 @@ import { ListItem, Avatar, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import * as RankingService from "../../services/RankingService";
 
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 import styles from "./styles";
 
 export default function Billboard() {
@@ -29,7 +29,7 @@ export default function Billboard() {
 
     if (ranking) {
         return (
-            <View style={styles.panel}>
+            <View style={[styles.panel, mainStyle.background]}>
                 <SafeAreaView style={styles.list}>
                     <ScrollView>
                         <View style={[mainStyle.header, {

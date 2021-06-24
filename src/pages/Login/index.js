@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Text, View, ActivityIndicator, Image, TextInput, TouchableOpacity } from "react-native";
 import AuthContext from "../../contexts/auth";
 import styles from "./styles";
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 
 const Login = () => {
     const [user, setUser] = useState("");

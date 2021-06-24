@@ -6,7 +6,7 @@ import CountDown from 'react-native-countdown-component';
 import * as Progress from 'react-native-progress';
 
 import styles from './styles';
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 
 const Answers = ({ route }) => {
     let { currentQuiz } = route.params;

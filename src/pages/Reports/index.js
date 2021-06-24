@@ -3,7 +3,7 @@ import { View, SafeAreaView, ScrollView } from "react-native";
 import { ListItem, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 
 const adminOptions = [
     {
@@ -28,7 +28,7 @@ export default function Reports() {
     var nav = useNavigation();
 
     return (
-        <View style={styles.panel}>
+        <View style={[styles.panel, mainStyle.background]}>
             <SafeAreaView style={styles.list}>
                 <View style={[mainStyle.container, styles.listContainer]}>
                     <ScrollView>

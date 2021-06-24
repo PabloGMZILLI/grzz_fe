@@ -6,7 +6,7 @@ import * as UserService from "../../services/UserService";
 import Constants from "expo-constants";
 
 import styles from "./styles";
-import mainStyle from "../../Styles/main";
+import mainStyle from "../../styles/main";
 
 export default function BillboardDetails({ route, navigation }) {
     const { user } = useContext(AuthContext);
@@ -46,7 +46,7 @@ export default function BillboardDetails({ route, navigation }) {
 
     if (userDisplayed) {
         return (
-            <View style={styles.container}>
+            <View style={mainStyle.background}>
                 <ScrollView>
                     <View style={[mainStyle.container,  { marginTop: Constants.statusBarHeight + 20,  flexDirection: "row"}]}>
                         <View style={{flex:1}}>

@@ -1,7 +1,11 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
+import { COLORS } from './constants';
 
 export default StyleSheet.create({
+    background: {
+        backgroundColor: COLORS.blue
+    },
     header: {
         paddingTop: Constants.statusBarHeight + 10,
     },
