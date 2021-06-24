@@ -21,7 +21,7 @@ export default StyleSheet.create({
     resultsTexts: {
         fontSize: 20,
         color: '#000000',
-        textAlign: 'center',
+        marginTop: 5
     },
     textContainer: {
         marginTop: 10,

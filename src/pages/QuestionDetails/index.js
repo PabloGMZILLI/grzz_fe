@@ -46,7 +46,7 @@ export default function QuestionDetails({ route, navigation }) {
                             <View style={mainStyle.inputView}>
                                 <TextInput
                                     style={mainStyle.TextInput}
-                                    placeholder="Tempo maximo para responder"
+                                    placeholder="Tempo máximo para responder"
                                     placeholderTextColor="#a9a9a9"
                                     value={question && question.max_time ? (question.max_time).toString() : ''}
                                     onChangeText={(number) => setMaxTimer(number)}

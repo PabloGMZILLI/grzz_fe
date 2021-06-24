@@ -122,7 +122,7 @@ export default function NewQuestion({ route, navigation }) {
                         <View style={mainStyle.inputView}>
                             <TextInput
                                 style={mainStyle.TextInput}
-                                placeholder="Titulo da questao"
+                                placeholder="Pergunta da questão"
                                 placeholderTextColor="#a9a9a9"
                                 value={title}
                                 onChangeText={(text) => setTitle(text)}
@@ -132,7 +132,7 @@ export default function NewQuestion({ route, navigation }) {
                         <View style={mainStyle.inputView}>
                             <TextInput
                                 style={mainStyle.TextInput}
-                                placeholder="Tempo maximo para responder"
+                                placeholder="Tempo máximo para responder em segundos"
                                 placeholderTextColor="#a9a9a9"
                                 value={maxTimer}
                                 onChangeText={(number) => setMaxTimer(number)}
@@ -142,7 +142,7 @@ export default function NewQuestion({ route, navigation }) {
                         <View style={mainStyle.inputView}>
                             <TextInput
                                 style={mainStyle.TextInput}
-                                placeholder="Pontos"
+                                placeholder="Pontuação dessa questão"
                                 placeholderTextColor="#a9a9a9"
                                 value={points}
                                 onChangeText={(number) => setPoints(number)}

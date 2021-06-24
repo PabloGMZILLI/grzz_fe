@@ -173,7 +173,8 @@ export default function Routes() {
                             options={{ headerShown: false }}
                         />
                         <RootStack.Screen
-                            name="Informações sobre o questionário"
+                            name="QuizDetails"
+                            title="Informações sobre o questionário"
                             component={QuizDetails}
                             options={{ headerShown: false }}
                         />

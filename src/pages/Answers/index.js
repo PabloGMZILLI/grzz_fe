@@ -16,6 +16,7 @@ const Answers = ({ route }) => {
     const [currentQuestion, setCurrentQuestion] = useState(questions[position]); // estado inicial
     const [quiz, setQuiz] = useState(currentQuiz);
     const [disabled, setDisabled] = useState(true);
+    const [timeleft, setTimeleft] = useState(0);
     const windowWidth = Dimensions.get('window').width;
 
     const nextQuestion = (position) => {
@@ -29,6 +30,14 @@ const Answers = ({ route }) => {
     useEffect(() => {
         setCurrentQuestion(questions[position]);
     }, [position]);
+
+    useEffect(() => {
+        setCurrentQuestion(prevState => ({
+            ...prevState,
+            'timespent': currentQuestion.max_time - timeleft
+        }));
+    }, [timeleft]);
+
     useEffect(() => {
         setQuiz(prevState => ({
             ...prevState, 'questions': prevState.questions.map(
@@ -42,7 +51,7 @@ const Answers = ({ route }) => {
         let currentProgress = (current * progressPart);
         return currentProgress;
     }
-    console.log("questions: ", questions.length);
+
     const Answer = ({ elements }) => {
         let currentAnswer = elements.item;
         const toggleChecked = () => {
@@ -85,6 +94,7 @@ const Answers = ({ route }) => {
                             until={currentQuestion.max_time}
                             size={15}
                             onFinish={() => nextQuestion(position)}
+                            onChange={(timer) => setTimeleft(timer)}
                             digitStyle={{ backgroundColor: '#FFF' }}
                             timeToShow={['M', 'S']}
                             timeLabels={{ m: null, s: null }}
@@ -92,7 +102,7 @@ const Answers = ({ route }) => {
                     </View>
                     <TouchableOpacity disabled={disabled}
                         style={(disabled) ? styles.buttonDisabled : styles.buttonNext}
-                        onPressIn={() => nextQuestion(position)}>
+                        onPressIn={() => nextQuestion(position) }>
                         <Text style={styles.btnTxt}>Próxima</Text>
                     </TouchableOpacity>
                 </View>
