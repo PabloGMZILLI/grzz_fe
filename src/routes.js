@@ -71,7 +71,7 @@ export default function Routes() {
         });
     }
 
-    !user ? signIn('admin', '12345'): null;
+    // !user ? signIn('admin', '12345'): null;
     function HomeTabs() {
         if (user.account_type == "admin") {
             return (
