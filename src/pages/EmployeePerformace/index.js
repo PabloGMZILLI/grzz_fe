@@ -1,78 +1,16 @@
-import React, { useState, useLayoutEffect } from "react";
+import React from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import { ListItem, Avatar, Icon, Badge, Text } from "react-native-elements";
-import * as RankingService from "../../services/RankingService";
 import mainStyle from "../../styles/main";
 import { BarChart, Grid, YAxis, XAxis } from "react-native-svg-charts";
 import * as scale from "d3-scale";
 
-export default function EmployeePerformace() {
-    const [ranking, setRanking] = useState([]);
-    const [cityList, setCityList] = useState([]);
-    const handleError = [{ error: "error" }];
+export default function EmployeePerformace({ route, navigation }) {
+    const { cityList } = route.params;
 
-    useLayoutEffect(() => {
-        RankingService.getRanking().then((data) => {
-            setRanking(data);
-            CreateCitiesList(data);
-        });
-    }, []);
-
-    function CreateCitiesList(data) {
-        if (data.length > 0) {
-            let tempCities = [];
-            let duplicates = [...tempCities];
-            let citiesWithPoints = [];
-
-            data.forEach((item) => {
-                tempCities.push(item.city.toLowerCase());
-            });
-
-            const cities = [...new Set(tempCities)];
-
-            cities.forEach((item) => {
-                const i = duplicates.indexOf(item);
-                duplicates = duplicates
-                    .slice(0, i)
-                    .concat(duplicates.slice(i + 1, duplicates.length));
-            });
-
-            cities.forEach((city) => {
-                let cityNameSplit = city.split(" ");
-                let compactName = "";
-
-                cityNameSplit.forEach((word) => {
-                    compactName + word[0];
-                });
-
-                citiesWithPoints.push({
-                    compactName: compactName.toUpperCase(),
-                    city: city,
-                    users: 0,
-                    points: 0,
-                    passed: 0,
-                    rejected: 0,
-                });
-            });
-
-            data.forEach((user) => {
-                citiesWithPoints.forEach((city) => {
-                    if (user.city.toLowerCase() == city.city) {
-                        city.points = city.points + user.points;
-                        city.users = city.users + 1;
-                        city.passed =
-                            user.points >= 700 ? city.passed + 1 : city.passed;
-                        city.rejected =
-                            user.points < 700
-                                ? city.rejected + 1
-                                : city.rejected;
-                    }
-                });
-            });
-
-            setCityList(citiesWithPoints);
-        }
-    }
+    /*
+    To the graph works is needed to remove everything about longestValue variable the y-axis.js from react-native-svg-charts in node-modules
+    */
 
     return (
         <View style={{ backgroundColor: "#b8e0de", height: "100%" }}>
@@ -90,7 +28,7 @@ export default function EmployeePerformace() {
                 <SafeAreaView>
                     <View style={[mainStyle.container]}>
                         <ScrollView>
-                            {cityList ? (
+                            {cityList == undefined ? (
                                 <View
                                     style={{
                                         alignItems: "center",
@@ -146,7 +84,7 @@ export default function EmployeePerformace() {
                     </View>
                     <View style={[mainStyle.container]}>
                         <ScrollView>
-                            {cityList ? (
+                            {!cityList ? (
                                 <View
                                     style={{
                                         alignItems: "center",

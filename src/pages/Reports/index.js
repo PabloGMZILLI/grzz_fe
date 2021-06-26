@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { View, SafeAreaView, ScrollView } from "react-native";
 import { ListItem, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import mainStyle from "../../styles/main";
+import * as headquarters from "../../global/headquarters";
 
 const adminOptions = [
     {
@@ -26,6 +27,15 @@ const adminOptions = [
 
 export default function Reports() {
     var nav = useNavigation();
+    let headquartersData;
+
+    useLayoutEffect(() => {
+        async function loadCityList() {
+            const data = await headquarters.genereteHeadquartersRanking();
+            headquartersData = data;
+        }
+        loadCityList();
+    }, []);
 
     return (
         <View style={[styles.panel, mainStyle.background]}>
@@ -36,8 +46,22 @@ export default function Reports() {
                             return (
                                 <ListItem
                                     key={i}
-                                    bottomDivider={(i === adminOptions.length - 1) ? null : true}
-                                    onPress={() => nav.navigate(item.path)}
+                                    bottomDivider={
+                                        i === adminOptions.length - 1
+                                            ? null
+                                            : true
+                                    }
+                                    onPress={() => {
+                                        if (
+                                            item.path === "EmployeePerformace"
+                                        ) {
+                                            nav.navigate(item.path, {
+                                                cityList: headquartersData,
+                                            });
+                                        } else {
+                                            nav.navigate(item.path);
+                                        }
+                                    }}
                                 >
                                     <ListItem.Content>
                                         <ListItem.Title>
