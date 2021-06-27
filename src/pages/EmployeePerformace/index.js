@@ -59,7 +59,11 @@ export default function EmployeePerformace({ route, navigation }) {
                                             fontWeight: "bold",
                                         }}
                                         formatLabel={(_, index) =>
-                                            `${cityList[index].compactName} - ${cityList[index].percent}%`
+                                            `${
+                                                cityList[index].compactName
+                                            } - ${cityList[
+                                                index
+                                            ].percent.toFixed(1)}%`
                                         }
                                     />
                                     <BarChart
