@@ -19,6 +19,7 @@ export function genereteHeadquartersRanking() {
             let tempCities = [];
             let duplicates = [...tempCities];
             let citiesWithPoints = [];
+            let totalPoints = 0;
 
             ranking.forEach((item) => {
                 tempCities.push(item.city.toLowerCase());
@@ -38,7 +39,7 @@ export function genereteHeadquartersRanking() {
                 let compactName = "";
 
                 cityNameSplit.forEach((word) => {
-                    compactName + word[0];
+                    compactName = compactName + word[0];
                 });
 
                 citiesWithPoints.push({
@@ -48,10 +49,12 @@ export function genereteHeadquartersRanking() {
                     points: 0,
                     passed: 0,
                     rejected: 0,
+                    percent: 0,
                 });
             });
 
             ranking.forEach((user) => {
+                totalPoints = totalPoints + user.points;
                 citiesWithPoints.forEach((city) => {
                     if (user.city.toLowerCase() == city.city) {
                         city.points = city.points + user.points;
@@ -64,6 +67,11 @@ export function genereteHeadquartersRanking() {
                                 : city.rejected;
                     }
                 });
+            });
+
+            citiesWithPoints.forEach((city) => {
+                let result = (city.points * 100) / totalPoints;
+                city.percent = result ? result : 0;
             });
 
             setTimeout(() => {

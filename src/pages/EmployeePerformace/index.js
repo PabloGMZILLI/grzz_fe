@@ -8,9 +8,7 @@ import * as scale from "d3-scale";
 export default function EmployeePerformace({ route, navigation }) {
     const { cityList } = route.params;
 
-    /*
-    To the graph works is needed to remove everything about longestValue variable the y-axis.js from react-native-svg-charts in node-modules
-    */
+    console.log(route.params);
 
     return (
         <View style={{ backgroundColor: "#b8e0de", height: "100%" }}>
@@ -28,7 +26,7 @@ export default function EmployeePerformace({ route, navigation }) {
                 <SafeAreaView>
                     <View style={[mainStyle.container]}>
                         <ScrollView>
-                            {cityList == undefined ? (
+                            {!cityList ? (
                                 <View
                                     style={{
                                         alignItems: "center",
@@ -60,9 +58,9 @@ export default function EmployeePerformace({ route, navigation }) {
                                             fontSize: 12,
                                             fontWeight: "bold",
                                         }}
-                                        formatLabel={(_, index) => {
-                                            `${cityList[index].compactName} - ${cityList[index].points}%`;
-                                        }}
+                                        formatLabel={(_, index) =>
+                                            `${cityList[index].compactName} - ${cityList[index].percent}%`
+                                        }
                                     />
                                     <BarChart
                                         style={{ marginLeft: 8, width: "75%" }}
