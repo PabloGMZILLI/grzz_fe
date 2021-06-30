@@ -1,24 +1,39 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useContext, useEffect } from "react";
-import { Text, View, ActivityIndicator, Image, TextInput, TouchableOpacity } from "react-native";
+import {
+    Text,
+    View,
+    ActivityIndicator,
+    Image,
+    TextInput,
+    TouchableOpacity,
+} from "react-native";
 import AuthContext from "../../contexts/auth";
 import styles from "./styles";
 import mainStyle from "../../styles/main";
+import * as UserService from "../../services/UserService";
 
-const Login = () => {
+const Login = ({ route, navigation }) => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const { signed, signIn } = useContext(AuthContext);
     const [disabledButton, setDisabledButton] = useState(false);
 
-    function handleSignIn() {
-        signIn(user, password);
+    async function handleSignIn() {
+        UserService.loginUser(user, password).then((res) => {
+            if (res) {
+                signIn(res);
+                navigation.replace("Home");
+            }
+        });
     }
 
     useEffect(() => {
-        (user.length > 0 && password.length > 0) ? setDisabledButton(false) : setDisabledButton(true)
-      }, [user, password]);
+        user.length > 0 && password.length > 0
+            ? setDisabledButton(false)
+            : setDisabledButton(true);
+    }, [user, password]);
     return (
         <View style={styles.container}>
             <Image
@@ -52,7 +67,12 @@ const Login = () => {
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={[ disabledButton ? mainStyle.disabledButton : mainStyle.redButton, styles.loginBtn ]}
+                style={[
+                    disabledButton
+                        ? mainStyle.disabledButton
+                        : mainStyle.redButton,
+                    styles.loginBtn,
+                ]}
                 disabled={disabledButton}
                 onPress={() => {
                     setLoading(true);
@@ -60,7 +80,11 @@ const Login = () => {
                 }}
             >
                 <Text style={styles.loginText}>
-                    {loading ? <ActivityIndicator size="large" color="white" /> : "Entrar"}
+                    {loading ? (
+                        <ActivityIndicator size="large" color="white" />
+                    ) : (
+                        "Entrar"
+                    )}
                 </Text>
             </TouchableOpacity>
         </View>

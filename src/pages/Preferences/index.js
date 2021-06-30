@@ -1,19 +1,45 @@
-import React, {useContext} from 'react';
-import { Text, ActivityIndicator, View } from 'react-native'
-import { Feather } from '@expo/vector-icons';
+import React, { useContext } from "react";
+import { View, SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
+import { ListItem, Icon, Badge, Text } from "react-native-elements";
 import mainStyle from "../../styles/main";
+import styles from "./styles";
+import AuthContext from "../../contexts/auth";
 
-import AuthContext from '../../contexts/auth';
-// Pagina de preferencias da usuaria, aqui pode configurar algumas coisas:
-// Tempo para notificar que alguma coisa
-// Notificar aniversario da cliente?
+export default function Painel({ route, navigation }) {
+    const { signed, signIn } = useContext(AuthContext);
 
- const Preferences = () => {
-    const { user } = useContext(AuthContext);
-     console.log(user);
     return (
-        <View style={[{flex: 1, alignContent: "center", justifyContent: "center"}, mainStyle.background]}><ActivityIndicator size="large" color="#EF4358" /></View>
+        <View style={[styles.panel, mainStyle.background]}>
+            <SafeAreaView style={styles.list}>
+                <ScrollView>
+                    <Text h2 style={[mainStyle.header, styles.headertitle]}>
+                        Preferencias
+                    </Text>
+                    <View style={[mainStyle.container, styles.listContainer]}>
+                        <TouchableOpacity
+                            style={[
+                                mainStyle.redButton,
+                                {
+                                    flexDirection: "row",
+                                },
+                            ]}
+                            onPress={() => {
+                                navigation.replace("Login");
+                                signIn(null);
+                            }}
+                        >
+                            <Text
+                                style={
+                                    (mainStyle.buttonText,
+                                    { color: "white", fontSize: 18 })
+                                }
+                            >
+                                Sair
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        </View>
     );
 }
-
-export default Preferences;
