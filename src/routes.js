@@ -26,7 +26,6 @@ import NewQuestion from "./pages/NewQuestion";
 import UserPanel from "./pages/UserPanel";
 import ManagerEachQuestions from "./pages/ManagerEachQuestions";
 import NewQuiz from "./pages/NewQuiz";
-import * as UserService from "./services/UserService";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -61,19 +60,39 @@ const icons = ({ route }) => ({
 });
 
 export default function Routes() {
-    const [user, setUser] = useState(null);    
+    const [user, setUser] = useState(null);
 
-    async function signIn(name, password) {
-        UserService.loginUser(name, password).then((res) => {
-            if (res) {
-                setUser(res);
-            }
-        });
+    async function signIn(user) {
+        setUser(user);
     }
 
     // !user ? signIn('admin', '12345'): null;
     function HomeTabs() {
-        if (user.account_type == "admin") {
+        if (user) {
+            if (user.account_type == "admin") {
+                return (
+                    <Tab.Navigator
+                        screenOptions={(routes) => icons(routes)}
+                        tabBarOptions={{
+                            activeTintColor: "#00B3A7",
+                            inactiveTintColor: "gray",
+                            keyboardHidesTabBar: false,
+                        }}
+                    >
+                        <Tab.Screen name="Painel" component={painel} />
+                        <Tab.Screen name="Placar" component={Billboard} />
+                        <Tab.Screen
+                            name="Perfil"
+                            component={BillboardDetails}
+                        />
+                        <Tab.Screen name="Questionários" component={Quizzes} />
+                        <Tab.Screen
+                            name="Preferências"
+                            component={Preferences}
+                        />
+                    </Tab.Navigator>
+                );
+            }
             return (
                 <Tab.Navigator
                     screenOptions={(routes) => icons(routes)}
@@ -83,7 +102,6 @@ export default function Routes() {
                         keyboardHidesTabBar: false,
                     }}
                 >
-                    <Tab.Screen name="Painel" component={painel} />
                     <Tab.Screen name="Placar" component={Billboard} />
                     <Tab.Screen name="Perfil" component={BillboardDetails} />
                     <Tab.Screen name="Questionários" component={Quizzes} />
@@ -91,53 +109,11 @@ export default function Routes() {
                 </Tab.Navigator>
             );
         }
-        return (
-            <Tab.Navigator
-                screenOptions={(routes) => icons(routes)}
-                tabBarOptions={{
-                    activeTintColor: "#00B3A7",
-                    inactiveTintColor: "gray",
-                    keyboardHidesTabBar: false,
-                }}
-            >
-                <Tab.Screen name="Placar" component={Billboard} />
-                <Tab.Screen name="Perfil" component={BillboardDetails} />
-                <Tab.Screen name="Questionários" component={Quizzes} />
-                <Tab.Screen name="Preferências" component={Preferences} />
-            </Tab.Navigator>
-        );
+        return null;
     }
 
     function signOut() {
         setUser(null);
-    }
-
-    if (!!!user) {
-        return (
-            <NavigationContainer>
-                <AuthContext.Provider
-                    value={{ signed: !!user, user, signIn, signOut }}
-                >
-                    <RootStack.Navigator
-                        screenOptions={{
-                            headerStyle: {
-                                backgroundColor: "#00B3A7",
-                            },
-                            headerTintColor: "#fff",
-                            headerTitleStyle: {
-                                fontWeight: "bold",
-                            },
-                        }}
-                    >
-                        <RootStack.Screen
-                            name="Login"
-                            component={Login}
-                            options={{ headerShown: false }}
-                        />
-                    </RootStack.Navigator>
-                </AuthContext.Provider>
-            </NavigationContainer>
-        );
     }
 
     return (
@@ -157,6 +133,7 @@ export default function Routes() {
                                 fontWeight: "bold",
                             },
                         }}
+                        initialRouteName="Login"
                     >
                         <RootStack.Screen
                             name="Home"
@@ -235,16 +212,31 @@ export default function Routes() {
                         <RootStack.Screen
                             name="ManagerEachQuestions"
                             component={ManagerEachQuestions}
-                            options={({route}) => ({
-                                title: route && route.params && route.params.pageTitle ? route.params.pageTitle : "",
+                            options={({ route }) => ({
+                                title:
+                                    route &&
+                                    route.params &&
+                                    route.params.pageTitle
+                                        ? route.params.pageTitle
+                                        : "",
                             })}
                         />
                         <RootStack.Screen
                             name="NewQuiz"
                             component={NewQuiz}
-                            options={({route}) => ({
-                                title: route && route.params && route.params.pageTitle ? route.params.pageTitle : "Adicionar novo questionário",
+                            options={({ route }) => ({
+                                title:
+                                    route &&
+                                    route.params &&
+                                    route.params.pageTitle
+                                        ? route.params.pageTitle
+                                        : "Adicionar novo questionário",
                             })}
+                        />
+                        <RootStack.Screen
+                            name="Login"
+                            component={Login}
+                            options={{ headerShown: false }}
                         />
                     </RootStack.Navigator>
                 </AuthContext.Provider>
